@@ -1,0 +1,80 @@
+erDiagram
+    CAMPAIGNS ||--o{ PLAYERS : "adquiere (FK acquisition_campaign_id)"
+    CAMPAIGNS ||--o{ NEW_LEADS : "genera (FK campaign_id)"
+    PLAYERS ||--o{ MATCHES : "juega (FK player_id)"
+    PLAYERS ||--o{ PURCHASES : "compra (FK player_id)"
+    PLAYERS ||--|| PLAYER_FEATURES : "agrega 30d (FK player_id)"
+
+    CAMPAIGNS {
+        int campaign_id PK
+        string name
+        string channel "Twitch|YouTube|TikTok|Discord|Evento"
+        string game_target
+        float cost_eur
+        string start_date
+        string end_date
+    }
+    PLAYERS {
+        int player_id PK
+        string riot_id "EUW-9xxxx UNIQUE"
+        string region "EUW"
+        string country
+        string age_group
+        string main_game "LoL|Valorant|TFT"
+        string rank_tier
+        int level
+        int account_age_days
+        string acquisition_channel
+        int acquisition_campaign_id FK
+        string acquisition_date
+        string last_login_date
+    }
+    MATCHES {
+        int match_id PK
+        int player_id FK
+        string match_date
+        string game
+        float duration_min
+        int win "0/1"
+        int kills
+        int deaths
+        int assists
+        int chat_messages
+        int premade_size "1=solo"
+        int toxicity_reports_received
+        int toxicity_reports_made
+    }
+    PURCHASES {
+        int purchase_id PK
+        int player_id FK
+        string purchase_date
+        string item_type "skin|battlepass|champions|points"
+        float amount_eur
+    }
+    NEW_LEADS {
+        int lead_id PK
+        int campaign_id FK
+        string signup_date
+        string age_group
+        string region
+        string country
+        string game_interest
+        int tutorial_completed "0/1"
+        int matches_first_week
+        int friends_invited
+        float days_to_second_session "NULL=1 sola sesión"
+        int converted_30d "0/1 label"
+    }
+    PLAYER_FEATURES {
+        int player_id PK_FK
+        int days_since_last_login "solo análisis, NO feature"
+        int matches_last_7d
+        int matches_last_30d
+        float winrate_30d
+        float kda_30d
+        float solo_rate_30d
+        int toxicity_received_30d
+        float total_spent_eur
+        int days_active_30d
+        int churn_60d "0/1 label"
+    }

@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+C:\Users\crazy\AppData\Local\Temp\opencode/
+data/riot_gaming.db
+models/*.pkl
+docs/NO_PAIN_NO_GAME_Resumen_Guia.pdf
+app/
+.streamlit/
+*.db
