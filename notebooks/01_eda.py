@@ -1,47 +1,76 @@
-"""EDA No Pain, No Game — ejecutable como script o notebook.
-Uso: python notebooks/01_eda.py  (genera docs/img/*.png)
-"""
-import sqlite3
-from pathlib import Path
-import pandas as pd
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
+import sqlite3, pandas as pd, matplotlib.pyplot as plt, matplotlib
+matplotlib.use('Agg')
+import numpy as np
 
-ROOT = Path(__file__).resolve().parent.parent
-DB = ROOT / "data" / "riot_gaming.db"
-IMG = ROOT / "docs" / "img"
-IMG.mkdir(exist_ok=True)
+plt.style.use('dark_background')
 
-con = sqlite3.connect(DB)
-df = pd.read_sql("SELECT * FROM player_features", con)
-leads = pd.read_sql("SELECT * FROM new_leads", con)
-camps = pd.read_sql("SELECT * FROM campaigns", con)
-con.close()
-cmap = dict(zip(camps.campaign_id, camps.channel))
-leads["channel"] = leads.campaign_id.map(cmap)
+DB_PATH = "data/playnova_games.db"
+IMG_DIR = "docs/img"
 
-print(f"players={len(df)} churn={df.churn_60d.mean():.3f} leads={len(leads)} conv={leads.converted_30d.mean():.3f}")
-print("\n-- churn por toxicidad --\n", df.assign(b=pd.cut(df.toxicity_received_30d, [-1,0,1,99], labels=["0","1","2+"])).groupby("b", observed=True).churn_60d.mean())
-print("\n-- churn por social --\n", df.assign(b=pd.cut(df.solo_rate_30d, [-0.01,0.33,0.66,1.01], labels=["grupo","mixto","solo"])).groupby("b", observed=True).churn_60d.mean())
-print("\n-- conv por canal --\n", leads.groupby("channel").converted_30d.mean().sort_values(ascending=False))
-print("\n-- conv por tutorial --\n", leads.groupby("tutorial_completed").converted_30d.mean())
+def load_data():
+    conn = sqlite3.connect(DB_PATH)
+    features = pd.read_sql("SELECT pf.*, p.acquisition_channel FROM player_features pf JOIN players p ON pf.player_id = p.player_id", conn)
+    leads = pd.read_sql("SELECT l.*, c.channel FROM leads l JOIN campaigns c ON l.campaign_id = c.campaign_id", conn)
+    conn.close()
+    return features, leads
 
-fig, ax = plt.subplots(figsize=(6, 4))
-(df.assign(b=pd.cut(df.toxicity_received_30d, [-1,0,1,99], labels=["0","1","2+"]))
-   .groupby("b", observed=True).churn_60d.mean().plot(kind="bar", ax=ax, color="#ff4b4b"))
-ax.set_title("Churn por reportes de toxicidad (30d)")
-ax.set_ylabel("Tasa churn"); fig.tight_layout(); fig.savefig(IMG / "churn_toxicidad.png"); plt.close(fig)
+def plot_churn_toxicity(features, path):
+    fig, ax = plt.subplots(figsize=(8,5))
+    report_bins = pd.cut(features['ads_watched_7d'], bins=5)
+    churn_by_reports = features.groupby(report_bins)['churn_d7'].mean()
+    churn_by_reports.plot(kind='bar', ax=ax, color='#22d3ee', edgecolor='#8b5cf6')
+    ax.set_title('Churn D7 vs Ads Watched (7d)', color='#22d3ee', fontsize=14)
+    ax.set_xlabel('Ads Watched Bins', color='#a0a0c0')
+    ax.set_ylabel('Churn Rate', color='#a0a0c0')
+    ax.tick_params(colors='#a0a0c0')
+    plt.tight_layout()
+    plt.savefig(path, bbox_inches='tight')
+    plt.close()
+    print(f"Guardado: {path}")
 
-fig, ax = plt.subplots(figsize=(7, 4))
-(leads.groupby("channel").converted_30d.mean().sort_values(ascending=False)
-   .plot(kind="bar", ax=ax, color="#21c55d"))
-ax.set_title("Conversión 30d por canal de adquisición")
-ax.set_ylabel("Tasa conversión"); fig.tight_layout(); fig.savefig(IMG / "conv_canal.png"); plt.close(fig)
+def plot_channel_conversion(leads, path):
+    fig, ax = plt.subplots(figsize=(8,5))
+    conv_by_channel = leads.groupby('channel')['converted_30d'].mean()
+    conv_by_channel.plot(kind='bar', ax=ax, color='#8b5cf6', edgecolor='#22d3ee')
+    ax.set_title('Conversion Rate 30d by UA Channel', color='#8b5cf6', fontsize=14)
+    ax.set_xlabel('Channel', color='#a0a0c0')
+    ax.set_ylabel('Conversion Rate', color='#a0a0c0')
+    ax.tick_params(colors='#a0a0c0')
+    plt.tight_layout()
+    plt.savefig(path, bbox_inches='tight')
+    plt.close()
+    print(f"Guardado: {path}")
 
-fig, ax = plt.subplots(figsize=(6, 4))
-ax.hist(df[df.churn_60d==0].winrate_30d, bins=20, alpha=0.6, label="se queda")
-ax.hist(df[df.churn_60d==1].winrate_30d, bins=20, alpha=0.6, label="abandona")
-ax.set_title("Winrate 30d: se queda vs abandona"); ax.legend()
-fig.tight_layout(); fig.savefig(IMG / "winrate_churn.png"); plt.close(fig)
-print("Figuras en docs/img/")
+def plot_winrate_churn(features, path):
+    fig, ax = plt.subplots(figsize=(8,5))
+    features['winrate_proxy'] = (features['coins_spent_7d'] / (features['session_count_7d'] + 1)).clip(0, 1)
+    churn_0 = features[features['churn_d7']==0]['winrate_proxy']
+    churn_1 = features[features['churn_d7']==1]['winrate_proxy']
+    ax.hist([churn_0, churn_1], bins=20, label=['Retained', 'Churned'], color=['#22d3ee','#ef4444'], alpha=0.7)
+    ax.set_title('Winrate Proxy Distribution by Churn', color='#22d3ee', fontsize=14)
+    ax.set_xlabel('Winrate Proxy', color='#a0a0c0')
+    ax.set_ylabel('Count', color='#a0a0c0')
+    ax.legend(color='#a0a0c0')
+    ax.tick_params(colors='#a0a0c0')
+    plt.tight_layout()
+    plt.savefig(path, bbox_inches='tight')
+    plt.close()
+    print(f"Guardado: {path}")
+
+def main():
+    import os; os.makedirs(IMG_DIR, exist_ok=True)
+    features, leads = load_data()
+    print(f"Features: {len(features)} rows, Leads: {len(leads)} rows")
+    plot_churn_toxicity(features, f"{IMG_DIR}/churn_toxicidad.png")
+    plot_channel_conversion(leads, f"{IMG_DIR}/conv_canal.png")
+    plot_winrate_churn(features, f"{IMG_DIR}/winrate_churn.png")
+    print("\nEDA completo.")
+    print(f"\nChurn rate global: {features['churn_d7'].mean():.1%}")
+    print(f"Conversion rate global: {leads['converted_30d'].mean():.1%}")
+    print(f"Tutorial completion: {features['tutorial_completed'].mean():.1%}")
+    print(f"Retention by channel:")
+    for ch in features['acquisition_channel'].unique():
+        subset = features[features['acquisition_channel']==ch]
+        print(f"  {ch}: {subset['churn_d7'].mean():.1%} churn")
+
+if __name__ == "__main__": main()

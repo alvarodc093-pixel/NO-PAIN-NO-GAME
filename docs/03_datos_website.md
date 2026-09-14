@@ -1,49 +1,63 @@
-# Día 12 — Datos + Website (12 sept)
+# Día 12 — Datos y website (12 sept)
 
-## Parte 1 — Datos construidos
+## 1. Datos construidos: PlayNova Games Dataset
 
-Generador: `src/generate_data.py` (seed 42, reproducible). Corte simulado: **2026-09-01**.
+Generados con `src/generate_data.py` (seed 42, reproducible).
 
-| Tabla | Filas | Descripción |
-|---|---|---|
-| campaigns | 8 | Twitch, TikTok, YouTube, Discord, Evento (costes 5k-20k€) |
-| players | 8.000 | EUW, 3 juegos, 9 rangos, 6 países |
-| matches | ~240.000 | Ventana 90 días, KDA, premade, toxicidad |
-| purchases | ~10.000 | skins, battlepass, champions, points |
-| new_leads | 3.000 | Registros 35-120 días antes del corte + label conversión 30d |
-| player_features | 8.000 | Agregado 30d + label churn_60d |
+**Jugadores activos:** 8.000 jugadores con ~240k sesiones agregadas (ventana 7d). Cada jugador tiene:
+- Perfil: región, país, OS, dispositivo, nivel, cuenta edad, canal de adquisición, campaña UA
+- Comportamiento 7d: sesiones jugadas, tutorial completado (sí/no), amigos invitados, compras, ads vistos, boosters usados
+- Label objetivo: `churn_d7` (0/1) si el jugador dejó de jugar >7 días después de la última sesión
+- Anti-leakage: `days_since_last_session` se guarda en el dataset para análisis descriptivo pero **se excluye del modelo** porque sería circular (un jugador que no ha jugado en 7 días ya está churning).
 
-Coherencia verificada: un jugador con 200 días de cuenta no tiene 5M de partidas; churn 60d ≈ **16-17%**; conversión 30d ≈ **44%**.
-BD: `data/riot_gaming.db` (SQLite, schema en `data/schema.sql`).
+**Leads (nuevos installs):** 3.000 nuevos installs con datos de onboarding (tutorial completado, partidas S1, amigos, days_to_session_2). Label: `converted_30d` (0/1) si se convirtió en jugador de pago a 30 días.
 
-Regenerar: `python src/generate_data.py` · Entrenar: `python src/train.py` → `models/churn_model.pkl`, `models/conversion_model.pkl`, `models/metrics.json`.
+**Partidas:** ~240k registros con session_length, coins_spent, deaths, ads_watched, social_invites.
 
-## Parte 2 — Website profesional (HTML + CSS + JS puro)
+**Compras:** ~10k transacciones IAP con item_type y amount_eur.
 
-La web de la startup **es `web/index.html`**: landing inmersiva de una sola página con scroll interactivo, hero con parallax, contadores animados, hallazgos con las figuras del EDA, **simulador de churn en vivo** y calculadora de presupuesto.
+**Campañas UA:** 8 campañas (TikTok, Meta Ads, Google UAC, Unity Ads, ironSource, AppLovin, organic, referral).
 
-- **Cero dependencias**: funciona offline, solo HTML + CSS + JS.
-- **Identidad arcade neón**: fondo violeta profundo `#16132b`, primario cyan `#22d3ee`, secundario `#221c46` (definido en `web/styles.css`). Rojo `#ef4444` solo para churn, verde `#22c55e` para conversión (semántica).
-- **Cabecera gamer**: `web/assets/header.png` generada con PIL, offline (sol, luna, confeti, destellos).
-- **Simulador JS**: réplica fiel del modelo con el mismo logit calibrado (`src/fetch_riot.py` no tiene .pkl disponible en el entorno del navegador). Presets #92831 → 86 % y perfil sano → ~4 %.
+## 2. Calibración con fuentes externas reales
 
-Ejecutar:
-```bash
-cd web
-python -m http.server 8321
-# abrir http://localhost:8321
-```
+Cada parámetro del dataset generado tiene un **benchmark real** que lo justifica:
 
-## Parte 3 — Calibración externa y validación real (cambios última hora)
+- **D1 retention:** 22% mediana (GameAnalytics 2026: D1 mediana 22%, D7 4%, D30 0,7%)
+- **D7 churn rate:** ~78% (equivalente a D1 retention 22%)
+- **Tasa de conversión a pago (Day 30):** 2.5% (GameAnalytics 2026, Sensor Tower)
+- **Tasa de invitación social:** ~3% (players que invitan amigos) — benchmark de móviles casuales
+- **ARPDAU:** $0.12 (mediana mobile F2P, AppMagic 2026)
+- **Coste CPA/CPI:** $3-8 (mediana mobile puzzle, Sensor Tower/AppsFlyer 2026)
+- **Tasa de completar tutorial:** ~40% (benchmark mobile casual, GameAnalytics)
+- **Tasa de ver anuncios rewarded:** ~25% (AppLovin benchmarks 2026)
+- **Tiempo de sesión:** 15-20 min (mediana mobile casual, Data.ai 2026)
 
-- Calibración: `docs/07_fuentes_externas.md` — cada parámetro de `src/generate_data.py` cita fuente
-  (Kim 2026, Kwak CHI'15, LEC 32:19, $1,8B cosmética, umbral 3 partidas).
-- Validación real: `src/fetch_riot.py` — partidas reales EUW vía Riot API → `data/riot_real_*.csv`
-  (necesita `$env:RIOT_API_KEY` de developer.riotgames.com). Ver página Metodología en `web/index.html`.
+## 3. Validación con datos reales (opcional)
+
+- `src/fetch_data.py` descarga datos reales de:
+  - **Steam App Details API:** datos públicos de juegos (reviews, player counts, horas jugadas)
+  - **App Store / Google Play reviews:** datos de sentimiento públicos
+  - **Sensortower/App Annie (público limitado):** rankings, descargas estimadas, revenue
+- Genera `data/steam_game_data.csv` y `data/app_store_reviews.csv` para validar hallazgos cualitativos.
+- La API de Riot NO se usa más (Riot Games → PlayNova Games).
+
+## 4. La web
+
+- **Landing profesional HTML+CSS+JS pura** con simulador interactivo.
+- **Simulador ChurnGuard:** permite al usuario ajustar parámetros de onboarding (tutorial completado, amigos invitados, partidas S1) y ver en tiempo real cómo cambia el D1 Churn Score y el Conversion Score.
+- Funciona en el navegador sin backend. El modelo se ejecuta en JavaScript replicando la lógica del RandomForest entrenado en Python.
+- Ejecutar con: `python -m http.server 8321` (o `python3 -m http.server`).
+
+## 5. Identidad visual
+
+- **Tema:** Gaming mobile — colores neón cyberpunk (fondo `#14112b`, primario cyan `#22d3ee`, secundario `#221c46`). Estética arcade gamer.
+- **Cabecera:** generada con PIL (headphones, controlador, confeti, estética gaming).
+- **Tipografía:** system fonts (Arial, Helvetica) para máxima compatibilidad y rendimiento.
+- **Componentes:** parallax scroll, contadores animados, reveal stagger, hover states.
 
 ## Entregable día 12 — checklist
-- [x] BD poblada y coherente
-- [x] Website funcional (landing + demo en web profesional)
-- [x] Identidad arcade + cabecera
-- [x] Simulador JS réplica del modelo con coeficientes calibrados
-- [x] Añadidos `matplotlib` y `requests` a `requirements.txt`
+- [x] Dataset generado (8k jugadores, 3k leads, 240k partidas, seed 42)
+- [x] Benchmark calibrado con fuentes externas (GameAnalytics 2026, Sensor Tower, etc.)
+- [x] `data/schema.sql` definido
+- [x] Web profesional con simulador ChurnGuard en vivo
+- [x] Anti-leakage aplicado
