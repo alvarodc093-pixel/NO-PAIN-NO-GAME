@@ -28,7 +28,7 @@ function updateSim() {
   document.getElementById('tutVal').textContent = tut;
   document.getElementById('friVal').textContent = fri;
   document.getElementById('sesVal').textContent = ses;
-  let score = 86 - (tut * 0.3) - (fri * 2) - (ses * 2);
+  let score = 88 - (tut * 0.5) - (fri * 2.5) - (ses * 3);
   score = Math.max(2, Math.min(99, score));
   const circumference = 2 * Math.PI * 80;
   const offset = circumference * (1 - score / 100);

@@ -3,7 +3,7 @@
 ## 1. Técnica elegida
 
 **Random Forest** (no deep learning) por tres razones:
-1. **Interpretabilidad:** Los PMs de PlayNova necesitan entender POR QUÉ un jugador tiene 87% de riesgo de churn. Un RF permite ver las top features y sus valores. El deep learning no.
+1. **Interpretabilidad:** Los PMs de PlayNova necesitan entender POR QUÉ un jugador tiene alto riesgo de churn. Un RF permite ver las top features y sus valores. El deep learning no.
 2. **Datos tabulares pequeños:** 8k jugadores × ~15 features no necesitan redes neuronales. Un RF con 300 árboles es más rápido, más ligero y más robusto.
 3. **Anti-leakage garantizado:** `days_since_last_session` se excluye del modelo explícitamente porque sería circular. Un RF puede verificar qué features se usan.
 
@@ -53,7 +53,7 @@
 
 ### Página Demo — Simulador
 - **Simulador ChurnGuard:** ajusta sliders (tutorial completado: 0-100%, amigos invitados: 0-10, partidas S1: 1-10) → el modelo JS replica el RF y muestra el D1 Churn Score en tiempo real (gauge SVG).
-- **Preset rápido:** #92831 (jugador en riesgo → ~86% churn) y Perfil sano (~4% churn).
+- **Preset rápido:** #92831 (tutorial=0, amigos=0, sesiones=1 → ~85% churn) y Perfil sano (tutorial=100%, amigos=5, sesiones=8 → ~3% churn).
 - **Calculadora budget:** introduce CPI y presupuesto → estima jugadores retenidos vs perdidos.
 - **Nota sobre métricas:** El modelo JS usa una aproximación lineal del RF entrenado en Python. El ROC-AUC real del modelo Python es 0.914 (churn) y 0.973 (conversion).
 - Todo en el navegador, sin backend, modelo JS replicado del RF entrenado en Python.

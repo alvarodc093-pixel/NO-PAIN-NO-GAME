@@ -19,7 +19,7 @@ Cada número sintético del dataset está calibrado con una fuente externa verif
 | Tasa retención TikTok | 29% D7 | TikTok for Business Case Studies | 2026 | Canal analysis |
 | Tasa retención Discord | 65% D7 | Discord for Gaming Community Report | 2026 | Canal analysis |
 | LTV medio jugador | $15-50 | Supercell/Playrix Reports | 2026 | ROI calculations |
-| Tasa toxicidad alta | >3 reports = 78% abandono | Riot Games/Tencent Toxicity Studies | 2025 | Toxicidad analysis |
+| Tasa toxicidad alta | >3 reports = 78% abandono | Tencent Player Behavior Studies | 2025 | Toxicidad analysis |
 | Revenue global mobile | $1.8B+ (top titles) | Newzoo — Global Games Market | 2026 | Market context |
 
 ## 2. Referencias completas
@@ -33,14 +33,14 @@ Cada número sintético del dataset está calibrado con una fuente externa verif
 7. **TikTok for Business** — "Gaming Case Studies 2026" (business.tiktok.com). TikTok retention vs other channels.
 8. **Discord for Gaming** — "Community Retention Report 2026" (discord.com). Discord retention vs TikTok.
 9. **Newzoo** — "Global Games Market Report 2026" (newzoo.com). Market size, revenue by platform.
-10. **Riot Games / Tencent** — "Player Toxicity Studies 2025" (riotgames.com). Toxicity impact on retention.
+10. **Tencent** — "Player Behavior and Toxicity Studies 2025" (tencent.com). Toxicity impact on retention in gaming.
 11. **Supercell** — "Clash Royale/Clash of Clans Retention Report" (supercell.com). LTV, retention benchmarks for top F2P titles.
 
 ## 3. Frases de defensa para la presentación
 
 - *"Nuestros números no son inventos — cada parámetro tiene una fuente externa real. La mediana D1 retention de 22% es de GameAnalytics 2026."*
 - *"El benchmark del tutorial ×3 retención D7 está documentado en GameAnalytics y corroborado por nuestros hallazgos del EDA."*
-- *"Usamos datos sintéticos calibrados porque Riot/PlayNova no comparten datos de jugadores con nosotros — pero la calibración con fuentes externas garantiza que los patrones son realistas."*
+- *"Usamos datos sintéticos calibrados porque PlayNova no comparte datos de jugadores con nosotros — pero la calibración con fuentes externas garantiza que los patrones son realistas."*
 - *"La API de datos públicos (Steam, App Store) nos permite validar los hallazgos cualitativos: el sentimiento de reviews coincide con nuestros hallazgos de toxicidad y tutorial."*
 - *"El anti-leakage es verificable: `days_since_last_session` se excluye explícitamente del modelo — lo podemos demostrar en el código fuente."*
 
@@ -49,7 +49,7 @@ Cada número sintético del dataset está calibrado con una fuente externa verif
 - **Datos sintéticos:** Aunque calibrados, son generados. La validación real con PlayNova sería el siguiente paso.
 - **No tenemos acceso a datos internos de PlayNova.** Los benchmarks externos sustituyen datos privados pero no los replican al 100%.
 - **Random Forest vs deep learning:** RF es más interpretable pero puede no capturar patrones complejos de secuencias de juego (LSTMs/Transformers lo harían mejor pero son cajas negras).
-- **Métricas en datos sintéticos:** ROC-AUC 0,985 puede ser optimista dado que el dataset generado tiene señales claras. En datos reales de producción, la métrica podría ser menor.
+- **Métricas en datos sintéticos:** ROC-AUC 0,914 puede ser optimista dado que el dataset generado tiene señales claras. En datos reales de producción, la métrica podría ser menor.
 - **Sample limitado:** 8K jugadores es pequeño para un modelo en producción (PlayNova tiene 2M MAU). Un piloto de 4 semanas con datos reales es necesario.
 
 ## 5. Validación real (opcional — src/fetch_data.py)

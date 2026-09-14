@@ -39,7 +39,6 @@ Cada parámetro del dataset generado tiene un **benchmark real** que lo justific
   - **App Store / Google Play reviews:** datos de sentimiento públicos
   - **Sensortower/App Annie (público limitado):** rankings, descargas estimadas, revenue
 - Genera `data/steam_game_data.csv` y `data/app_store_reviews.csv` para validar hallazgos cualitativos.
-- La API de Riot NO se usa más (Riot Games → PlayNova Games).
 
 ## 4. La web
 
