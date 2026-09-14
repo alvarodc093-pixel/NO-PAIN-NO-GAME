@@ -3,9 +3,9 @@
 ## 1. Las 3 ideas iniciales
 
 ### Idea A — ChurnGuard (mobile F2P / retención) — ELEGIDA
-- **¿Qué problema existe?** Los juegos F2P pierden al 97% de nuevos jugadores antes de la primera semana (D1 22% mediana, D7 4%, D30 0,7%). Los publishers gastan miles de millones en adquisición (UA) sin retorno porque no saben quién va a abandonar en 7 días ni quién se convertirá en jugador de pago.
+- **¿Qué problema existe?** Los juegos F2P pierden a la mayoría de nuevos jugadores en la primera semana (D1 22% mediana, D7 4%, D30 0,7% · GameAnalytics 2026). Los publishers gastan miles de millones en adquisición (UA) sin retorno porque no saben quién va a abandonar en 7 días ni quién se convertirá en jugador de pago.
 - **¿Quién tiene ese problema?** PlayNova Games (ficticio, mid-tier F2P publisher de móviles: Candy Crush-style, puzzle, idle). Product Managers de Live-Ops, equipo de Growth y Monetización.
-- **¿Por qué es importante?** Adquirir un jugador nuevo cuesta $3-8 (CPI medio móvil). Si el 97% se va en D1, el CAC se pierde. Retener un solo jugador genera $15-50 de LTV (lifetime value).
+- **¿Por qué es importante?** Adquirir un jugador nuevo cuesta $3-8 (CPI medio móvil). Si 2 de cada 3 se van en 7 días, el CAC se pierde. Retener un solo jugador genera $15-50 de LTV (lifetime value).
 - **¿Qué pierde actualmente?** Gasto de UA desperdiciado (CPI sin conversión), churn silencioso (el jugador no reporta nada, simplemente deja de jugar), oportunidad de monetización perdida, reputación (1 estrella en store review).
 - **¿Cómo ayudan los datos?** Eventos del juego (sesiones, tutorial progreso, compras, notificaciones, sesión length) permiten predecir quién abandona en 7 días y quién se convertirá en paying player a 30 días.
 - **¿Por qué pagarían?** Porque un ranking semanal de "Top-100 jugadores en riesgo de D1-churn + acción de onboarding personalizada" es accionable y medible en LTV recuperado.
@@ -22,10 +22,10 @@
 - **Sector:** Data Science para gaming móvil / entretenimiento F2P
 - **Qué hace:** Startup especializada en retención de jugadores y monetización para juegos móviles free-to-play. Convierte eventos de juego en decisiones: a quién retener, a quién re-enganchar y quién va a ser paying player.
 - **Cliente objetivo:** PlayNova Games (ficticio, mid-tier F2P publisher, 3 títulos, ~2M MAU).
-- **Problema que resuelve:** Abandono silencioso de jugadores actuales (D1 retention 22%) + adquisición ineficiente de nuevos jugadores (97% D1 churn).
+- **Problema que resuelve:** Abandono silencioso de jugadores actuales (churn 7d ~67% en demo) + adquisición ineficiente de nuevos jugadores.
 - **Propuesta de valor:** "Detectamos al jugador que va a dejar el juego antes de que lo haga, y al lead que se quedará jugando antes de que empiece — con acciones automatizadas de onboarding y re-engagement."
 - **Servicios / producto principal:**
-  1. **D1 Churn Score (producto principal):** probabilidad de abandono a 7 días por jugador (0-100%) + motivo de desenganche + acción de retención automatizada.
+  1. **Churn Score 7d (producto principal):** probabilidad de abandono a 7 días por jugador (0-100%) + motivo de desenganche + acción de retención automatizada.
   2. **Conversion Score (segunda línea):** probabilidad de que un nuevo registro (install) se convierta en jugador de pago a 30 días — para optimizar el budget de UA.
   3. **Dashboard Live-Ops:** ranking de riesgo D1, alertas de churn masivo, simulador de campañas de re-engagement.
 
@@ -43,7 +43,7 @@
             │                       │
       ¿Quién se convierte?    ¿Quién abandona?
             │                       │
-    Conversion Score         D1 Churn Score ← FOCO DÍAS 13-14
+    Conversion Score         Churn Score 7d ← FOCO DÍAS 13-14
        (pago a 30d)           (abandono a 7d)
             │                       │
             └───────────┬───────────┘

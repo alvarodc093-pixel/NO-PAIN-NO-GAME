@@ -1,67 +1,60 @@
 # ChurnGuard — Proyecto Bootcamp Startup (Días 10-15)
 
-**Propuesta de valor:** Detecta el abandono antes de que ocurra. Predicción de churn D7 y conversión a pago para juegos móviles F2P.
+**Propuesta de valor:** detecta el abandono antes de que ocurra. Churn a 7 días con motivo+acción y conversión a pago a 30 días para juegos móviles F2P.
 
-## El Problema
+## El problema (en €)
 
-Los juegos móviles F2P pierden al 97% de nuevos jugadores antes de la primera semana. La retención D1 mediana es 22%, D7 es 4%, D30 es 0.7% (GameAnalytics 2026). Los publishers gastan $3-8 por jugador adquirido sin saber quién va a abandonar.
+- Churn 7d del **67%** en el dataset demo calibrado. Con CPI $5 y 10.000 installs/mes, ~6.700 se pierden: **~$33.500/mes en UA sin retorno**.
+- Benchmarks: D1 22% / D7 4% / D30 0,7% (GameAnalytics 2026).
 
-## Los Productos
+## Los productos
 
-1. **D1 Churn Score:** Probabilidad de abandono a 7 días por jugador + motivo de desenganche + acción de retención automatizada. ROC-AUC 0.914, recall 1.000.
-2. **Conversion Score:** Probabilidad de que un nuevo install se convierta en jugador de pago a 30 días. ROC-AUC 0.973, accuracy 0.980.
+1. **Churn Score 7d** (principal): probabilidad de abandono + motivo + acción. ROC-AUC **0.914**, PR-AUC **0.950**, F1 **0.883** (thr 0,50).
+2. **Conversion Score 30d** (UA): probabilidad de pago a 30 días. ROC-AUC **0.901**, PR-AUC **0.279**, F1 **0.490** (thr 0,40 sintonizado; recall 0.758, precision 0.362).
 
-## Los Datos
+## Los datos
 
-- **8.000 jugadores** + 3.000 leads + ~240k partidas (SQLite, seed 42)
-- Calibración con fuentes reales: GameAnalytics 2026, Sensor Tower, AppsFlyer, AppMagic, Data.ai
-- Anti-leakage: `days_since_last_session` excluido del modelo
-- Validación opcional con datos reales: `src/fetch_data.py`
+- **8.000 jugadores** + **3.000 leads** + **~53.000 sesiones** + **~800 compras** (SQLite, seed 42, `src/generate_data.py`).
+- Churn por logit con solape real (sin separación perfecta); canal propagado a features; conversión ~5,4%.
+- Anti-leakage: `days_since_last_session` y el `device` aleatorio de leads, **excluidos** del modelo.
+- Modelos en `models/` (`.pkl` con encoders incluidos) + métricas en `models/metrics.json`.
 
-## La Web
+## La web
 
-Landing profesional HTML+CSS+JS pura con:
-- Hero con parallax y contadores animados
-- Tabla de benchmarks con fuentes externas
-- Simulador ChurnGuard en vivo (modelo JS replicando el RF entrenado)
-- Calculadora de budget de UA
-- FAQ acordeones
-- 100% funcional sin backend
-
-Ejecutar: `python -m http.server 8321`
-
-## La Estructura
-
-```
-├── docs/          # Guías bootcamp días 10-15 + fuentes externas
-├── web/           # Landing HTML+CSS+JS
-├── src/           # Python: generate_data.py, train.py, fetch_data.py
-├── data/          # SQLite DB, schema.sql
-├── models/        # Modelos .pkl + metrics.json
-├── notebooks/     # EDA reproducible
-├── docs/img/      # Figuras del EDA
-├── requirements.txt
-└── .gitignore
-```
-
-## Métricas del Modelo
-
-| | ROC-AUC | Accuracy | Precision | Recall | F1 |
-|---|---------|-----------|--------|-----|-----|
-| Churn Score | 0.914 | 0.958 | 0.948 | 1.000 | 0.973 |
-| Conversion Score | 0.973 | 0.980 | 0.125 | 0.167 | 0.143 |
-
-> Nota: La precision/recall bajas del Conversion Score se deben al desbalance de clases (~2.5% de convertidos). El ROC-AUC de 0.973 demuestra excelente discriminación.
-
-## Instalación
+Landing en `web/` (HTML+CSS+JS, cero dependencias): hero con mock del ranking, benchmarks, figuras del EDA, métricas honestas (ROC **y** PR-AUC), simulador con motivo+acción, calculadora de ROI, piloto de 4 semanas (2.500 €), integración/GDPR y FAQ de CTO.
 
 ```bash
 pip install -r requirements.txt
 python src/generate_data.py
 python src/train.py
-python -m http.server 8321
+python notebooks/01_eda.py
+cd web
+python -m http.server 8321   # → http://localhost:8321
 ```
+
+## Estructura
+
+```
+├── docs/          # Guías días 10-15 + 07_fuentes_externas.md
+├── web/           # Landing + assets (figuras copiadas de docs/img/)
+├── src/           # generate_data.py, train.py, fetch_data.py
+├── data/          # schema.sql (+ .db generada, ignorada en git)
+├── models/        # .pkl + metrics.json (versionados)
+├── notebooks/     # 01_eda.py reproducible
+├── bootcamp/      # Storytelling .docx
+├── requirements.txt
+└── .gitignore
+```
+
+## Métricas (test, seed 42)
+
+| | Thr | ROC-AUC | PR-AUC | Acc | Prec | Rec | F1 |
+|---|-----|---------|--------|-----|------|-----|-----|
+| Churn 7d | 0,50 | 0.914 | 0.950 | 0.844 | 0.888 | 0.878 | 0.883 |
+| Conversión 30d | 0,40 | 0.901 | 0.279 | 0.913 | 0.362 | 0.758 | 0.490 |
+
+> En conversión manda el PR-AUC (5,4% de positivos), no el ROC. El threshold 0,40 maximiza F1: captura el 76% de futuros pagadores porque un push innecesario es barato y un pagador perdido es caro.
 
 ## Licencia
 
-Proyecto bootcamp Startup — 14/09/2026
+Proyecto bootcamp Startup — 14/09/2026. Cliente piloto ficticio (PlayNova Games). Dataset demo sintético y calibrado.

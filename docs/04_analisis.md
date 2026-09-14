@@ -1,54 +1,41 @@
 # Día 13 — Análisis exploratorio de datos (13 sept)
 
-## 1. EDA reproducibles
+Script `notebooks/01_eda.py` (pandas + matplotlib, reproducible). Lee `data/playnova_games.db`, genera las 3 figuras en `docs/img/` (copiadas a `web/assets/`) e imprime el resumen.
 
-Script `notebooks/01_eda.py` (pandas + matplotlib). Lee `data/playnova_games.db`, genera las 3 figuras en `docs/img/` y calcula estadísticas descriptivas.
+> Nota de honestidad: este dataset **no** contiene reportes de toxicidad, rachas de derrotas ni split por juego. Los hallazgos de abajo usan solo columnas que existen de verdad.
 
-## 2. 6 Hallazgos estrella
+## Hallazgos verificados (números medidos en el dataset)
 
-### H1 — El tutorial es el predictor más fuerte de retención (×3)
-- Los jugadores que completan el tutorial tienen una tasa de retención D7 **3 veces superior** a los que lo abandonan (35% vs 12%).
-- **Implicación:** El onboarding es el producto. No el juego en sí. Un tutorial mejor = churn reducido directamente.
-- **Referencia:** Benchmarks GameAnalytics 2026 confirman que el completion rate del tutorial correlaciona con D7 retention (r = 0.82).
+### H1 — El tutorial multiplica ×2,2 la retención
+- Retención 7d con tutorial: **50,1%** vs sin tutorial: **22,3%** (churn 49,9% vs 77,7%).
+- Es la palanca de onboarding más barata: cada punto de completion mueve la retención global.
+- Importancia en el modelo: 0.042 (sexta feature; el top es sesiones 0.36 + monedas 0.24).
 
-### H2 — TikTok trae volumen pero no calidad (29% conversión D7)
-- Los jugadores de TikTok tienen el **según mejor CPA** ($2.10) pero la **peor retención D7** (29%).
-- Los jugadores de Discord/comunidades tienen un CPA más alto ($4.50) pero **65% de retención D7**.
-- **Implicación:** Más installs ≠ más jugadores retenidos. El budget de UA debe redistribuirse hacia canales de calidad, no de volumen.
+### H2 — Orgánico y referral retienen; el paid compra volumen
+- Churn por canal (medido): organic 57,7% · referral 62,7% · google_uac 67,0% · unity_ads 68,6% · ironsource 68,9% · tiktok 69,1% · applovin 70,8% · meta 70,9%.
+- En retención: **orgánico 42,3% > referral 37,3% > TikTok 30,9%**.
+- Matiz honesto: en **conversión a pago** TikTok (7,0%) y referral (6,4%) lideran — el paid trae pagadores pero los retiene peor. La decisión es pujar por calidad (retención × conversión), no por installs.
 
-### H3 — La toxicidad baja destruye la retención a largo plazo
-- Jugadores con >3 reportes en los primeros 7 días tienen un 78% de abandono D30 (vs 12% baseline).
-- Los jugadores con 1-2 reportes mantienen un 34% de retención D30.
-- **Implicación:** Moderación temprana = retención. Un jugador tóxico que se queda afecta a otros 5-8 jugadores (efecto dominó).
+### H3 — El círculo social retiene
+- Churn con ≥1 amigo invitado: **57,7%** vs sin amigos: **75,1%**.
+- Importancia en el modelo: 0.029 (churn) y 0.074 (conversión). El referral no es solo adquisición: es retención.
 
-### H4 — Los jugadores que no compran se van silenciosamente
-- El 94% de jugadores que nunca hacen una compra abandonan en los primeros 14 días.
-- Los que hacen su primera compra (incluso $0.99) tienen un 68% de retención D30.
-- **Implicación:** La primera micro-transacción es un punto de inflexión. Incentivar la primera compra (bundle de bienvenida) es más efectivo que retener gratis.
+### H4 — El engagement temprano separa a los que se quedan
+- Sesiones, monedas, ads y boosters concentran el 0.79 de importancia del modelo de churn (0.36 + 0.24 + 0.12 + 0.07).
+- Los retenidos generan más monedas por sesión desde la semana 1 (ver figura de engagement). La primera compra también discrimina: solo ~14% compra, y compra quien sigue jugando.
 
-### H5 — El racha de derrotas es un predictor temprano de churn
-- Jugadores que pierden 3+ partidas consecutivas antes del día 3 tienen un 62% de abandono D7 (vs 28% baseline).
-- **Implicación:** El sistema debe detectar rachas perdedoras y ofrecer boosters/buffers automáticos antes de que abandonen.
+### H5 — La ventana crítica son 4 días
+- Top features de conversión: días hasta 2ª sesión (0.31) + duración sesión 1 (0.22) + tutorial (0.16).
+- Regla operativa: install con tutorial + retorno en ≤4 días + (amigo o sesión 1 larga) convierte al 35%; el resto, al ~2%. De ahí el threshold 0.40 del modelo.
 
-### H6 — Los jugadores que invitan amigos se quedan (y pagan más)
-- Los que invitan ≥1 amigo tienen un 52% de retención D7 (vs 18% baseline).
-- Su LTV es **2.3x superior** al de jugadores solitarios.
-- **Implicación:** El sistema de invitados no es marketing — es retención. Los programas de referidos son un predictor de retención, no de adquisición.
+## Segmentación (solo splits que existen)
 
-## 3. Análisis de segmentación
-
-- **Por región:** Europa Occidental tiene la mayor retención D7 (28%) vs APAC (18%).
-- **Por dispositivo:** iOS retiene mejor (26% D7) que Android (20% D7).
-- **Por canal:** Organic (32%) > Discord/community (28%) > Referral (25%) > Meta (22%) > TikTok (15%).
-- **Por juego:** Puzzle Stars (match-3) retiene mejor que Idle Legends (idle RPG).
-
-## 4. Datos de validación externa
-
-- `src/fetch_data.py` descarga reviews públicos de Google Play y Steam App Details para validar hallazgos cualitativos (sentimiento de toxicidad, feedback de tutorial).
-- Los resultados se alinean con los 6 hallazgos del EDA (soporte cualitativo).
+- **Por canal:** ver H2 (8 canales, tabla completa arriba).
+- **Por OS/dispositivo:** iOS vs Android con importancias bajas (0.011 churn / 0.032 conversión) — no es palanca.
+- **Por país:** importancias 0.031 / 0.103 — útil para calibrar pujas, no para producto.
+- **No disponible:** por juego, por región APAC, por reportes de toxicidad — no se afirma nada sobre ellos.
 
 ## Entregable día 13 — checklist
-- [x] `notebooks/01_eda.py` reproducible
-- [x] 6 hallazgos estrella con benchmarks externos
-- [x] Segmentación por región/dispositivo/canal/juego
-- [x] Figuras generadas en `docs/img/`
+- [x] `notebooks/01_eda.py` reproducible y sin bugs (columnas duplicadas y `legend()` corregidos)
+- [x] 5 hallazgos verificados con números medidos, sin columnas inventadas
+- [x] Figuras regeneradas en `docs/img/` y copiadas a `web/assets/`

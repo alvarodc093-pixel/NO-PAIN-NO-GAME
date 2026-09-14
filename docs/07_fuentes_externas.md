@@ -4,23 +4,15 @@
 
 Cada número sintético del dataset está calibrado con una fuente externa verificable:
 
-| Número | Valor | Fuente | Año | Se usa para |
-|--------|-------|--------|-----|-------------|
-| D1 retention | 22% mediana | GameAnalytics — Mobile Gaming Benchmarks | 2026 | Dataset generación |
-| D7 retention | 4% mediana | GameAnalytics — Mobile Gaming Benchmarks | 2026 | Dataset generación |
-| D30 retention | 0.7% mediana | GameAnalytics — Mobile Gaming Benchmarks | 2026 | Dataset generación |
-| Conversión a pago (Day 30) | ~2.5% | GameAnalytics / Sensor Tower | 2026 | Label conversión |
-| ARPDAU | $0.12 | AppMagic — Mobile F2P Report | 2026 | Dataset generación |
-| CPI medio (puzzle) | $3-8 | AppsFlyer — Mobile Attribution | 2026 | Campaign data |
-| Tasa completar tutorial | ~40% | GameAnalytics — Onboarding Benchmarks | 2026 | Feature engineering |
-| Tasa ver ads rewarded | ~25% | AppLovin — MAX Benchmarks | 2026 | Ads_watched feature |
-| Tiempo de sesión | 15-20 min | Data.ai (data.ai) — Mobile Gaming | 2026 | session_length |
-| Tasa invitación social | ~3% | Sensor Tower — Social Features | 2026 | social_invites |
-| Tasa retención TikTok | 29% D7 | TikTok for Business Case Studies | 2026 | Canal analysis |
-| Tasa retención Discord | 65% D7 | Discord for Gaming Community Report | 2026 | Canal analysis |
-| LTV medio jugador | $15-50 | Supercell/Playrix Reports | 2026 | ROI calculations |
-| Tasa toxicidad alta | >3 reports = 78% abandono | Tencent Player Behavior Studies | 2025 | Toxicidad analysis |
-| Revenue global mobile | $1.8B+ (top titles) | Newzoo — Global Games Market | 2026 | Market context |
+| Número | Valor en demo | Benchmark externo | Año |
+|--------|---------------|-------------------|-----|
+| Churn 7d global | 67,0% | Crisis retención móvil (D1 22% / D7 4% mediana · GameAnalytics) | 2026 |
+| Retención por canal | Orgánico 42,3% · referral 37,3% · TikTok 30,9% · paid 29–33% | Tesis volumen-vs-calidad (TikTok barato, orgánico retiene) | 2026 |
+| Conversión a pago (30d) | 5,4% (rango alto a propósito, para métricas estables) | 2–5% F2P mid-core · Sensor Tower | 2026 |
+| Tutorial completado | 38,5% | ~40% casual · GameAnalytics | 2026 |
+| ARPDAU referencia | $0.12 | AppMagic F2P | 2026 |
+| CPI puzzle | $3-8 | AppsFlyer | 2026 |
+| Sesión media | ~16 min | 15–20 min · Data.ai | 2026 |
 
 ## 2. Referencias completas
 
@@ -31,17 +23,16 @@ Cada número sintético del dataset está calibrado con una fuente externa verif
 5. **AppLovin** — "MAX SDK Benchmarks 2026" (applovin.com). Ad-watched rates, rewarded video performance.
 6. **Data.ai (data.ai)** — "Mobile Gaming Usage 2026" (data.ai.com). Session length, engagement, retention.
 7. **TikTok for Business** — "Gaming Case Studies 2026" (business.tiktok.com). TikTok retention vs other channels.
-8. **Discord for Gaming** — "Community Retention Report 2026" (discord.com). Discord retention vs TikTok.
+8. **TikTok for Business** — "Gaming Case Studies 2026" (business.tiktok.com). Volumen barato, retención menor que orgánico.
 9. **Newzoo** — "Global Games Market Report 2026" (newzoo.com). Market size, revenue by platform.
-10. **Tencent** — "Player Behavior and Toxicity Studies 2025" (tencent.com). Toxicity impact on retention in gaming.
-11. **Supercell** — "Clash Royale/Clash of Clans Retention Report" (supercell.com). LTV, retention benchmarks for top F2P titles.
+10. **Supercell** — "Clash Royale/Clash of Clans Retention Report" (supercell.com). LTV, retention benchmarks top F2P.
 
 ## 3. Frases de defensa para la presentación
 
 - *"Nuestros números no son inventos — cada parámetro tiene una fuente externa real. La mediana D1 retention de 22% es de GameAnalytics 2026."*
-- *"El benchmark del tutorial ×3 retención D7 está documentado en GameAnalytics y corroborado por nuestros hallazgos del EDA."*
+- *"El tutorial multiplica ×2,2 la retención medido en nuestro dataset (50,1% vs 22,3%), en línea con los benchmarks de onboarding de GameAnalytics."*
 - *"Usamos datos sintéticos calibrados porque PlayNova no comparte datos de jugadores con nosotros — pero la calibración con fuentes externas garantiza que los patrones son realistas."*
-- *"La API de datos públicos (Steam, App Store) nos permite validar los hallazgos cualitativos: el sentimiento de reviews coincide con nuestros hallazgos de toxicidad y tutorial."*
+- *"La API de datos públicos (Steam, App Store) valida cualitativamente: el sentimiento de reviews coincide con los hallazgos de tutorial y abandono temprano."*
 - *"El anti-leakage es verificable: `days_since_last_session` se excluye explícitamente del modelo — lo podemos demostrar en el código fuente."*
 
 ## 4. Limitaciones honestas
@@ -57,10 +48,10 @@ Cada número sintético del dataset está calibrado con una fuente externa verif
 - Descarga datos públicos de Steam App Details (reviews, player counts, hours played).
 - Descarga reviews públicos de Google Play (análisis de sentimiento).
 - Genera `data/steam_game_data.csv` y `data/app_store_reviews.csv`.
-- Validación cualitativa: el sentimiento de reviews coincide con nuestros hallazgos (toxicidad, tutorial, desenganche silencioso).
+- Validación cualitativa: el sentimiento de reviews coincide con los hallazgos (tutorial, abandono temprano, anuncios).
 
 ## Entregable día 15 — checklist
-- [x] Tabla de calibración con 11 fuentes externas
+- [x] Tabla de calibración con 10 fuentes externas (valores medidos vs benchmark)
 - [x] Frases de defensa listas
 - [x] Limitaciones honestas documentadas
 - [x] `src/fetch_data.py` para validación con datos reales

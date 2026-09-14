@@ -2,61 +2,41 @@
 
 ## 1. Datos construidos: PlayNova Games Dataset
 
-Generados con `src/generate_data.py` (seed 42, reproducible).
+Generados con `src/generate_data.py` (seed 42, reproducible). Números reales de la última generación:
 
-**Jugadores activos:** 8.000 jugadores con ~240k sesiones agregadas (ventana 7d). Cada jugador tiene:
-- Perfil: región, país, OS, dispositivo, nivel, cuenta edad, canal de adquisición, campaña UA
-- Comportamiento 7d: sesiones jugadas, tutorial completado (sí/no), amigos invitados, compras, ads vistos, boosters usados
-- Label objetivo: `churn_d7` (0/1) si el jugador dejó de jugar >7 días después de la última sesión
-- Anti-leakage: `days_since_last_session` se guarda en el dataset para análisis descriptivo pero **se excluye del modelo** porque sería circular (un jugador que no ha jugado en 7 días ya está churning).
-
-**Leads (nuevos installs):** 3.000 nuevos installs con datos de onboarding (tutorial completado, partidas S1, amigos, days_to_session_2). Label: `converted_30d` (0/1) si se convirtió en jugador de pago a 30 días.
-
-**Partidas:** ~240k registros con session_length, coins_spent, deaths, ads_watched, social_invites.
-
-**Compras:** ~10k transacciones IAP con item_type y amount_eur.
-
-**Campañas UA:** 8 campañas (TikTok, Meta Ads, Google UAC, Unity Ads, ironSource, AppLovin, organic, referral).
+- **8.000 jugadores** · **3.000 leads** · **~53.000 sesiones** (tabla `events`) · **~800 compras** IAP · 8 campañas UA.
+- **Churn 7d: 67,0%** · **conversión a pago 30d: 5,4%** · **tutorial completado: 38,5%**.
+- Cada jugador tiene: perfil (región, país, OS, nivel, antigüedad, canal y campaña de adquisición), comportamiento 7d (sesiones, tutorial, amigos invitados, monedas, ads, boosters) y label `churn_d7`.
+- Cada lead tiene: onboarding (tutorial, duración sesión 1, amigos, días hasta 2ª sesión) y label `converted_30d`.
+- **Generación honesta:** el churn se decide por logit (tutorial + social + nivel + canal + ruido) y las sesiones son su consecuencia ruidosa — hay solape real entre clases, sin separación perfecta.
+- Anti-leakage: `days_since_last_session` se guarda solo para análisis y **se excluye del modelo** (sería circular). El identificador `device` de leads también se excluye (es aleatorio).
 
 ## 2. Calibración con fuentes externas reales
 
-Cada parámetro del dataset generado tiene un **benchmark real** que lo justifica:
-
-- **D1 retention:** 22% mediana (GameAnalytics 2026: D1 mediana 22%, D7 4%, D30 0,7%)
-- **D7 churn rate:** ~78% (equivalente a D1 retention 22%)
-- **Tasa de conversión a pago (Day 30):** 2.5% (GameAnalytics 2026, Sensor Tower)
-- **Tasa de invitación social:** ~3% (players que invitan amigos) — benchmark de móviles casuales
-- **ARPDAU:** $0.12 (mediana mobile F2P, AppMagic 2026)
-- **Coste CPA/CPI:** $3-8 (mediana mobile puzzle, Sensor Tower/AppsFlyer 2026)
-- **Tasa de completar tutorial:** ~40% (benchmark mobile casual, GameAnalytics)
-- **Tasa de ver anuncios rewarded:** ~25% (AppLovin benchmarks 2026)
-- **Tiempo de sesión:** 15-20 min (mediana mobile casual, Data.ai 2026)
+- **Retención:** churn 67% a 7d, coherente con la crisis de retención móvil (D1 22% / D7 4% / D30 0,7% mediana · GameAnalytics 2026).
+- **Conversión a pago:** 5,4% a 30d, en el rango alto F2P mid-core (2–5% · Sensor Tower 2026) — elegida así a propósito para tener suficientes positivos y métricas estables.
+- **Tutorial:** 38,5% completion (~40% casual · GameAnalytics).
+- **Economía:** ARPDAU $0.12 (AppMagic 2026) · CPI puzzle $3–8 (AppsFlyer 2026) · sesión 15–20 min (Data.ai 2026).
+- **Canales (medido en el dataset):** orgánico 42,3% retenidos · referral 37,3% · TikTok 30,9% · resto paid 29–33%. El orden coincide con la tesis volumen-vs-calidad.
 
 ## 3. Validación con datos reales (opcional)
 
-- `src/fetch_data.py` descarga datos reales de:
-  - **Steam App Details API:** datos públicos de juegos (reviews, player counts, horas jugadas)
-  - **App Store / Google Play reviews:** datos de sentimiento públicos
-  - **Sensortower/App Annie (público limitado):** rankings, descargas estimadas, revenue
-- Genera `data/steam_game_data.csv` y `data/app_store_reviews.csv` para validar hallazgos cualitativos.
+- `src/fetch_data.py` descarga Steam App Details y reseñas públicas para validar cualitativamente (sentimiento sobre tutorial, anuncios y abandono).
+- Genera `data/steam_game_data.csv` y `data/app_store_reviews.csv`.
 
 ## 4. La web
 
-- **Landing profesional HTML+CSS+JS pura** con simulador interactivo.
-- **Simulador ChurnGuard:** permite al usuario ajustar parámetros de onboarding (tutorial completado, amigos invitados, partidas S1) y ver en tiempo real cómo cambia el D1 Churn Score y el Conversion Score.
-- Funciona en el navegador sin backend. El modelo se ejecuta en JavaScript replicando la lógica del RandomForest entrenado en Python.
-- Ejecutar con: `python -m http.server 8321` (o `python3 -m http.server`).
+- Landing en `web/` (HTML+CSS+JS, cero dependencias): hero con mock del ranking semanal, contadores animados, tabla de benchmarks, figuras del EDA servidas desde `web/assets/`, dos productos con métricas honestas (ROC **y** PR-AUC), simulador con motivo+acción, calculadora de ROI, plan piloto de 4 semanas con precio, integración/GDPR y FAQ de CTO.
+- El simulador es una **demo ilustrativa calibrada**, no el modelo productivo (declarado en la propia web y en el FAQ).
+- Servir desde la carpeta web: `cd web` y `python -m http.server 8321` → `http://localhost:8321`.
 
 ## 5. Identidad visual
 
-- **Tema:** Gaming mobile — colores neón cyberpunk (fondo `#14112b`, primario cyan `#22d3ee`, secundario `#221c46`). Estética arcade gamer.
-- **Cabecera:** generada con PIL (headphones, controlador, confeti, estética gaming).
-- **Tipografía:** system fonts (Arial, Helvetica) para máxima compatibilidad y rendimiento.
-- **Componentes:** parallax scroll, contadores animados, reveal stagger, hover states.
+- Neón cyberpunk (`#14112b` + cyan `#22d3ee` + violeta `#8b5cf6`), orbes con parallax, grid, reveal on-scroll, mock de dashboard, tablas y gauge SVG. Responsive con CTA de piloto siempre visible.
 
 ## Entregable día 12 — checklist
-- [x] Dataset generado (8k jugadores, 3k leads, 240k partidas, seed 42)
-- [x] Benchmark calibrado con fuentes externas (GameAnalytics 2026, Sensor Tower, etc.)
-- [x] `data/schema.sql` definido
-- [x] Web profesional con simulador ChurnGuard en vivo
-- [x] Anti-leakage aplicado
+- [x] Dataset regenerado con logit realista (churn 67%, conv 5,4%, seed 42)
+- [x] Benchmark calibrado con fuentes externas
+- [x] `data/schema.sql` + canal propagado a `player_features`
+- [x] Web reescrita: vistosa, honesta y orientada a piloto
+- [x] Figuras del EDA regeneradas y copiadas a `web/assets/`

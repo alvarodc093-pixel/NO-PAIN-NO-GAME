@@ -9,22 +9,18 @@
 
 ## 2. Métricas del modelo
 
-### Churn Score (D7 abandono)
-- **ROC-AUC:** 0,914
-- **Accuracy:** 0,958
-- **Precision:** 0,948 (de los que predecimos churn, el 95% realmente abandonan)
-- **Recall:** 1,000 (detectamos el 100% de los que realmente abandonan)
-- **F1:** 0,973
-- **Top features:** session_count_7d (0.857), coins_spent_7d (0.041), level (0.031), ads_watched_7d (0.019), country_region (0.016), social_invites_7d (0.014)
+### Churn Score (abandono 7d, threshold 0,50)
+- **ROC-AUC:** 0,914 · **PR-AUC:** 0,950 · **Accuracy:** 0,844
+- **Precision:** 0,888 · **Recall:** 0,878 · **F1:** 0,883
+- **Matriz (test 1.600):** [[409, 119], [131, 941]] — falla en ambos sentidos, como en producción. Nada de recall 1,000.
+- **Top features:** sesiones_7d 0.36, monedas 0.24, ads 0.12, boosters 0.07, nivel 0.06, tutorial 0.04, canal 0.03, país 0.03.
 
-### Conversion Score (pago a 30 días)
-- **ROC-AUC:** 0,973
-- **Accuracy:** 0,980
-- **Precision:** 0,125 (clase minoritaria: ~2.5% de convertidos)
-- **Recall:** 0,167 (clase minoritaria)
-- **F1:** 0,143
-- **Nota:** La baja precision/recall es por desbalance de clases (solo ~2.5% se convierten). El ROC-AUC de 0.973 demuestra que el modelo discrimina muy bien entre convertidos y no-convertidos. Para mejorar precision, se puede ajustar el threshold.
-- **Top features:** days_to_session_2 (0.464), tutorial_completed (0.245), device (0.073), friends_invited (0.072), session_1_length (0.061)
+### Conversion Score (pago a 30 días, threshold 0,40 sintonizado por F1)
+- **ROC-AUC:** 0,901 · **PR-AUC:** 0,279 · **Accuracy:** 0,913
+- **Precision:** 0,362 · **Recall:** 0,758 · **F1:** 0,490
+- **Matriz (test 600):** [[523, 44], [8, 25]] — con 5,4% de positivos, el PR-AUC manda sobre el ROC.
+- **Lectura de negocio:** con threshold 0,40 capturamos el 76% de futuros pagadores; los falsos positivos cuestan un push, un pagador perdido cuesta LTV.
+- **Top features:** días_hasta_2ª_sesión 0.31, duración_sesión_1 0.22, tutorial 0.16, canal 0.10, país 0.10.
 
 ## 3. Anti-leakage y reproducibilidad
 
@@ -38,24 +34,24 @@
 ### Página Inicio — Hero
 - Parallax con orb violeta/cyan, fondo `#14112b`.
 - Título "CHURNGUARD" + subtítulo "Detecta el abandono antes de que ocurra".
-- Contadores animados: 8K jugadores · 0,914 ROC-AUC Churn · 1,000 Recall de churn · 0,973 ROC-AUC Conversion.
+- Contadores: 8K jugadores · ROC-AUC churn 0,914 · F1 churn 0,883 · ROC-AUC conversión 0,901.
 - CTA: "Ver Demo" → Simulador.
 
 ### Página Datos
 - Tabla de benchmarks con fuentes (D1 22%, D7 4%, D30 0,7%).
-- Comparativa: TikTok (29%) vs Discord (65%) retención D7.
-- Figuras del EDA (toxicidad, canales, winrate).
+- Comparativa real (medida): orgánico 42,3% retenidos vs paid ~30% (TikTok 30,9%).
+- Figuras del EDA (ads, canales, engagement).
 
 ### Página Solución
-- Dos productos: **D1 Churn Score** (abandono 7d) + **Conversion Score** (pago 30d).
+- Dos productos: **Churn Score 7d** + **Conversion Score 30d** (threshold 0,40).
 - Tabla de métricas comparativa (ROC-AUC, precision, recall, F1).
 - Explicación de anti-leakage.
 
 ### Página Demo — Simulador
-- **Simulador ChurnGuard:** ajusta sliders (tutorial completado: 0-100%, amigos invitados: 0-10, partidas S1: 1-10) → el modelo JS replica el RF y muestra el D1 Churn Score en tiempo real (gauge SVG).
-- **Preset rápido:** #92831 (tutorial=0, amigos=0, sesiones=1 → ~85% churn) y Perfil sano (tutorial=100%, amigos=5, sesiones=8 → ~3% churn).
-- **Calculadora budget:** introduce CPI y presupuesto → estima jugadores retenidos vs perdidos.
-- **Nota sobre métricas:** El modelo JS usa una aproximación lineal del RF entrenado en Python. El ROC-AUC real del modelo Python es 0.914 (churn) y 0.973 (conversion).
+- **Simulador:** sliders (tutorial %, amigos, sesiones 1–20) + selector de canal → gauge de riesgo con **motivo probable + acción del playbook**. Demo ilustrativa calibrada (declarado en la web), no el `.pkl` productivo.
+- **Presets:** en riesgo (0, 0, 1, TikTok → ~80%) · típico TikTok (40, 2, 5 → ~51%) · sano orgánico (100, 5, 8 → ~7%).
+- **Calculadora ROI:** CPI + budget + LTV → installs, retenidos base vs con piloto (+5 pp D7), € incremental y múltiplo sobre los 2.500 € del piloto.
+- **Sección piloto:** alcance 4 semanas, A/B con métrica primaria D7, precio fijo 2.500 €, integración (`POST /score`, p95 <200 ms) y GDPR (IDs anonimizados, borrado a petición).
 - Todo en el navegador, sin backend, modelo JS replicado del RF entrenado en Python.
 
 ### Página Metodología
@@ -74,16 +70,16 @@ Cada semana, ChurnGuard entrega:
    - Motivo: Sin compras → Bundle de bienvenida $0.99 + first-purchase bonus
    - Motivo: Tóxico → Moderación + warning + cooldown
    - Motivo: Sesión corta → Mini-tutorial + evento diario personalizado
-3. **Ranking de calidad de UA:** TikTok vs Discord vs Meta vs organic (CPA vs retención D7).
+3. **Ranking de calidad de UA:** orgánico vs referral vs TikTok vs resto paid (CPI vs retención D7 × conversión).
 
 ## 6. Demo script semanal (para reunión con PlayNova)
 
-1. **Problema (2 min):** "El 97% de vuestros jugadores abandona en D1. Perdemos $X/mes en UA quemado."
-2. **Datos (2 min):** "Analizamos 8K jugadores, 240K sesiones con benchmarks reales."
-3. **Hallazgos (3 min):** "El tutorial es el predictor #1. TikTok trae volumen pero no calidad."
-4. **Producto (4 min):** "Mostramos el simulador: ajusta el tutorial y ve el churn en tiempo real."
-5. **Resultado (1 min):** "Un 5% de mejora en D1 = +$1.5M/año en LTV recuperada."
-6. **Next steps (2 min):** "Pilot de 4 semanas con ranking semanal + acciones automatizadas."
+1. **Problema (2 min):** "El 67% de vuestros jugadores abandona en 7 días. Con CPI $5 y 10k installs/mes, ~$33k/mes en UA sin retorno."
+2. **Datos (2 min):** "8K jugadores, 3K leads, ~53K sesiones (seed 42), calibrados con GameAnalytics/Sensor Tower."
+3. **Hallazgos (3 min):** "Tutorial ×2,2 retención. Orgánico 42% vs paid ~30%. La ventana crítica son 4 días."
+4. **Producto (4 min):** "Simulador con motivo+acción; ranking semanal Top-100; threshold de conversión sintonizado a F1."
+5. **Resultado (1 min):** "+5 pp en D7 validados en A/B = € incrementales calculados en la web con vuestro CPI y LTV."
+6. **Next steps (2 min):** "Piloto 4 semanas, 2.500 € fijos, go/no-go por lift D7 con IC 95%."
 
 ## Entregable día 14 — checklist
 - [x] Modelos entrenados (`models/churn_model.pkl`, `models/conversion_model.pkl`)

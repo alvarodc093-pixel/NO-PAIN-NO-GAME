@@ -12,7 +12,7 @@
 | **Modelo de negocio** | F2P + microtransacciones (gemas, vidas, boosters) + pases de temporada + anuncios rewarded. ARPDAU ~$0.12, ARPU ~$3.50/mes. |
 | **Procesos principales** | 1) Onboarding/tutorial 2) Sesiones diarias (15-20 min) 3) Live-Ops (eventos diarios/semanales) 4) Monetización (tienda, ads) 5) UA (TikTok, Unity Ads, Meta, Google UAC) 6) Retargeting / re-engagement. |
 | **Situación actual** | Crecimiento plano desde Q2 2025. El equipo cree que "el tutorial no es suficiente" y "TikTok trae gente mala". Tienen análisis descriptivo (crashlytics, firebase) pero NO un sistema predictivo de churn. |
-| **Problemas** | D1 retention 22% (mediana móvil), 97% churn post-instal, budget de UA quemado sin LTV, toxicidad baja pero desenganche silencioso alto, campañas re-engagement genéricas sin personalizar. |
+| **Problemas** | Retención D1 22% mediana (GameAnalytics 2026), churn 7d ~67% en la demo, budget de UA quemado sin LTV, desenganche silencioso, campañas de re-engagement genéricas sin personalizar. |
 | **Necesidades** | 1) Ranking semanal D1-churn 2) Motivo de desenganche por segmento 3) Qué canal/tutorial trae jugadores que SÍ pagan 4) Demo usable por PMs no-técnicos. |
 
 **Qué pierde si no actúa:** con 2M MAU y ARPDAU $0.12, cada punto de D1 retention = 20.000 jugadores/€30.000/mes en valor de retorno. A escala, un 5% de mejora en D1 = +$1.5M/año en LTV recuperada.
@@ -20,11 +20,11 @@
 ## 2. Datos disponibles (lo que PlayNova ya produce)
 
 - **Jugadores:** device_id, app_version, región, país, dispositivo, OS, nivel, cuenta de jugador, fecha de install, última sesión, source attribution.
-- **Eventos de juego:** session_length, tutorial_step_completed, level_reached, deaths, coins_spent, boosters_used, ads_watched, social (invites, guild_joined).
+- **Eventos de juego:** session_length, tutorial_step, coins_spent, boosters_used, ads_watched, social_invites (agregado 7d por jugador).
 - **Sesiones:** fecha, duración, tipo (casual/deep), push_notifications_recibidas, notificaciones abiertas.
 - **Monetización:** compras in-app (gemas, vidas, boosters, pase_temporada), importe, fecha, IAP vs ad.
 - **UA/Marketing:** campaña, canal (TikTok, Meta, Google UAC, Unity Ads), coste, install atribuido, primer evento post-install.
-- **Onboarding:** tutorial_step_1_completed, tutorial_step_3_completed, tutorial_completed, partidas_s1, friends_invited, days_to_session_2.
+- **Onboarding:** tutorial_completed, session_1_length, friends_invited, days_to_session_2.
 - **Support/reports:** reportes de jugador, tickets, baja de app.
 
 ## 3. Diseño de la base de datos

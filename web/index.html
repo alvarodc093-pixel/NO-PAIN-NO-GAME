@@ -3,161 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ChurnGuard — Detecta el abandono antes de que ocurra</title>
+<title>ChurnGuard — Detecta el abandono antes de que ocurra | Retención F2P</title>
+<meta name="description" content="ChurnGuard predice qué jugadores abandonarán en 7 días y qué installs se convertirán en pago. Piloto de 4 semanas para publishers F2P.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <nav id="navbar">
-  <div class="logo">CHURNGUARD</div>
-  <div class="links">
-    <a href="#problema">Problema</a>
-    <a href="#datos">Datos</a>
-    <a href="#solucion">Solución</a>
-    <a href="#demo">Demo</a>
-    <a href="#metodologia">Metodología</a>
+  <div class="nav-inner">
+    <div class="logo">🛡️ CHURNGUARD</div>
+    <div class="links">
+      <a href="#problema">Problema</a>
+      <a href="#datos">Datos</a>
+      <a href="#solucion">Solución</a>
+      <a href="#demo">Demo</a>
+      <a href="#piloto">Piloto</a>
+      <a href="#metodologia">Metodología</a>
+    </div>
+    <a href="#piloto" class="btn-nav">Pedir piloto →</a>
   </div>
 </nav>
 
-<section class="hero" id="inicio">
+<header class="hero" id="inicio">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
-  <h1>CHURNGUARD</h1>
-  <p>Detecta el abandono antes de que ocurra. Predecimos qué jugadores dejarán el juego en 7 días y qué nuevos installs se convertirán en jugadores de pago.</p>
-  <div class="cta"><a href="#demo"><button>Ver Demo →</button></a></div>
-  <div class="counters">
-    <div class="counter"><div class="num">8,000</div><div class="label">Jugadores analizados</div></div>
-    <div class="counter"><div class="num">0.914</div><div class="label">ROC-AUC Churn Score</div></div>
-    <div class="counter"><div class="num">1.000</div><div class="label">Recall de churn</div></div>
-    <div class="counter"><div class="num">0.973</div><div class="label">ROC-AUC Conversion</div></div>
+  <div class="grid-overlay"></div>
+  <div class="hero-inner">
+    <div class="badge">● Piloto de 4 semanas · publishers F2P · sin integración invasiva</div>
+    <h1>Detecta el abandono<br><span class="grad">antes de que ocurra</span></h1>
+    <p class="lede">Predecimos qué jugadores dejarán tu juego en <strong>7 días</strong> —con motivo y acción— y qué installs se convertirán en <strong>pago a 30 días</strong>. Para que tu budget de UA deje de quemarse.</p>
+    <div class="cta-row">
+      <a href="#demo"><button class="btn-primary btn-lg">Probar el simulador →</button></a>
+      <a href="#piloto"><button class="btn-ghost btn-lg">Ver piloto de 4 semanas</button></a>
+    </div>
+    <div class="counters">
+      <div class="counter"><div class="num" data-target="8000" data-format="int">0</div><div class="label">Jugadores (dataset demo)</div></div>
+      <div class="counter"><div class="num" data-target="0.914" data-format="dec3">0</div><div class="label">ROC-AUC · Churn 7d</div></div>
+      <div class="counter"><div class="num" data-target="0.883" data-format="dec3">0</div><div class="label">F1 · Churn 7d</div></div>
+      <div class="counter"><div class="num" data-target="0.901" data-format="dec3">0</div><div class="label">ROC-AUC · Conversión 30d</div></div>
+    </div>
+    <div class="logos"><span>Diseñado para Live-Ops</span><span>·</span><span>Growth</span><span>·</span><span>Monetización</span><span>·</span><span>UA</span></div>
   </div>
-</section>
+  <div class="hero-mock">
+    <div class="mock-window">
+      <div class="mock-bar"><span></span><span></span><span></span><em>live-ops · ranking semanal de riesgo</em></div>
+      <table class="mock-table">
+        <tr><th>Jugador</th><th>Riesgo 7d</th><th>Motivo</th><th>Acción</th></tr>
+        <tr><td>p92831</td><td class="risk-high">78%</td><td>Tutorial incompleto</td><td>Push onboarding + bonus</td></tr>
+        <tr><td>p10422</td><td class="risk-high">71%</td><td>Sin círculo social</td><td>Invitar amigos + recompensa</td></tr>
+        <tr><td>p55201</td><td class="risk-mid">44%</td><td>Sesiones cortas</td><td>Evento diario + booster</td></tr>
+        <tr><td>p77340</td><td class="risk-low">9%</td><td>—</td><td>—</td></tr>
+      </table>
+      <div class="mock-foot">Muestra sintética con fines de demostración · el piloto usa tus eventos reales</div>
+    </div>
+  </div>
+</header>
 
 <section id="problema">
-  <h2 class="section-title">El Problema</h2>
+  <h2 class="section-title">El problema en €, no en %</h2>
+  <p class="subtitle">La retención D1 mediana en móvil es del 22% (GameAnalytics 2026). El resto del budget de adquisición se evapora en silencio.</p>
   <div class="problem-grid">
-    <div class="card"><h3>97% de abandono D1</h3><p>Los juegos F2P pierden al 97% de nuevos jugadores antes de la primera semana. La retención D1 media es 22%, D7 es 4%, D30 es 0.7% (GameAnalytics 2026).</p></div>
-    <div class="card"><h3>UA quemado</h3><p>Adquirir un jugador cuesta $3-8 (CPI medio). Si el 97% se va en D1, el presupuesto de adquisición se pierde. Un 5% de mejora en D1 = +$1.5M/año en LTV recuperada.</p></div>
-    <div class="card"><h3>Sin predicción</h3><p>PlayNova Games tiene datos descriptivos (Firebase, Crashlytics) pero NO un sistema predictivo. No saben quién va a abandonar hasta que ya lo hizo.</p></div>
+    <div class="card"><div class="icon">📉</div><h3>67% abandona en 7 días</h3><p>En nuestro dataset demo calibrado, 2 de cada 3 jugadores dejan de jugar en la primera semana. Sin alerta previa: simplemente no vuelven.</p></div>
+    <div class="card"><div class="icon">🔥</div><h3>UA quemado: $3–8 por install</h3><p>Con CPI medio de $5 y 10.000 installs/mes, ~6.700 se pierden. Son ~$33.500/mes en adquisición sin retorno.</p></div>
+    <div class="card"><div class="icon">🙈</div><h3>Sin predicción accionable</h3><p>Firebase y Crashlytics describen el pasado. Nadie te dice <em>esta semana</em> a quién retener, por qué motivo y con qué acción.</p></div>
   </div>
 </section>
 
 <section id="datos">
-  <h2 class="section-title">Los Datos</h2>
-  <p class="subtitle">Benchmark calibrado con fuentes externas verificables — cada número tiene una fuente real.</p>
+  <h2 class="section-title">Datos calibrados, no inventados</h2>
+  <p class="subtitle">Dataset sintético reproducible (seed 42): 8.000 jugadores · 3.000 leads · ~53.000 sesiones · ~800 compras. Cada parámetro tiene benchmark externo.</p>
   <table class="data-table">
-    <tr><th>Métrica</th><th>Valor</th><th>Fuente</th></tr>
-    <tr><td>D1 Retention mediana</td><td>22%</td><td>GameAnalytics 2026</td></tr>
-    <tr><td>D7 Retention mediana</td><td>4%</td><td>GameAnalytics 2026</td></tr>
-    <tr><td>Conversión a pago (D30)</td><td>~2.5%</td><td>Sensor Tower 2026</td></tr>
-    <tr><td>ARPDAU</td><td>$0.12</td><td>AppMagic 2026</td></tr>
-    <tr><td>CPI medio (puzzle)</td><td>$3-8</td><td>AppsFlyer 2026</td></tr>
-    <tr><td>Tutorial completion rate</td><td>~40%</td><td>GameAnalytics 2026</td></tr>
+    <tr><th>Métrica</th><th>Valor demo</th><th>Benchmark</th></tr>
+    <tr><td>Churn a 7 días</td><td>67,0%</td><td>D7 retention ~4% mediana móvil · GameAnalytics 2026</td></tr>
+    <tr><td>Conversión a pago (30d)</td><td>5,4%</td><td>~2–5% F2P mid-core · Sensor Tower 2026</td></tr>
+    <tr><td>Tutorial completado</td><td>38,5%</td><td>~40% casual · GameAnalytics</td></tr>
+    <tr><td>ARPDAU referencia</td><td>$0.12</td><td>AppMagic 2026</td></tr>
+    <tr><td>CPI puzzle</td><td>$3–8</td><td>AppsFlyer 2026</td></tr>
   </table>
-  <h3 class="section-title" style="font-size:1.5rem;color:#22d3ee;">Canal de UA: Volumen vs Calidad</h3>
-  <div class="metric-row"><span style="color:#22d3ee">TikTok</span><div class="metric-bar"><div class="fill" style="width:29%"></div></div>29% retención D7</div>
-  <div class="metric-row"><span style="color:#22d3ee">Discord/Community</span><div class="metric-bar"><div class="fill" style="width:65%"></div></div>65% retención D7</div>
-  <div class="problem-grid" style="margin-top:2rem;">
-    <div class="card"><h3>Figura: Toxicidad</h3><img src="docs/img/churn_toxicidad.png" style="width:100%;border-radius:8px" onerror="this.style.display='none'"></div>
-    <div class="card"><h3>Figura: Canales</h3><img src="docs/img/conv_canal.png" style="width:100%;border-radius:8px" onerror="this.style.display='none'"></div>
-    <div class="card"><h3>Figura: Winrate</h3><img src="docs/img/winrate_churn.png" style="width:100%;border-radius:8px" onerror="this.style.display='none'"></div>
+  <h3 class="mini-title">Canal de UA: volumen vs. calidad</h3>
+  <div class="metric-row"><span class="chan">TikTok · 30,9% retenidos</span><div class="metric-bar"><div class="fill" style="width:31%"></div></div></div>
+  <div class="metric-row"><span class="chan">Orgánico · 42,3% retenidos</span><div class="metric-bar"><div class="fill" style="width:42%"></div></div></div>
+  <div class="metric-row"><span class="chan">Referral · 37,3% retenidos</span><div class="metric-bar"><div class="fill" style="width:37%"></div></div></div>
+  <p class="note">TikTok trae volumen barato pero retiene peor que orgánico y referral. El budget debe moverse a calidad, no a installs.</p>
+  <div class="fig-grid">
+    <div class="card"><h3>Retención por canal</h3><img src="assets/fig-canal.png" alt="Conversión por canal" loading="lazy"><p class="note">Orgánico y referral convierten mejor que paid social.</p></div>
+    <div class="card"><h3>Ads rewarded y churn</h3><img src="assets/fig-toxicidad.png" alt="Churn vs ads" loading="lazy"><p class="note">El engagement temprano (ads, sesiones) separa retenidos de churners.</p></div>
+    <div class="card"><h3>Engagement por churn</h3><img src="assets/fig-winrate.png" alt="Engagement por churn" loading="lazy"><p class="note">Los retenidos concentran más monedas por sesión desde la semana 1.</p></div>
   </div>
 </section>
 
 <section id="solucion">
-  <h2 class="section-title">La Solución</h2>
+  <h2 class="section-title">Dos scores, una decisión semanal</h2>
   <div class="products">
     <div class="product">
-      <h3>D1 Churn Score</h3>
-      <p>Probabilidad de abandono a 7 días por jugador. Motivo de desenganche + acción de retención automatizada.</p>
+      <div class="tag">Producto principal</div>
+      <h3>🎯 Churn Score 7d</h3>
+      <p>Probabilidad de abandono a 7 días por jugador, con <strong>motivo</strong> y <strong>acción de retención</strong>. Ranking semanal Top-100 para Live-Ops.</p>
       <div class="metric-grid">
         <div class="metric-item"><div class="val">0.914</div><div class="lbl">ROC-AUC</div></div>
-        <div class="metric-item"><div class="val">0.948</div><div class="lbl">Precision</div></div>
-        <div class="metric-item"><div class="val">1.000</div><div class="lbl">Recall</div></div>
-        <div class="metric-item"><div class="val">0.973</div><div class="lbl">F1 Score</div></div>
+        <div class="metric-item"><div class="val">0.950</div><div class="lbl">PR-AUC</div></div>
+        <div class="metric-item"><div class="val">0.888</div><div class="lbl">Precision</div></div>
+        <div class="metric-item"><div class="val">0.878</div><div class="lbl">Recall</div></div>
       </div>
-      <p class="note">Top feature: Tutorial completado ×3 retención</p>
+      <p class="note">Importancias: sesiones 0.36 · monedas 0.24 · ads 0.12 · boosters 0.07 · nivel 0.06 · tutorial 0.04 · canal 0.03. Ninguna feature domina: el modelo combina señales.</p>
     </div>
     <div class="product">
-      <h3>Conversion Score</h3>
-      <p>Probabilidad de que un nuevo install se convierta en jugador de pago a 30 días. Optimiza el budget de UA.</p>
+      <div class="tag alt">Segunda línea · UA</div>
+      <h3>💰 Conversion Score 30d</h3>
+      <p>Probabilidad de que un install se convierta en pago a 30 días (threshold 0.40 sintonizado por F1). Para pujar y presupuestar por calidad.</p>
       <div class="metric-grid">
-        <div class="metric-item"><div class="val">0.973</div><div class="lbl">ROC-AUC</div></div>
-        <div class="metric-item"><div class="val">0.980</div><div class="lbl">Accuracy</div></div>
-        <div class="metric-item"><div class="val">0.125</div><div class="lbl">Precision</div></div>
-        <div class="metric-item"><div class="val">0.167</div><div class="lbl">Recall</div></div>
-        <div class="metric-item"><div class="val">0.143</div><div class="lbl">F1 Score</div></div>
+        <div class="metric-item"><div class="val">0.901</div><div class="lbl">ROC-AUC</div></div>
+        <div class="metric-item"><div class="val">0.279</div><div class="lbl">PR-AUC</div></div>
+        <div class="metric-item"><div class="val">0.362</div><div class="lbl">Precision</div></div>
+        <div class="metric-item"><div class="val">0.758</div><div class="lbl">Recall</div></div>
       </div>
-      <p class="note">Top feature: Días hasta 2ª sesión</p>
+      <p class="note">Clase minoritaria (5,4%): el PR-AUC manda, no el ROC. Con threshold 0.40 capturamos el 76% de futuros pagadores asumiendo falsos positivos baratos (un push) frente a un pagador perdido (caro).</p>
     </div>
   </div>
-  <div class="card" style="margin-top:2rem">
-    <h3>Anti-Leakage Verificable</h3>
-    <p><code>days_since_last_session</code> se excluye explícitamente del modelo. Todos los features son anteriores a la fecha de predicción. Verificable en <code>src/train.py</code>.</p>
+  <div class="card honesty">
+    <h3>🔍 Honestidad técnica (lo que un vendor no te cuenta)</h3>
+    <ul>
+      <li><code>days_since_last_session</code> <strong>excluido</strong> del modelo — sería decir "predigo que se fue porque se fue". Verificable en <code>src/train.py</code>.</li>
+      <li>Datos <strong>sintéticos calibrados</strong>, no tus eventos reales. Las métricas son de laboratorio; el piloto de 4 semanas las valida en producción.</li>
+      <li>RandomForest de 300 árboles, encoders por columna persistidos en el <code>.pkl</code>. Interpretable para PMs; suficiente para 8k×10 tabulares.</li>
+    </ul>
   </div>
 </section>
 
 <section id="demo">
-  <h2 class="section-title">Demo: Simulador ChurnGuard</h2>
+  <h2 class="section-title">Demo interactiva</h2>
+  <p class="subtitle">Ajusta el perfil de un jugador y mira riesgo, motivo y acción. Demo ilustrativa calibrada con el modelo — no es el modelo productivo.</p>
   <div class="simulator">
-    <h3 class="section-title" style="font-size:1.5rem">Simulador D1 Churn Score</h3>
-    <div class="slider-group">
-      <label>Tutorial completado: <span id="tutVal">40</span>%</label>
-      <input type="range" id="tutorial" min="0" max="100" value="40" oninput="updateSim()">
+    <div class="sim-grid">
+      <div>
+        <div class="slider-group">
+          <label>Tutorial completado: <span id="tutVal">40</span>%</label>
+          <input type="range" id="tutorial" min="0" max="100" value="40" oninput="updateSim()">
+        </div>
+        <div class="slider-group">
+          <label>Amigos invitados: <span id="friVal">2</span></label>
+          <input type="range" id="friends" min="0" max="10" value="2" oninput="updateSim()">
+        </div>
+        <div class="slider-group">
+          <label>Sesiones en 7 días: <span id="sesVal">5</span></label>
+          <input type="range" id="sessions" min="1" max="20" value="5" oninput="updateSim()">
+        </div>
+        <div class="slider-group">
+          <label>Canal de adquisición</label>
+          <select id="channel" onchange="updateSim()">
+            <option value="organic">Orgánico</option>
+            <option value="referral">Referral</option>
+            <option value="tiktok" selected>TikTok</option>
+            <option value="meta">Meta</option>
+            <option value="google_uac">Google UAC</option>
+            <option value="unity_ads">Unity Ads</option>
+            <option value="ironsource">ironSource</option>
+            <option value="applovin">AppLovin</option>
+          </select>
+        </div>
+        <div class="presets">
+          <button onclick="setPreset(0,0,1,'tiktok')">⚠️ En riesgo</button>
+          <button onclick="setPreset(40,2,5,'tiktok')">😐 Típico TikTok</button>
+          <button onclick="setPreset(100,5,8,'organic')">✅ Sano orgánico</button>
+        </div>
+      </div>
+      <div class="gauge-box">
+        <div class="gauge">
+          <svg width="200" height="200" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#2a2550" stroke-width="12"/>
+            <circle id="gaugeArc" cx="100" cy="100" r="80" fill="none" stroke="#22d3ee" stroke-width="12" stroke-dasharray="502" stroke-dashoffset="502" stroke-linecap="round"/>
+          </svg>
+          <div class="value" id="gaugeVal">--</div>
+        </div>
+        <div id="motiveBox" class="motive"></div>
+      </div>
     </div>
-    <div class="slider-group">
-      <label>Amigos invitados: <span id="friVal">2</span></label>
-      <input type="range" id="friends" min="0" max="10" value="2" oninput="updateSim()">
-    </div>
-    <div class="slider-group">
-      <label>Partidas sesión 1: <span id="sesVal">3</span></label>
-      <input type="range" id="sessions" min="1" max="10" value="3" oninput="updateSim()">
-    </div>
-    <div class="gauge">
-      <svg width="200" height="200" viewBox="0 0 200 200">
-        <circle cx="100" cy="100" r="80" fill="none" stroke="#2a2550" stroke-width="12"/>
-        <circle id="gaugeArc" cx="100" cy="100" r="80" fill="none" stroke="#22d3ee" stroke-width="12" stroke-dasharray="502" stroke-dashoffset="502" stroke-linecap="round" transform="rotate(-90,100,100)"/>
-      </svg>
-      <div class="value" id="gaugeVal">--</div>
-    </div>
-    <h4 style="margin:1rem 0 .5rem">Presets rápidos:</h4>
-    <div class="presets">
-      <button onclick="setPreset(0,0,1)">⚠️ En riesgo (#92831)</button>
-      <button onclick="setPreset(40,2,3)">😐 Neutral</button>
-      <button onclick="setPreset(100,5,8)">✅ Perfil sano</button>
-    </div>
-    <div class="card" style="margin-top:1.5rem">
-      <h3>Calculadora de Budget</h3>
-      <p>Introduce el CPI y el presupuesto mensual para estimar jugadores retenidos vs perdidos.</p>
+    <div class="card budget">
+      <h3>🧮 Calculadora de ROI del piloto</h3>
+      <p>¿Cuánto vale subir la retención 5 puntos? Introduce tu CPI y tu budget mensual.</p>
       <div class="input-row">
-        <input type="number" id="cpi" placeholder="CPI ($)" value="5" class="input-field">
-        <input type="number" id="budget" placeholder="Budget ($)" value="10000" class="input-field">
+        <label>CPI ($) <input type="number" id="cpi" value="5" min="1" max="30" class="input-field"></label>
+        <label>Budget ($/mes) <input type="number" id="budget" value="10000" min="500" step="500" class="input-field"></label>
+        <label>LTV por retenido ($) <input type="number" id="ltv" value="21" min="1" class="input-field"></label>
         <button onclick="calcBudget()" class="btn-primary">Calcular</button>
       </div>
-      <div id="budgetResult" style="margin-top:1rem;color:#a0a0c0"></div>
+      <div id="budgetResult" class="budget-result"></div>
     </div>
+  </div>
+</section>
+
+<section id="piloto">
+  <h2 class="section-title">Piloto de 4 semanas, sin humo</h2>
+  <div class="problem-grid">
+    <div class="card"><div class="icon">📦</div><h3>Semana 1 · Conexión</h3><p>Export diario de eventos (CSV o endpoint): sesiones, tutorial, compras, atribución. Nada de SDK invasivo el día 1. Firma DPA + anonimización de IDs.</p></div>
+    <div class="card"><div class="icon">🎯</div><h3>Semanas 2–3 · A/B test</h3><p>Grupo tratado (Top-riesgo + acción personalizada) vs. control. Métrica primaria: retención D7. Secundarias: tutorial completion, D30 pago.</p></div>
+    <div class="card"><div class="icon">💶</div><h3>Semana 4 · Decisión</h3><p>Informe con lift, IC 95% y € recuperados. Si no hay lift significativo, no se factura la fase 2. Precio piloto: <strong>2.500 €</strong> fijos.</p></div>
+  </div>
+  <div class="card honesty">
+    <h3>🔌 Integración y GDPR</h3>
+    <ul>
+      <li><strong>Input:</strong> CSV diario o POST JSON a <code>/score</code> → devuelve <code>{p_churn_7d, motivo, acción}</code> por jugador. Latencia &lt; 200 ms p95.</li>
+      <li><strong>Privacidad:</strong> solo IDs anonimizados + eventos de juego. Sin PII, sin tracking cross-app. Borrado a petición, retención 90 días.</li>
+      <li><strong>Stack:</strong> scikit-learn versionado (seed 42), artefacto <code>.pkl</code> con encoders incluidos. Re-entreno semanal con tus datos.</li>
+    </ul>
   </div>
 </section>
 
 <section id="metodologia">
-  <h2 class="section-title">Metodología</h2>
+  <h2 class="section-title">Metodología en 5 días</h2>
   <div class="problem-grid">
-    <div class="card"><h3>Día 10 — Idea</h3><p>Propuesta de valor, ficha de cliente, enfoque de 5 días con FOCO DÍAS 13-14.</p></div>
-    <div class="card"><h3>Día 11 — Cliente</h3><p>PlayNova Games: ficha completa, datos disponibles, diseño BD con diagrama ER.</p></div>
-    <div class="card"><h3>Día 12 — Datos</h3><p>8K jugadores, 3K leads, 240K partidas (seed 42). Benchmark con fuentes externas.</p></div>
-    <div class="card"><h3>Día 13 — Análisis</h3><p>6 hallazgos estrella con EDA reproducible (tutorial ×3, TikTok 29%, toxicidad, etc.).</p></div>
-    <div class="card"><h3>Día 14 — Solución</h3><p>Random Forest anti-leakage, métricas verificables, web con simulador en vivo.</p></div>
+    <div class="card"><h3>Día 10 · Idea</h3><p>Foco: retención 7d + conversión 30d para F2P. Cliente piloto: PlayNova Games.</p></div>
+    <div class="card"><h3>Día 11 · Cliente y datos</h3><p>Esquema SQLite en <code>data/schema.sql</code> + diagrama ER. Anti-leakage desde el diseño.</p></div>
+    <div class="card"><h3>Día 12 · Dataset</h3><p><code>src/generate_data.py</code> (seed 42): churn por logit con solape real, canal propagado a features, conversión ~5%.</p></div>
+    <div class="card"><h3>Día 13 · Análisis</h3><p><code>notebooks/01_eda.py</code> reproducible: orgánico 42% vs. paid ~30% retención; tutorial y social como palancas.</p></div>
+    <div class="card"><h3>Día 14 · Solución</h3><p><code>src/train.py</code>: RF 300 árboles, threshold sintonizado en conversión, métricas en <code>models/metrics.json</code>.</p></div>
   </div>
-  <h3 style="color:#22d3ee;margin:2rem 0 1rem">FAQ</h3>
-  <div class="faq-item"><h4 onclick="this.parentElement.classList.toggle('open')">¿Por qué Random Forest y no Deep Learning?</h4><p>Por interpretabilidad: los PMs necesitan entender POR QUÉ un jugador tiene 87% de riesgo. Los datos tabulares pequeños (8K×15) no necesitan redes neuronales. RF es más rápido, ligero y verificable.</p></div>
-  <div class="faq-item"><h4 onclick="this.parentElement.classList.toggle('open')">¿Cómo es el anti-leakage?</h4><p><code>days_since_last_session</code> se excluye del modelo. Todos los features son anteriores a la fecha de predicción. El código es verificable en <code>src/train.py</code>.</p></div>
-  <div class="faq-item"><h4 onclick="this.parentElement.classList.toggle('open')">¿Usan datos reales de PlayNova?</h4><p>No — usamos datos sintéticos calibrados con fuentes externas (GameAnalytics, Sensor Tower, AppsFlyer). La validación real con PlayNova sería el siguiente paso del piloto.</p></div>
-  <div class="faq-item"><h4 onclick="this.parentElement.classList.toggle('open')">¿Qué pasa si el ROC-AUC es 0.985 en datos sintéticos?</h4><p>Es honesto. En datos reales de producción la métrica podría ser menor. Un piloto de 4 semanas con datos reales de PlayNova validaría esto.</p></div>
+  <h3 class="mini-title">Preguntas que haría tu CTO</h3>
+  <div class="faq-item"><h4>¿Por qué el recall de churn ya no es 1.000?</h4><p>Porque antes había fuga: el nº de sesiones determinaba la etiqueta. Ahora el churn se genera por logit (tutorial, social, canal, ruido) y las sesiones son consecuencia ruidosa. Recall 0.878 con precision 0.888 es un modelo real, no una tautología. La matriz es [[409,119],[131,941]]: falla en ambos sentidos, como en producción.</p></div>
+  <div class="faq-item"><h4>¿Por qué RandomForest y no deep learning?</h4><p>8k×10 tabulares no necesitan redes. El RF es interpretable (tu PM ve el porqué), rápido (&lt;200 ms), y auditable. Cuando tengas secuencias de eventos a escala, migramos a gradient boosting / temporal.</p></div>
+  <div class="faq-item"><h4>¿El simulador web es el modelo real?</h4><p>No: es una demo ilustrativa calibrada con las importancias del RF. El modelo real está en <code>models/churn_model.pkl</code> con sus encoders. En el piloto exponemos el endpoint <code>/score</code> de verdad.</p></div>
+  <div class="faq-item"><h4>¿Y si en mis datos el ROC baja a 0.80?</h4><p>Probable y aceptable: lo que vendemos es lift en A/B, no un ROC de laboratorio. El go/no-go del piloto es retención D7 incremental con IC 95%, no una métrica offline.</p></div>
+  <div class="faq-item"><h4>¿Qué necesitáis de nosotros?</h4><p>Un CSV diario anonimizado durante 4 semanas y un owner de Live-Ops para lanzar las acciones del playbook. Nada más.</p></div>
 </section>
 
-<footer>
-  ChurnGuard — Proyecto Bootcamp Startup 2026 | Días 10-15 | Generado 14/09/2026<br>
-  PlayNova Games (ficticio) · Data Science para gaming móvil F2P
+<footer id="contacto">
+  <div class="foot-cta">
+    <h3>¿Hablamos del piloto?</h3>
+    <p>Escríbenos con tu CPI, tu D7 actual y tu volumen mensual. Te devolvemos la estimación de € en 48 h.</p>
+    <a href="mailto:piloto@churnguard.gg?subject=Piloto%20ChurnGuard%204%20semanas"><button class="btn-primary btn-lg">pedir piloto · 2.500 € →</button></a>
+  </div>
+  <div class="foot-base">ChurnGuard — Bootcamp Startup 2026 · Días 10–15<br>PlayNova Games (cliente piloto ficticio) · Dataset demo sintético y calibrado · <a href="#inicio">volver arriba ↑</a></div>
 </footer>
 
 <script src="app.js"></script>
