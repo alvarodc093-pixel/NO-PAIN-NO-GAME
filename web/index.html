@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ChurnGuard — Detecta el abandono antes de que ocurra | Retención F2P</title>
-<meta name="description" content="ChurnGuard predice qué jugadores abandonarán en 7 días y qué installs se convertirán en pago. Piloto de 4 semanas para publishers F2P.">
+<title>ChurnGuard — Churn y alto valor desde datos reales | F2P</title>
+<meta name="description" content="ChurnGuard predice inactividad y jugadores de alto valor desde 18.099 reseñas reales de Steam. Modelos auditables, piloto de 4 semanas.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
     <div class="logo">🛡️ CHURNGUARD</div>
     <div class="links">
       <a href="#problema">Problema</a>
-      <a href="#datos">Datos</a>
+      <a href="#datos">Datos reales</a>
       <a href="#solucion">Solución</a>
       <a href="#demo">Demo</a>
       <a href="#piloto">Piloto</a>
@@ -29,142 +29,145 @@
   <div class="orb orb-3"></div>
   <div class="grid-overlay"></div>
   <div class="hero-inner">
-    <div class="badge">● Piloto de 4 semanas · publishers F2P · sin integración invasiva</div>
-    <h1>Detecta el abandono<br><span class="grad">antes de que ocurra</span></h1>
-    <p class="lede">Predecimos qué jugadores dejarán tu juego en <strong>7 días</strong> —con motivo y acción— y qué installs se convertirán en <strong>pago a 30 días</strong>. Para que tu budget de UA deje de quemarse.</p>
+    <div class="badge">● 18.099 reseñas reales · 6 F2P · cero sintéticos</div>
+    <h1>El abandono se ve venir<br><span class="grad">en las señales tempranas</span></h1>
+    <p class="lede">Inferimos qué jugadores están inactivos y quiénes son de <strong>alto valor</strong> solo con señales del momento de la reseña. Sin mirar la recencia. Modelos auditables, validez probada <strong>juego por juego</strong>.</p>
     <div class="cta-row">
       <a href="#demo"><button class="btn-primary btn-lg">Probar el simulador →</button></a>
-      <a href="#piloto"><button class="btn-ghost btn-lg">Ver piloto de 4 semanas</button></a>
+      <a href="#datos"><button class="btn-ghost btn-lg">Ver los datos reales</button></a>
     </div>
     <div class="counters">
-      <div class="counter"><div class="num" data-target="8000" data-format="int">0</div><div class="label">Jugadores (dataset demo)</div></div>
-      <div class="counter"><div class="num" data-target="0.914" data-format="dec3">0</div><div class="label">ROC-AUC · Churn 7d</div></div>
-      <div class="counter"><div class="num" data-target="0.883" data-format="dec3">0</div><div class="label">F1 · Churn 7d</div></div>
-      <div class="counter"><div class="num" data-target="0.901" data-format="dec3">0</div><div class="label">ROC-AUC · Conversión 30d</div></div>
+      <div class="counter"><div class="num" data-target="16447" data-format="int">0</div><div class="label">Jugadores reales etiquetados</div></div>
+      <div class="counter"><div class="num" data-target="0.930" data-format="dec3">0</div><div class="label">ROC-AUC · Churn</div></div>
+      <div class="counter"><div class="num" data-target="0.817" data-format="dec3">0</div><div class="label">F1 · Churn</div></div>
+      <div class="counter"><div class="num" data-target="0.972" data-format="dec3">0</div><div class="label">ROC-AUC · Alto valor</div></div>
     </div>
-    <div class="logos"><span>Diseñado para Live-Ops</span><span>·</span><span>Growth</span><span>·</span><span>Monetización</span><span>·</span><span>UA</span></div>
+    <div class="logos"><span>Steam appreviews API</span><span>·</span><span>6 títulos F2P</span><span>·</span><span>seed 42</span><span>·</span><span>pipeline reproducible</span></div>
   </div>
   <div class="hero-mock">
     <div class="mock-window">
       <div class="mock-bar"><span></span><span></span><span></span><em>live-ops · ranking semanal de riesgo</em></div>
       <table class="mock-table">
-        <tr><th>Jugador</th><th>Riesgo 7d</th><th>Motivo</th><th>Acción</th></tr>
-        <tr><td>p92831</td><td class="risk-high">78%</td><td>Tutorial incompleto</td><td>Push onboarding + bonus</td></tr>
-        <tr><td>p10422</td><td class="risk-high">71%</td><td>Sin círculo social</td><td>Invitar amigos + recompensa</td></tr>
-        <tr><td>p55201</td><td class="risk-mid">44%</td><td>Sesiones cortas</td><td>Evento diario + booster</td></tr>
-        <tr><td>p77340</td><td class="risk-low">9%</td><td>—</td><td>—</td></tr>
+        <tr><th>Jugador</th><th>Riesgo</th><th>Motivo</th><th>Acción</th></tr>
+        <tr><td>r88210</td><td class="risk-high">83%</td><td>Pocas horas tempranas</td><td>Onboarding + evento diario</td></tr>
+        <tr><td>r10422</td><td class="risk-high">71%</td><td>Señal antigua, título frío</td><td>Win-back + bundle retorno</td></tr>
+        <tr><td>r55201</td><td class="risk-mid">44%</td><td>No recomienda</td><td>Soporte proactivo</td></tr>
+        <tr><td>r77340</td><td class="risk-low">9%</td><td>—</td><td>—</td></tr>
       </table>
-      <div class="mock-foot">Muestra sintética con fines de demostración · el piloto usa tus eventos reales</div>
+      <div class="mock-foot">Demo ilustrativa · el piloto usa tus eventos reales</div>
     </div>
   </div>
 </header>
 
 <section id="problema">
-  <h2 class="section-title">El problema en €, no en %</h2>
-  <p class="subtitle">La retención D1 mediana en móvil es del 22% (GameAnalytics 2026). El resto del budget de adquisición se evapora en silencio.</p>
+  <h2 class="section-title">El problema, medido en datos reales</h2>
+  <p class="subtitle">27,1% de los reseñistas ya están inactivos. Y el engagement temprano lo anticipa: Q1 (≤18 h) 35,7% de churn frente a Q4 13,2%.</p>
   <div class="problem-grid">
-    <div class="card"><div class="icon">📉</div><h3>67% abandona en 7 días</h3><p>En nuestro dataset demo calibrado, 2 de cada 3 jugadores dejan de jugar en la primera semana. Sin alerta previa: simplemente no vuelven.</p></div>
-    <div class="card"><div class="icon">🔥</div><h3>UA quemado: $3–8 por install</h3><p>Con CPI medio de $5 y 10.000 installs/mes, ~6.700 se pierden. Son ~$33.500/mes en adquisición sin retorno.</p></div>
-    <div class="card"><div class="icon">🙈</div><h3>Sin predicción accionable</h3><p>Firebase y Crashlytics describen el pasado. Nadie te dice <em>esta semana</em> a quién retener, por qué motivo y con qué acción.</p></div>
+    <div class="card"><div class="icon">📉</div><h3>El abandono se gesta pronto</h3><p>Mediana de horas en reseña: 36,8 h en churned vs 120,6 h en activos. Quien no se engancha en las primeras horas, no vuelve.</p></div>
+    <div class="card"><div class="icon">🙈</div><h3>Gustar no retiene</h3><p>Churn entre quienes recomiendan: 26,5% vs 29,6% si no. La nota media no es el KPI; el hábito temprano sí.</p></div>
+    <div class="card"><div class="icon">🎮</div><h3>Cada título vive una fase</h3><p>Dota 2 genera 3.000 reseñas en 3 días; Fall Guys en 470. La velocidad de la comunidad delata la fase de vida del juego — y dónde poner Live-Ops.</p></div>
   </div>
 </section>
 
 <section id="datos">
-  <h2 class="section-title">Datos calibrados, no inventados</h2>
-  <p class="subtitle">Dataset sintético reproducible (seed 42): 8.000 jugadores · 3.000 leads · ~53.000 sesiones · ~800 compras. Cada parámetro tiene benchmark externo.</p>
+  <h2 class="section-title">Datos 100% reales, auditables</h2>
+  <p class="subtitle">18.099 reseñas públicas de Steam (API pública, sin key, 2026-09-14) → 16.447 jugadores etiquetados. Cobertura del 100% en campos clave. Procedencia completa en <code>docs/08_datos_reales.md</code>.</p>
   <table class="data-table">
-    <tr><th>Métrica</th><th>Valor demo</th><th>Benchmark</th></tr>
-    <tr><td>Churn a 7 días</td><td>67,0%</td><td>D7 retention ~4% mediana móvil · GameAnalytics 2026</td></tr>
-    <tr><td>Conversión a pago (30d)</td><td>5,4%</td><td>~2–5% F2P mid-core · Sensor Tower 2026</td></tr>
-    <tr><td>Tutorial completado</td><td>38,5%</td><td>~40% casual · GameAnalytics</td></tr>
-    <tr><td>ARPDAU referencia</td><td>$0.12</td><td>AppMagic 2026</td></tr>
-    <tr><td>CPI puzzle</td><td>$3–8</td><td>AppsFlyer 2026</td></tr>
+    <tr><th>Título</th><th>Reseñas</th><th>Churn*</th><th>Alto valor</th><th>p75 horas</th></tr>
+    <tr><td>Dota 2</td><td>2.920</td><td>5,2%</td><td>15,4%</td><td>1.153 h</td></tr>
+    <tr><td>Apex Legends</td><td>2.977</td><td>5,1%</td><td>15,3%</td><td>423 h</td></tr>
+    <tr><td>Team Fortress 2</td><td>2.827</td><td>8,8%</td><td>23,7%</td><td>162 h</td></tr>
+    <tr><td>Warframe</td><td>2.699</td><td>8,4%</td><td>24,0%</td><td>693 h</td></tr>
+    <tr><td>Path of Exile</td><td>2.227</td><td>50,7%</td><td>21,1%</td><td>1.257 h</td></tr>
+    <tr><td>Fall Guys</td><td>2.797</td><td>91,2%</td><td>20,5%</td><td>85 h</td></tr>
   </table>
-  <h3 class="mini-title">Canal de UA: volumen vs. calidad</h3>
-  <div class="metric-row"><span class="chan">TikTok · 30,9% retenidos</span><div class="metric-bar"><div class="fill" style="width:31%"></div></div></div>
-  <div class="metric-row"><span class="chan">Orgánico · 42,3% retenidos</span><div class="metric-bar"><div class="fill" style="width:42%"></div></div></div>
-  <div class="metric-row"><span class="chan">Referral · 37,3% retenidos</span><div class="metric-bar"><div class="fill" style="width:37%"></div></div></div>
-  <p class="note">TikTok trae volumen barato pero retiene peor que orgánico y referral. El budget debe moverse a calidad, no a installs.</p>
+  <p class="note">* Tasas de la muestra de reseñistas, no retención de los juegos (documentado). Lo que generaliza son las relaciones, validadas juego por juego.</p>
+  <h3 class="mini-title">Lo que enseña cada figura (generadas por <code>notebooks/02_eda_real.py</code>)</h3>
   <div class="fig-grid">
-    <div class="card"><h3>Retención por canal</h3><img src="assets/fig-canal.png" alt="Conversión por canal" loading="lazy"><p class="note">Orgánico y referral convierten mejor que paid social.</p></div>
-    <div class="card"><h3>Ads rewarded y churn</h3><img src="assets/fig-toxicidad.png" alt="Churn vs ads" loading="lazy"><p class="note">El engagement temprano (ads, sesiones) separa retenidos de churners.</p></div>
-    <div class="card"><h3>Engagement por churn</h3><img src="assets/fig-winrate.png" alt="Engagement por churn" loading="lazy"><p class="note">Los retenidos concentran más monedas por sesión desde la semana 1.</p></div>
+    <div class="card"><h3>Estado por título</h3><img src="assets/fig-titulo.png" alt="Churn y alto valor por título" loading="lazy"><p class="note">Juegos vivos vs juegos en declive: dónde priorizar Live-Ops.</p></div>
+    <div class="card"><h3>Engagement temprano</h3><img src="assets/fig-engagement.png" alt="Churn por cuartil de horas" loading="lazy"><p class="note">Q1 35,7% → Q4 13,2%: el hábito de las primeras horas decide.</p></div>
+    <div class="card"><h3>Satisfacción ≠ retención</h3><img src="assets/fig-voto.png" alt="Churn según voto" loading="lazy"><p class="note">Recomendar apenas mueve la aguja (26,5% vs 29,6%).</p></div>
   </div>
 </section>
 
 <section id="solucion">
-  <h2 class="section-title">Dos scores, una decisión semanal</h2>
+  <h2 class="section-title">Dos scores, cero caja negra</h2>
   <div class="products">
     <div class="product">
       <div class="tag">Producto principal</div>
-      <h3>🎯 Churn Score 7d</h3>
-      <p>Probabilidad de abandono a 7 días por jugador, con <strong>motivo</strong> y <strong>acción de retención</strong>. Ranking semanal Top-100 para Live-Ops.</p>
+      <h3>🎯 Churn Score</h3>
+      <p>Infiere el estado de actividad <strong>sin mirar la recencia</strong>: solo señales del momento de la reseña. Ranking semanal para Live-Ops.</p>
       <div class="metric-grid">
-        <div class="metric-item"><div class="val">0.914</div><div class="lbl">ROC-AUC</div></div>
-        <div class="metric-item"><div class="val">0.950</div><div class="lbl">PR-AUC</div></div>
-        <div class="metric-item"><div class="val">0.888</div><div class="lbl">Precision</div></div>
-        <div class="metric-item"><div class="val">0.878</div><div class="lbl">Recall</div></div>
+        <div class="metric-item"><div class="val">0.930</div><div class="lbl">ROC-AUC</div></div>
+        <div class="metric-item"><div class="val">0.872</div><div class="lbl">PR-AUC (base 0.27)</div></div>
+        <div class="metric-item"><div class="val">0.836</div><div class="lbl">Precision</div></div>
+        <div class="metric-item"><div class="val">0.798</div><div class="lbl">Recall</div></div>
       </div>
-      <p class="note">Importancias: sesiones 0.36 · monedas 0.24 · ads 0.12 · boosters 0.07 · nivel 0.06 · tutorial 0.04 · canal 0.03. Ninguna feature domina: el modelo combina señales.</p>
+      <p class="note">Validez por título ROC 0.891–0.924 en los 6 juegos. Matriz test: [[2258,140],[180,712]].</p>
     </div>
     <div class="product">
       <div class="tag alt">Segunda línea · UA</div>
-      <h3>💰 Conversion Score 30d</h3>
-      <p>Probabilidad de que un install se convierta en pago a 30 días (threshold 0.40 sintonizado por F1). Para pujar y presupuestar por calidad.</p>
+      <h3>💰 High-Value Score</h3>
+      <p>Probabilidad de jugador de alto valor (top-25% horas + recomienda; threshold 0.60). Para concentrar win-back y pukkar por calidad.</p>
       <div class="metric-grid">
-        <div class="metric-item"><div class="val">0.901</div><div class="lbl">ROC-AUC</div></div>
-        <div class="metric-item"><div class="val">0.279</div><div class="lbl">PR-AUC</div></div>
-        <div class="metric-item"><div class="val">0.362</div><div class="lbl">Precision</div></div>
-        <div class="metric-item"><div class="val">0.758</div><div class="lbl">Recall</div></div>
+        <div class="metric-item"><div class="val">0.972</div><div class="lbl">ROC-AUC</div></div>
+        <div class="metric-item"><div class="val">0.873</div><div class="lbl">PR-AUC (base 0.20)</div></div>
+        <div class="metric-item"><div class="val">0.774</div><div class="lbl">Precision</div></div>
+        <div class="metric-item"><div class="val">0.934</div><div class="lbl">Recall</div></div>
       </div>
-      <p class="note">Clase minoritaria (5,4%): el PR-AUC manda, no el ROC. Con threshold 0.40 capturamos el 76% de futuros pagadores asumiendo falsos positivos baratos (un push) frente a un pagador perdido (caro).</p>
+      <p class="note">Validez por título ROC 0.979–0.996. Proxy transparente: los F2P no exponen pagos.</p>
     </div>
   </div>
   <div class="card honesty">
-    <h3>🔍 Honestidad técnica (lo que un vendor no te cuenta)</h3>
+    <h3>🔍 Honestidad técnica</h3>
     <ul>
-      <li><code>days_since_last_session</code> <strong>excluido</strong> del modelo — sería decir "predigo que se fue porque se fue". Verificable en <code>src/train.py</code>.</li>
-      <li>Datos <strong>sintéticos calibrados</strong>, no tus eventos reales. Las métricas son de laboratorio; el piloto de 4 semanas las valida en producción.</li>
-      <li>RandomForest de 300 árboles, encoders por columna persistidos en el <code>.pkl</code>. Interpretable para PMs; suficiente para 8k×10 tabulares.</li>
+      <li><strong>Sin fuga:</strong> el modelo nunca ve horas totales, últimas 2 semanas, recencia, p75 ni (en conversión) el voto — definen las etiquetas. Verificable en <code>src/train_real.py</code>.</li>
+      <li><strong>Sesgo declarado:</strong> muestra de reseñistas; ventanas de observación desiguales; títulos PC como análogos F2P. Todo en <code>docs/08_datos_reales.md</code>.</li>
+      <li><strong>Artefactos versionados:</strong> <code>models/real_*.pkl</code> (con encoders), <code>models/real_metrics.json</code>, DB de 2 MB. El crudo se re-descarga en ~5 min.</li>
     </ul>
   </div>
 </section>
 
 <section id="demo">
   <h2 class="section-title">Demo interactiva</h2>
-  <p class="subtitle">Ajusta el perfil de un jugador y mira riesgo, motivo y acción. Demo ilustrativa calibrada con el modelo — no es el modelo productivo.</p>
+  <p class="subtitle">Ajusta el perfil y mira riesgo, motivo y acción. Demo ilustrativa calibrada con las importancias reales — no es el modelo productivo.</p>
   <div class="simulator">
     <div class="sim-grid">
       <div>
         <div class="slider-group">
-          <label>Tutorial completado: <span id="tutVal">40</span>%</label>
-          <input type="range" id="tutorial" min="0" max="100" value="40" oninput="updateSim()">
+          <label>Horas jugadas (en reseña): <span id="hoursVal">100</span> h</label>
+          <input type="range" id="hours" min="0" max="2000" value="100" oninput="updateSim()">
         </div>
         <div class="slider-group">
-          <label>Amigos invitados: <span id="friVal">2</span></label>
-          <input type="range" id="friends" min="0" max="10" value="2" oninput="updateSim()">
+          <label>Juegos en la cuenta: <span id="gamesVal">30</span></label>
+          <input type="range" id="games" min="0" max="500" value="30" oninput="updateSim()">
         </div>
         <div class="slider-group">
-          <label>Sesiones en 7 días: <span id="sesVal">5</span></label>
-          <input type="range" id="sessions" min="1" max="20" value="5" oninput="updateSim()">
+          <label>Antigüedad de la señal: <span id="ageVal">10</span> días</label>
+          <input type="range" id="age" min="0" max="400" value="10" oninput="updateSim()">
         </div>
         <div class="slider-group">
-          <label>Canal de adquisición</label>
-          <select id="channel" onchange="updateSim()">
-            <option value="organic">Orgánico</option>
-            <option value="referral">Referral</option>
-            <option value="tiktok" selected>TikTok</option>
-            <option value="meta">Meta</option>
-            <option value="google_uac">Google UAC</option>
-            <option value="unity_ads">Unity Ads</option>
-            <option value="ironsource">ironSource</option>
-            <option value="applovin">AppLovin</option>
+          <label>Título</label>
+          <select id="title" onchange="updateSim()">
+            <option value="dota">Dota 2 (vivo)</option>
+            <option value="apex" selected>Apex Legends (vivo)</option>
+            <option value="tf2">Team Fortress 2</option>
+            <option value="warframe">Warframe</option>
+            <option value="poe">Path of Exile (frío)</option>
+            <option value="fallguys">Fall Guys (en declive)</option>
+          </select>
+        </div>
+        <div class="slider-group">
+          <label>¿Recomienda el juego?</label>
+          <select id="voted" onchange="updateSim()">
+            <option value="1" selected>Sí</option>
+            <option value="0">No</option>
           </select>
         </div>
         <div class="presets">
-          <button onclick="setPreset(0,0,1,'tiktok')">⚠️ En riesgo</button>
-          <button onclick="setPreset(40,2,5,'tiktok')">😐 Típico TikTok</button>
-          <button onclick="setPreset(100,5,8,'organic')">✅ Sano orgánico</button>
+          <button onclick="setPreset(10,5,300,'fallguys',0)">⚠️ En riesgo</button>
+          <button onclick="setPreset(100,30,10,'apex',1)">😐 Típico</button>
+          <button onclick="setPreset(800,120,5,'dota',1)">✅ Sano</button>
         </div>
       </div>
       <div class="gauge-box">
@@ -179,12 +182,12 @@
       </div>
     </div>
     <div class="card budget">
-      <h3>🧮 Calculadora de ROI del piloto</h3>
-      <p>¿Cuánto vale subir la retención 5 puntos? Introduce tu CPI y tu budget mensual.</p>
+      <h3>🧮 Calculadora de eficiencia del targeting</h3>
+      <p>De tus installs, ~19,9% serán alto valor. Contactando al top por score (precisión 0,774) rindes <strong>3,9×</strong> por euro de outreach.</p>
       <div class="input-row">
-        <label>CPI ($) <input type="number" id="cpi" value="5" min="1" max="30" class="input-field"></label>
         <label>Budget ($/mes) <input type="number" id="budget" value="10000" min="500" step="500" class="input-field"></label>
-        <label>LTV por retenido ($) <input type="number" id="ltv" value="21" min="1" class="input-field"></label>
+        <label>CPI ($) <input type="number" id="cpi" value="5" min="1" max="30" class="input-field"></label>
+        <label>LTV alto valor ($) <input type="number" id="ltv" value="45" min="1" class="input-field"></label>
         <button onclick="calcBudget()" class="btn-primary">Calcular</button>
       </div>
       <div id="budgetResult" class="budget-result"></div>
@@ -195,16 +198,16 @@
 <section id="piloto">
   <h2 class="section-title">Piloto de 4 semanas, sin humo</h2>
   <div class="problem-grid">
-    <div class="card"><div class="icon">📦</div><h3>Semana 1 · Conexión</h3><p>Export diario de eventos (CSV o endpoint): sesiones, tutorial, compras, atribución. Nada de SDK invasivo el día 1. Firma DPA + anonimización de IDs.</p></div>
-    <div class="card"><div class="icon">🎯</div><h3>Semanas 2–3 · A/B test</h3><p>Grupo tratado (Top-riesgo + acción personalizada) vs. control. Métrica primaria: retención D7. Secundarias: tutorial completion, D30 pago.</p></div>
-    <div class="card"><div class="icon">💶</div><h3>Semana 4 · Decisión</h3><p>Informe con lift, IC 95% y € recuperados. Si no hay lift significativo, no se factura la fase 2. Precio piloto: <strong>2.500 €</strong> fijos.</p></div>
+    <div class="card"><div class="icon">📦</div><h3>Semana 1 · Conexión</h3><p>Export diario de eventos anonimizado (CSV o endpoint): sesiones, progresión, compras, atribución. Firma DPA. Nada invasivo el día 1.</p></div>
+    <div class="card"><div class="icon">🎯</div><h3>Semanas 2–3 · A/B test</h3><p>Tratado (Top-riesgo + acción del playbook) vs control. Métrica primaria: retención. Secundarias: 2ª sesión y conversión.</p></div>
+    <div class="card"><div class="icon">💶</div><h3>Semana 4 · Decisión</h3><p>Informe con lift, IC 95% y €. Sin lift significativo, no se factura la fase 2. Precio piloto: <strong>2.500 €</strong> fijos.</p></div>
   </div>
   <div class="card honesty">
     <h3>🔌 Integración y GDPR</h3>
     <ul>
-      <li><strong>Input:</strong> CSV diario o POST JSON a <code>/score</code> → devuelve <code>{p_churn_7d, motivo, acción}</code> por jugador. Latencia &lt; 200 ms p95.</li>
-      <li><strong>Privacidad:</strong> solo IDs anonimizados + eventos de juego. Sin PII, sin tracking cross-app. Borrado a petición, retención 90 días.</li>
-      <li><strong>Stack:</strong> scikit-learn versionado (seed 42), artefacto <code>.pkl</code> con encoders incluidos. Re-entreno semanal con tus datos.</li>
+      <li><strong>Input:</strong> CSV diario o POST JSON a <code>/score</code> → <code>{p_churn, motivo, acción}</code>. Latencia &lt; 200 ms p95.</li>
+      <li><strong>Privacidad:</strong> IDs anonimizados, sin PII. Borrado a petición, retención 90 días.</li>
+      <li><strong>Stack:</strong> scikit-learn versionado (seed 42), <code>.pkl</code> con encoders. Re-entreno semanal.</li>
     </ul>
   </div>
 </section>
@@ -212,27 +215,27 @@
 <section id="metodologia">
   <h2 class="section-title">Metodología en 5 días</h2>
   <div class="problem-grid">
-    <div class="card"><h3>Día 10 · Idea</h3><p>Foco: retención 7d + conversión 30d para F2P. Cliente piloto: PlayNova Games.</p></div>
-    <div class="card"><h3>Día 11 · Cliente y datos</h3><p>Esquema SQLite en <code>data/schema.sql</code> + diagrama ER. Anti-leakage desde el diseño.</p></div>
-    <div class="card"><h3>Día 12 · Dataset</h3><p><code>src/generate_data.py</code> (seed 42): churn por logit con solape real, canal propagado a features, conversión ~5%.</p></div>
-    <div class="card"><h3>Día 13 · Análisis</h3><p><code>notebooks/01_eda.py</code> reproducible: orgánico 42% vs. paid ~30% retención; tutorial y social como palancas.</p></div>
-    <div class="card"><h3>Día 14 · Solución</h3><p><code>src/train.py</code>: RF 300 árboles, threshold sintonizado en conversión, métricas en <code>models/metrics.json</code>.</p></div>
+    <div class="card"><h3>Día 10 · Idea</h3><p>Foco: churn + alto valor para F2P. Cliente piloto: PlayNova Games.</p></div>
+    <div class="card"><h3>Día 11 · Cliente y datos</h3><p>APIs evaluadas (Steam ✓, OpenDota ✗ por timeouts). Schema real en la DB.</p></div>
+    <div class="card"><h3>Día 12 · Dataset real</h3><p><code>fetch_steam_reviews → build_real_dataset</code>: 18.099 reseñas → 16.447 etiquetados.</p></div>
+    <div class="card"><h3>Día 13 · Análisis</h3><p><code>02_eda_real.py</code>: engagement temprano, fase por título, voto≠retención.</p></div>
+    <div class="card"><h3>Día 14 · Solución</h3><p><code>train_real.py</code> anti-fuga + <code>eval_per_title.py</code>: ROC 0.89–0.92 por juego.</p></div>
   </div>
   <h3 class="mini-title">Preguntas que haría tu CTO</h3>
-  <div class="faq-item"><h4>¿Por qué el recall de churn ya no es 1.000?</h4><p>Porque antes había fuga: el nº de sesiones determinaba la etiqueta. Ahora el churn se genera por logit (tutorial, social, canal, ruido) y las sesiones son consecuencia ruidosa. Recall 0.878 con precision 0.888 es un modelo real, no una tautología. La matriz es [[409,119],[131,941]]: falla en ambos sentidos, como en producción.</p></div>
-  <div class="faq-item"><h4>¿Por qué RandomForest y no deep learning?</h4><p>8k×10 tabulares no necesitan redes. El RF es interpretable (tu PM ve el porqué), rápido (&lt;200 ms), y auditable. Cuando tengas secuencias de eventos a escala, migramos a gradient boosting / temporal.</p></div>
-  <div class="faq-item"><h4>¿El simulador web es el modelo real?</h4><p>No: es una demo ilustrativa calibrada con las importancias del RF. El modelo real está en <code>models/churn_model.pkl</code> con sus encoders. En el piloto exponemos el endpoint <code>/score</code> de verdad.</p></div>
-  <div class="faq-item"><h4>¿Y si en mis datos el ROC baja a 0.80?</h4><p>Probable y aceptable: lo que vendemos es lift en A/B, no un ROC de laboratorio. El go/no-go del piloto es retención D7 incremental con IC 95%, no una métrica offline.</p></div>
-  <div class="faq-item"><h4>¿Qué necesitáis de nosotros?</h4><p>Un CSV diario anonimizado durante 4 semanas y un owner de Live-Ops para lanzar las acciones del playbook. Nada más.</p></div>
+  <div class="faq-item"><h4>¿De dónde salen los datos?</h4><p>De la API pública de reseñas de Steam (sin key): 18.099 reseñas de 6 F2P del 2026-09-14. Crudo re-descargable, DB y resumen versionados, procedencia en <code>docs/08_datos_reales.md</code>.</p></div>
+  <div class="faq-item"><h4>¿El 91% de churn de Fall Guys es la retención del juego?</h4><p>No: es la tasa en nuestra muestra de reseñistas (quien escribe ya está implicado, y en un juego en declive casi todos están lapsed). Lo decimos por escrito. Lo que generaliza son las relaciones, validadas título a título.</p></div>
+  <div class="faq-item"><h4>¿Hay fuga? La antigüedad pesa 0.50…</h4><p>Es señal real (velocidad de reseñas = fase de vida del título) pero con ventana desigual: documentado como limitación. El modelo nunca ve recencia ni horas totales; el piloto con ventanas fijas hará predicción pura.</p></div>
+  <div class="faq-item"><h4>¿High-value no es inventar el pago?</h4><p>Es un proxy transparente (top-25% horas + recomienda), así presentado en todas partes. En el piloto se sustituye por tus eventos de pago reales.</p></div>
+  <div class="faq-item"><h4>¿El simulador es el modelo?</h4><p>No: demo ilustrativa calibrada. El modelo real está en <code>models/real_*.pkl</code>; en el piloto exponemos <code>/score</code> de verdad.</p></div>
 </section>
 
 <footer id="contacto">
   <div class="foot-cta">
     <h3>¿Hablamos del piloto?</h3>
-    <p>Escríbenos con tu CPI, tu D7 actual y tu volumen mensual. Te devolvemos la estimación de € en 48 h.</p>
+    <p>Escríbenos con tu CPI, tu retención actual y tu volumen mensual. Estimación en 48 h.</p>
     <a href="mailto:piloto@churnguard.gg?subject=Piloto%20ChurnGuard%204%20semanas"><button class="btn-primary btn-lg">pedir piloto · 2.500 € →</button></a>
   </div>
-  <div class="foot-base">ChurnGuard — Bootcamp Startup 2026 · Días 10–15<br>PlayNova Games (cliente piloto ficticio) · Dataset demo sintético y calibrado · <a href="#inicio">volver arriba ↑</a></div>
+  <div class="foot-base">ChurnGuard — Bootcamp Startup 2026 · Días 10–15<br>Datos públicos de Steam (18.099 reseñas, 2026-09-14) · PlayNova Games (piloto ficticio) · <a href="#inicio">volver arriba ↑</a></div>
 </footer>
 
 <script src="app.js"></script>

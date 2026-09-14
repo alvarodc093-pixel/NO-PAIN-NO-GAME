@@ -3,6 +3,8 @@ __pycache__/
 .venv/
 .ipynb_checkpoints/
 *.db
+!data/playnova_real.db
+data/real/steam_reviews.jsonl
 docs/NO_PAIN_NO_GAME_Resumen_Guia.pdf
 app/
 .streamlit/

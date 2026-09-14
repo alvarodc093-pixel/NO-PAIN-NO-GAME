@@ -1,0 +1,49 @@
+{
+  "scrape_date": "2026-09-14",
+  "source": "Steam Store appreviews API (pública, sin key)",
+  "n_raw": 18099,
+  "n_labeled_churn": 16447,
+  "n_ambiguous_dropped": 1652,
+  "churn_rate": 0.2712,
+  "high_value_rate": 0.1986,
+  "voted_up_rate": 0.7988,
+  "median_hours_forever": 95.7,
+  "by_title": {
+    "Dota 2": {
+      "n": 3000,
+      "churn_rate": 0.0521,
+      "high_value_rate": 0.1545,
+      "p75_hours": 1153.1
+    },
+    "Team Fortress 2": {
+      "n": 3000,
+      "churn_rate": 0.0884,
+      "high_value_rate": 0.237,
+      "p75_hours": 162.4
+    },
+    "Warframe": {
+      "n": 3000,
+      "churn_rate": 0.0845,
+      "high_value_rate": 0.2401,
+      "p75_hours": 693.1
+    },
+    "Path of Exile": {
+      "n": 3000,
+      "churn_rate": 0.507,
+      "high_value_rate": 0.211,
+      "p75_hours": 1257.4
+    },
+    "Apex Legends": {
+      "n": 3099,
+      "churn_rate": 0.0511,
+      "high_value_rate": 0.1532,
+      "p75_hours": 423.4
+    },
+    "Fall Guys": {
+      "n": 3000,
+      "churn_rate": 0.9117,
+      "high_value_rate": 0.2045,
+      "p75_hours": 85.5
+    }
+  }
+}

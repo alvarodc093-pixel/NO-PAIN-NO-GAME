@@ -1,0 +1,96 @@
+{
+  "churn_model": {
+    "model": "real_churn_model",
+    "threshold": 0.5,
+    "accuracy": 0.9027,
+    "precision": 0.8357,
+    "recall": 0.7982,
+    "f1": 0.8165,
+    "roc_auc": 0.9295,
+    "pr_auc": 0.8718,
+    "baseline_pr": 0.2711,
+    "n_test": 3290,
+    "confusion_matrix": [
+      [
+        2258,
+        140
+      ],
+      [
+        180,
+        712
+      ]
+    ],
+    "features": [
+      "voted_up",
+      "num_reviews",
+      "early_access",
+      "received_free",
+      "refunded",
+      "language",
+      "review_age_days",
+      "appid",
+      "log_hours_at_review",
+      "log_review_len",
+      "log_games_owned"
+    ],
+    "top_features": {
+      "review_age_days": 0.5028549364604993,
+      "appid": 0.24208541459868624,
+      "log_hours_at_review": 0.07809856082686971,
+      "num_reviews": 0.07600695840148669,
+      "log_games_owned": 0.03748355742856813,
+      "log_review_len": 0.036287948207882295,
+      "language": 0.021390261942925697,
+      "voted_up": 0.004753345690804151,
+      "received_free": 0.0010390164422777483,
+      "early_access": 0.0,
+      "refunded": 0.0
+    }
+  },
+  "conversion_model": {
+    "model": "real_conversion_model",
+    "threshold": 0.6,
+    "accuracy": 0.9328,
+    "precision": 0.7744,
+    "recall": 0.9343,
+    "f1": 0.8468,
+    "roc_auc": 0.9715,
+    "pr_auc": 0.8732,
+    "baseline_pr": 0.1988,
+    "n_test": 3290,
+    "confusion_matrix": [
+      [
+        2458,
+        178
+      ],
+      [
+        43,
+        611
+      ]
+    ],
+    "features": [
+      "num_reviews",
+      "early_access",
+      "received_free",
+      "refunded",
+      "language",
+      "review_age_days",
+      "appid",
+      "log_hours_at_review",
+      "log_review_len",
+      "log_games_owned"
+    ],
+    "top_features": {
+      "log_hours_at_review": 0.7485519277085345,
+      "appid": 0.10290396598061449,
+      "review_age_days": 0.07004735743425179,
+      "log_review_len": 0.02329026509872779,
+      "num_reviews": 0.021288485706295594,
+      "log_games_owned": 0.01703272701245658,
+      "language": 0.016526534622919396,
+      "received_free": 0.0003587364361998485,
+      "early_access": 0.0,
+      "refunded": 0.0
+    }
+  }
+}

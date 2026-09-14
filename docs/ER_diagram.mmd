@@ -1,76 +1,28 @@
 erDiagram
-    CAMPAIGNS ||--o{ PLAYERS : "adquiere (FK acquisition_campaign_id)"
-    CAMPAIGNS ||--o{ LEADS : "genera (FK campaign_id)"
-    PLAYERS ||--o{ EVENTS : "sesiones 7d (FK player_id)"
-    PLAYERS ||--o{ PURCHASES : "compra (FK player_id)"
-    PLAYERS ||--|| PLAYER_FEATURES : "agrega 7d (FK player_id)"
+    TITLES ||--o{ REVIEWS : "recibe (FK appid)"
 
-    CAMPAIGNS {
-        int campaign_id PK
-        string name
-        string channel "tiktok|meta|google_uac|unity_ads|ironsource|applovin|organic|referral"
-        string game_target "puzzle|idle"
-        float cost_eur
-        string start_date
-        string end_date
+    TITLES {
+        int appid PK
+        string name "Dota 2|TF2|Warframe|PoE|Apex|Fall Guys"
+        float p75_hours "umbral high_value"
     }
-    PLAYERS {
-        int player_id PK
-        string device_id
-        string region
-        string country
-        string os "iOS|Android"
-        string app_version
-        int level
-        int account_age_days
-        string acquisition_channel
-        int acquisition_campaign_id FK
-        string install_date
-        string last_session_date
-    }
-    EVENTS {
-        int event_id PK
-        int player_id FK
-        string event_date
-        float session_length
-        int tutorial_step
-        float coins_spent
-        int boosters_used
-        int ads_watched
-        int social_invites
-    }
-    PURCHASES {
-        int purchase_id PK
-        int player_id FK
-        string purchase_date
-        string item_type "gems|lives|booster|season_pass"
-        float amount_eur
-    }
-    LEADS {
-        int lead_id PK
-        int campaign_id FK
-        string install_date
-        string country
-        string os
-        string device
-        int tutorial_completed "0/1"
-        float session_1_length
-        int friends_invited
-        int days_to_session_2
-        int converted_30d "0/1 label"
-    }
-    PLAYER_FEATURES {
-        int player_id PK_FK
-        int session_count_7d
-        int tutorial_completed "0/1"
-        int social_invites_7d
-        float coins_spent_7d
-        int ads_watched_7d
-        int boosters_used_7d
-        int level
-        string country_region
-        string device_type
-        string acquisition_channel
-        int churn_d7 "0/1 label"
-        int days_since_last_session "solo analisis, NO feature"
+    REVIEWS {
+        string review_id PK
+        int appid FK
+        int voted_up "0/1"
+        float hours_forever "EXCLUIDA del modelo"
+        float hours_at_review "feature"
+        float hours_l2w "solo label"
+        float days_since_last_played "solo label"
+        float review_age_days "feature"
+        int review_len "feature"
+        int num_games_owned "feature"
+        int num_reviews "feature"
+        int early_access "feature"
+        int received_free "feature"
+        int refunded "feature"
+        string language "feature"
+        int timestamp_created
+        int churn "NULL|0|1 label"
+        int high_value "0|1 label proxy"
     }

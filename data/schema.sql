@@ -1,3 +1,6 @@
+-- OBSOLETO desde 2026-09-14: schema del dataset SINTÉTICO retirado.
+-- Schema vigente: tablas titles + reviews en data/playnova_real.db
+-- (construidas por src/build_real_dataset.py, documentadas en docs/08_datos_reales.md).
 CREATE TABLE IF NOT EXISTS campaigns (
     campaign_id    INTEGER PRIMARY KEY AUTOINCREMENT,
     name           TEXT    NOT NULL,

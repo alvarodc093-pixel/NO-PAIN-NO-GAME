@@ -1,7 +1,7 @@
-"""Entrena Churn Score (7d) y Conversion Score (30d) con RandomForest.
+"""RETIRADO — entrenador sobre datos SINTÉTICOS (ya no se usa).
 
-Anti-leakage: `days_since_last_session` se excluye siempre. `device` en leads
-es un identificador aleatorio y también se excluye.
+Usar src/train_real.py sobre data/playnova_real.db.
+Se conserva el archivo solo como historial.
 """
 import sqlite3, json, pickle, pandas as pd, numpy as np
 from sklearn.ensemble import RandomForestClassifier

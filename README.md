@@ -1,60 +1,55 @@
 # ChurnGuard — Proyecto Bootcamp Startup (Días 10-15)
 
-**Propuesta de valor:** detecta el abandono antes de que ocurra. Churn a 7 días con motivo+acción y conversión a pago a 30 días para juegos móviles F2P.
+**Propuesta de valor:** detecta el abandono desde señales tempranas. Churn + jugador de alto valor para juegos F2P — con **datos 100% reales**.
 
-## El problema (en €)
+## Datos reales (cero sintéticos)
 
-- Churn 7d del **67%** en el dataset demo calibrado. Con CPI $5 y 10.000 installs/mes, ~6.700 se pierden: **~$33.500/mes en UA sin retorno**.
-- Benchmarks: D1 22% / D7 4% / D30 0,7% (GameAnalytics 2026).
+- **18.099 reseñas públicas de Steam** (API pública, sin key, 2026-09-14) de 6 títulos F2P:
+  Dota 2, TF2, Warframe, Path of Exile, Apex Legends, Fall Guys.
+- **16.447 jugadores etiquetados** en `data/playnova_real.db`: churn **27,1%** · high_value **19,9%**.
+- Labels auditables + anti-fuga por diseño (el modelo nunca ve recencia ni horas totales).
+- Procedencia, mapeo, sesgos y validez por título: `docs/08_datos_reales.md`.
 
-## Los productos
+## Los productos (modelos `real_*`, test 3.290, seed 42)
 
-1. **Churn Score 7d** (principal): probabilidad de abandono + motivo + acción. ROC-AUC **0.914**, PR-AUC **0.950**, F1 **0.883** (thr 0,50).
-2. **Conversion Score 30d** (UA): probabilidad de pago a 30 días. ROC-AUC **0.901**, PR-AUC **0.279**, F1 **0.490** (thr 0,40 sintonizado; recall 0.758, precision 0.362).
+1. **Churn Score**: ROC-AUC **0.930**, PR-AUC **0.872** (base 0,271), F1 **0.817** (thr 0,50).
+   Validez por título: ROC 0.891–0.924 en los 6 juegos.
+2. **Conversion Score** (high_value = top-25% horas + recomienda, proxy transparente):
+   ROC-AUC **0.972**, PR-AUC **0.873** (base 0,199), F1 **0.847** (thr 0,60).
+   Validez por título: ROC 0.979–0.996.
 
-## Los datos
-
-- **8.000 jugadores** + **3.000 leads** + **~53.000 sesiones** + **~800 compras** (SQLite, seed 42, `src/generate_data.py`).
-- Churn por logit con solape real (sin separación perfecta); canal propagado a features; conversión ~5,4%.
-- Anti-leakage: `days_since_last_session` y el `device` aleatorio de leads, **excluidos** del modelo.
-- Modelos en `models/` (`.pkl` con encoders incluidos) + métricas en `models/metrics.json`.
-
-## La web
-
-Landing en `web/` (HTML+CSS+JS, cero dependencias): hero con mock del ranking, benchmarks, figuras del EDA, métricas honestas (ROC **y** PR-AUC), simulador con motivo+acción, calculadora de ROI, piloto de 4 semanas (2.500 €), integración/GDPR y FAQ de CTO.
+## Pipeline reproducible
 
 ```bash
 pip install -r requirements.txt
-python src/generate_data.py
-python src/train.py
-python notebooks/01_eda.py
+python src/fetch_steam_reviews.py    # ~5 min, 18k reseñas → data/real/
+python src/build_real_dataset.py    # → data/playnova_real.db + data/real_summary.json
+python src/train_real.py            # → models/real_*.pkl + models/real_metrics.json
+python notebooks/02_eda_real.py     # figuras en docs/img/ (+ copia a web/assets/)
+python src/eval_per_title.py        # validez por título
 cd web
-python -m http.server 8321   # → http://localhost:8321
+python -m http.server 8321          # → http://localhost:8321
 ```
 
 ## Estructura
 
 ```
-├── docs/          # Guías días 10-15 + 07_fuentes_externas.md
-├── web/           # Landing + assets (figuras copiadas de docs/img/)
-├── src/           # generate_data.py, train.py, fetch_data.py
-├── data/          # schema.sql (+ .db generada, ignorada en git)
-├── models/        # .pkl + metrics.json (versionados)
-├── notebooks/     # 01_eda.py reproducible
-├── bootcamp/      # Storytelling .docx
-├── requirements.txt
-└── .gitignore
+├── docs/          # guías días 10-15 + 07_fuentes + 08_datos_reales (procedencia)
+├── web/           # landing + assets (figuras del EDA real)
+├── src/           # fetch/build/train_real/eval (generate_data.py y train.py: retirados)
+├── data/          # playnova_real.db + real_summary.json (versionados; crudo .jsonl ignorado)
+├── models/        # real_*.pkl + real_metrics.json (versionados)
+├── notebooks/     # 02_eda_real.py
+├── bootcamp/      # storytelling .docx
+└── requirements.txt
 ```
 
-## Métricas (test, seed 42)
+## Hallazgos (medidos)
 
-| | Thr | ROC-AUC | PR-AUC | Acc | Prec | Rec | F1 |
-|---|-----|---------|--------|-----|------|-----|-----|
-| Churn 7d | 0,50 | 0.914 | 0.950 | 0.844 | 0.888 | 0.878 | 0.883 |
-| Conversión 30d | 0,40 | 0.901 | 0.279 | 0.913 | 0.362 | 0.758 | 0.490 |
-
-> En conversión manda el PR-AUC (5,4% de positivos), no el ROC. El threshold 0,40 maximiza F1: captura el 76% de futuros pagadores porque un push innecesario es barato y un pagador perdido es caro.
+- Engagement temprano: churn Q1 (≤18 h) **35,7%** → Q4 **13,2%**.
+- Satisfacción ≠ retención: recomienda 26,5% vs no recomienda 29,6% de churn.
+- Fase de vida por título medible (velocidad de reseñas: Dota 3 días vs Fall Guys 470 días por 3.000 reseñas).
 
 ## Licencia
 
-Proyecto bootcamp Startup — 14/09/2026. Cliente piloto ficticio (PlayNova Games). Dataset demo sintético y calibrado.
+Bootcamp Startup — 14/09/2026. Cliente piloto ficticio (PlayNova Games). Dataset derivado de datos públicos de Steam.

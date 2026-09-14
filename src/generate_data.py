@@ -1,3 +1,9 @@
+"""RETIRADO — generador SINTÉTICO (ya no se usa).
+
+El proyecto usa datos 100% reales desde 2026-09-14:
+ver src/fetch_steam_reviews.py, src/build_real_dataset.py y docs/08_datos_reales.md.
+Se conserva el archivo solo como historial.
+"""
 import sqlite3, random, datetime, os, math
 
 random.seed(42)

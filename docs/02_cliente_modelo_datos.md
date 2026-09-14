@@ -13,38 +13,38 @@
 | **Procesos principales** | 1) Onboarding/tutorial 2) Sesiones diarias (15-20 min) 3) Live-Ops (eventos diarios/semanales) 4) Monetización (tienda, ads) 5) UA (TikTok, Unity Ads, Meta, Google UAC) 6) Retargeting / re-engagement. |
 | **Situación actual** | Crecimiento plano desde Q2 2025. El equipo cree que "el tutorial no es suficiente" y "TikTok trae gente mala". Tienen análisis descriptivo (crashlytics, firebase) pero NO un sistema predictivo de churn. |
 | **Problemas** | Retención D1 22% mediana (GameAnalytics 2026), churn 7d ~67% en la demo, budget de UA quemado sin LTV, desenganche silencioso, campañas de re-engagement genéricas sin personalizar. |
-| **Necesidades** | 1) Ranking semanal D1-churn 2) Motivo de desenganche por segmento 3) Qué canal/tutorial trae jugadores que SÍ pagan 4) Demo usable por PMs no-técnicos. |
+| **Necesidades** | 1) Ranking semanal de churn 2) Motivo por segmento 3) Qué perfiles llegan a alto valor 4) Demo usable por PMs no-técnicos. |
 
 **Qué pierde si no actúa:** con 2M MAU y ARPDAU $0.12, cada punto de D1 retention = 20.000 jugadores/€30.000/mes en valor de retorno. A escala, un 5% de mejora en D1 = +$1.5M/año en LTV recuperada.
 
-## 2. Datos disponibles (lo que PlayNova ya produce)
+## 2. Datos: de la wishlist al dataset real
 
-- **Jugadores:** device_id, app_version, región, país, dispositivo, OS, nivel, cuenta de jugador, fecha de install, última sesión, source attribution.
-- **Eventos de juego:** session_length, tutorial_step, coins_spent, boosters_used, ads_watched, social_invites (agregado 7d por jugador).
-- **Sesiones:** fecha, duración, tipo (casual/deep), push_notifications_recibidas, notificaciones abiertas.
-- **Monetización:** compras in-app (gemas, vidas, boosters, pase_temporada), importe, fecha, IAP vs ad.
-- **UA/Marketing:** campaña, canal (TikTok, Meta, Google UAC, Unity Ads), coste, install atribuido, primer evento post-install.
-- **Onboarding:** tutorial_completed, session_1_length, friends_invited, days_to_session_2.
-- **Support/reports:** reportes de jugador, tickets, baja de app.
+La lista original (telemetría interna ideal) se sustituyó por datos 100% reales y
+auditables. Lo que PlayNova produciría en el piloto vs lo que usamos hoy:
 
-## 3. Diseño de la base de datos
+- **Piloto (eventos internos):** sesiones, progresión/tutorial, compras, atribución de canal.
+- **Hoy (Steam público):** por reseña — `playtime_forever/at_review/last_two_weeks`,
+  `last_played`, `num_games_owned/reviews`, `voted_up`, longitud, idioma, fechas,
+  early access, gratis/de pago. Mapeo completo en `docs/08_datos_reales.md`.
 
-Tablas (SQLite `data/playnova_games.db`, schema en `data/schema.sql`):
+## 3. Diseño de la base de datos (real)
 
-- **campaigns(campaign_id PK, name, channel, game_target, cost_eur, start_date, end_date)** — campañas de UA (TikTok, Meta, Google UAC, Unity Ads).
-- **players(player_id PK, device_id, region, country, os, app_version, level, account_age_days, acquisition_channel, acquisition_campaign_id FK, install_date, last_session_date)** — jugadores activos.
-- **events(event_id PK, player_id FK, event_date, session_length, tutorial_step, coins_spent, boosters_used, ads_watched, social_invites)** — eventos de juego diarios agregados.
-- **purchases(purchase_id PK, player_id FK, purchase_date, item_type, amount_eur)** — compras in-app.
-- **leads(lead_id PK, campaign_id FK, install_date, country, os, device, tutorial_completed, session_1_length, friends_invited, days_to_session_2, converted_30d)** — nuevos installs + label conversión 30d.
-- **player_features(player_id PK/FK, agregados 7d + churn_d7 label)** — agregado ventana 7d + label churn_7d para modelar. `days_since_last_session` se guarda para análisis (excluido del modelo, anti-leakage).
+SQLite `data/playnova_real.db`, construida por `src/build_real_dataset.py`:
 
-Claves foráneas: events.player_id → players, purchases.player_id → players, leads.campaign_id → campaigns, player_features.player_id → players.
+- **titles(appid PK, name, p75_hours)** — 6 títulos F2P.
+- **reviews(review_id PK, appid FK, voted_up, hours_forever/at_review/l2w,
+  days_since_last_played, review_age_days, review_len, num_games_owned/reviews,
+  early_access, received_free, refunded, language, timestamp_created,
+  churn NULL|0|1, high_value 0|1)** — 18.099 filas (16.447 etiquetadas).
+
+Claves: reviews.appid → titles.appid. (El schema sintético antiguo `data/schema.sql`
+quedó obsoleto con el cambio a datos reales.)
 
 ## 4. Diagrama Entidad-Relación
 
-Ver `docs/ER_diagram.mmd` (Mermaid, renderiza en GitHub). Tablas: CAMPAIGNS 1───∞ PLAYERS 1───∞ EVENTS; CAMPAIGNS 1───∞ LEADS; PLAYERS 1───1 PLAYER_FEATURES.
+Ver `docs/ER_diagram.mmd` (Mermaid, renderiza en GitHub). Tablas: TITLES 1───∞ REVIEWS.
 
 ## Entregable día 11 — checklist
 - [x] Ficha cliente completa
 - [x] Lista de datos disponibles
-- [x] `data/schema.sql` + diagrama ER
+- [x] `data/playnova_real.db` + diagrama ER real
