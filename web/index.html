@@ -84,9 +84,9 @@
   <p class="note">* Tasas dentro de nuestra muestra de personas que dejaron reseña y pertenecen a la categoría de abandono definida — no son la retención de esos juegos (documentado). Lo que generaliza son las relaciones, validadas juego por juego.</p>
   <h3 class="mini-title">Lo que enseña cada figura (generadas por <code>notebooks/02_eda_real.py</code>)</h3>
   <div class="fig-grid">
-    <div class="card"><h3>Estado por título</h3><img src="assets/fig-titulo.png" alt="Churn y alto valor por título" loading="lazy"><p class="note">Juegos vivos vs juegos en declive: dónde priorizar Live-Ops.</p></div>
-    <div class="card"><h3>Engagement temprano</h3><img src="assets/fig-engagement.png" alt="Churn por cuartil de horas" loading="lazy"><p class="note">Q1 35,7% → Q4 13,2%: el hábito de las primeras horas decide.</p></div>
-    <div class="card"><h3>Satisfacción ≠ retención</h3><img src="assets/fig-voto.png" alt="Churn según voto" loading="lazy"><p class="note">Recomendar apenas mueve la aguja (26,5% vs 29,6%).</p></div>
+    <div class="card"><h3>Estado por título</h3><img class="zoomable" src="assets/fig-titulo.png" alt="Churn y alto valor por título" loading="lazy" title="Clic para ampliar"><p class="note">Juegos vivos vs juegos en declive: dónde priorizar Live-Ops. <span class="zoom-hint">🔍 Clic para ampliar</span></p></div>
+    <div class="card"><h3>Engagement temprano</h3><img class="zoomable" src="assets/fig-engagement.png" alt="Churn por cuartil de horas" loading="lazy" title="Clic para ampliar"><p class="note">Q1 35,7% → Q4 13,2%: el hábito de las primeras horas decide. <span class="zoom-hint">🔍 Clic para ampliar</span></p></div>
+    <div class="card"><h3>Satisfacción ≠ retención</h3><img class="zoomable" src="assets/fig-voto.png" alt="Churn según voto" loading="lazy" title="Clic para ampliar"><p class="note">Recomendar apenas mueve la aguja (26,5% vs 29,6%). <span class="zoom-hint">🔍 Clic para ampliar</span></p></div>
   </div>
 </section>
 
@@ -238,6 +238,12 @@
   </div>
   <div class="foot-base">ChurnGuard — NO PAIN NO GAME · Bootcamp Startup 2026 · Días 10–15<br>Datos públicos de Steam (18.099 reseñas, 2026-09-14) · Cliente ficticio: PlayNova Games · <a href="#inicio">volver arriba ↑</a></div>
 </footer>
+
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <span class="lb-close" title="Cerrar (Esc)">×</span>
+  <img id="lightboxImg" src="" alt="Figura ampliada">
+  <div id="lightboxCap" class="lb-cap"></div>
+</div>
 
 <script src="app.js"></script>
 </body>

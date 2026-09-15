@@ -38,6 +38,27 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.faq-item h4').forEach((h) => {
     h.addEventListener('click', () => h.parentElement.classList.toggle('open'));
   });
+
+  // Lightbox para las 3 figuras de #datos (presentación)
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  const lbCap = document.getElementById('lightboxCap');
+  const closeLb = () => { lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; };
+  document.querySelectorAll('.fig-grid img.zoomable').forEach((img) => {
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = img.closest('.card');
+      const title = card ? card.querySelector('h3').textContent : img.alt;
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCap.textContent = title + ' — ' + img.alt + ' (pulsa Esc o clic fuera para cerrar)';
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  lb.addEventListener('click', closeLb);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
 });
 
 // Demo ilustrativa calibrada con las importancias reales (NO es el .pkl productivo).
