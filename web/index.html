@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ChurnGuard — Churn y alto valor desde datos reales | F2P</title>
-<meta name="description" content="ChurnGuard predice inactividad y jugadores de alto valor desde 18.099 reseñas reales de Steam. Modelos auditables, piloto de 4 semanas.">
+<meta name="description" content="ChurnGuard ayuda a detectar señales de posible abandono y priorizar dónde actuar, desde 18.099 reseñas reales de Steam. Demo ilustrativa, piloto de 4 semanas con PlayNova Games.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -31,7 +31,7 @@
   <div class="hero-inner">
     <div class="badge">● 18.099 reseñas reales · 6 F2P · cero sintéticos</div>
     <h1>El abandono se ve venir<br><span class="grad">en las señales tempranas</span></h1>
-    <p class="lede">Inferimos qué jugadores están inactivos y quiénes son de <strong>alto valor</strong> solo con señales del momento de la reseña. Sin mirar la recencia. Modelos auditables, validez probada <strong>juego por juego</strong>.</p>
+    <p class="lede">Estudiamos qué señales aparecen con más frecuencia entre quienes terminan abandonando y convertimos esas señales en <strong>prioridad, motivo y acción</strong> para Live-Ops. No adivinamos el futuro: ayudamos a decidir <strong>dónde actuar antes</strong>. Modelos auditables, validez probada <strong>juego por juego</strong>.</p>
     <div class="cta-row">
       <a href="#demo"><button class="btn-primary btn-lg">Probar el simulador →</button></a>
       <a href="#datos"><button class="btn-ghost btn-lg">Ver los datos reales</button></a>
@@ -54,18 +54,18 @@
         <tr><td>r55201</td><td class="risk-mid">44%</td><td>No recomienda</td><td>Soporte proactivo</td></tr>
         <tr><td>r77340</td><td class="risk-low">9%</td><td>—</td><td>—</td></tr>
       </table>
-      <div class="mock-foot">Demo ilustrativa · el piloto usa tus eventos reales</div>
+      <div class="mock-foot">Demo ilustrativa · no es el modelo productivo · el piloto usa vuestros eventos reales</div>
     </div>
   </div>
 </header>
 
 <section id="problema">
   <h2 class="section-title">El problema, medido en datos reales</h2>
-  <p class="subtitle">27,1% de los reseñistas ya están inactivos. Y el engagement temprano lo anticipa: Q1 (≤18 h) 35,7% de churn frente a Q4 13,2%.</p>
+  <p class="subtitle">27,1% de los reseñistas pertenecen a la categoría de abandono que hemos definido. Y el engagement temprano muestra diferencias claras: Q1 (≤18 h) 35,7% frente a Q4 13,2% en nuestra muestra.</p>
   <div class="problem-grid">
-    <div class="card"><div class="icon">📉</div><h3>El abandono se gesta pronto</h3><p>Mediana de horas en reseña: 36,8 h en churned vs 120,6 h en activos. Quien no se engancha en las primeras horas, no vuelve.</p></div>
-    <div class="card"><div class="icon">🙈</div><h3>Gustar no retiene</h3><p>Churn entre quienes recomiendan: 26,5% vs 29,6% si no. La nota media no es el KPI; el hábito temprano sí.</p></div>
-    <div class="card"><div class="icon">🎮</div><h3>Cada título vive una fase</h3><p>Dota 2 genera 3.000 reseñas en 3 días; Fall Guys en 470. La velocidad de la comunidad delata la fase de vida del juego — y dónde poner Live-Ops.</p></div>
+    <div class="card"><div class="icon">📉</div><h3>El abandono empieza pronto</h3><p>Mediana de horas en reseña: 36,8 h en la categoría de abandono vs 120,6 h en activos. Las primeras horas pueden ser una ventana crítica para intentar enganchar al jugador.</p></div>
+    <div class="card"><div class="icon">🙈</div><h3>Que guste no significa que se queden</h3><p>En nuestra muestra, 26,5% de abandono entre quienes recomiendan vs 29,6% si no. La buena valoración por sí sola no debería ser la única señal para decidir a quién recuperar.</p></div>
+    <div class="card"><div class="icon">🎮</div><h3>Cada juego tiene su propia historia</h3><p>Dota 2 genera 3.000 reseñas en 3 días; Fall Guys en 470. El ritmo de la comunidad ayuda a entender en qué momento puede estar un juego — y dónde puede tener sentido concentrar esfuerzos.</p></div>
   </div>
 </section>
 
@@ -81,7 +81,7 @@
     <tr><td>Path of Exile</td><td>2.227</td><td>50,7%</td><td>21,1%</td><td>1.257 h</td></tr>
     <tr><td>Fall Guys</td><td>2.797</td><td>91,2%</td><td>20,5%</td><td>85 h</td></tr>
   </table>
-  <p class="note">* Tasas de la muestra de reseñistas, no retención de los juegos (documentado). Lo que generaliza son las relaciones, validadas juego por juego.</p>
+  <p class="note">* Tasas dentro de nuestra muestra de personas que dejaron reseña y pertenecen a la categoría de abandono definida — no son la retención de esos juegos (documentado). Lo que generaliza son las relaciones, validadas juego por juego.</p>
   <h3 class="mini-title">Lo que enseña cada figura (generadas por <code>notebooks/02_eda_real.py</code>)</h3>
   <div class="fig-grid">
     <div class="card"><h3>Estado por título</h3><img src="assets/fig-titulo.png" alt="Churn y alto valor por título" loading="lazy"><p class="note">Juegos vivos vs juegos en declive: dónde priorizar Live-Ops.</p></div>
@@ -91,12 +91,12 @@
 </section>
 
 <section id="solucion">
-  <h2 class="section-title">Dos scores, cero caja negra</h2>
+  <h2 class="section-title">Dos puntuaciones, dos decisiones</h2>
   <div class="products">
     <div class="product">
       <div class="tag">Producto principal</div>
       <h3>🎯 Churn Score</h3>
-      <p>Infiere el estado de actividad <strong>sin mirar la recencia</strong>: solo señales del momento de la reseña. Ranking semanal para Live-Ops.</p>
+      <p>Analiza las señales disponibles y da una <strong>puntuación de riesgo + motivo + acción</strong>. No es “tiene riesgo” a secas, es “tiene prioridad porque presenta poco engagement temprano, vamos a intentar recuperarlo con esta acción”. <strong>Sin mirar la recencia</strong>: solo señales del momento de la reseña.</p>
       <div class="metric-grid">
         <div class="metric-item"><div class="val">0.930</div><div class="lbl">ROC-AUC</div></div>
         <div class="metric-item"><div class="val">0.872</div><div class="lbl">PR-AUC (base 0.27)</div></div>
@@ -108,29 +108,29 @@
     <div class="product">
       <div class="tag alt">Segunda línea · UA</div>
       <h3>💰 High-Value Score</h3>
-      <p>Probabilidad de jugador de alto valor (top-25% horas + recomienda; threshold 0.60). Para concentrar win-back y pukkar por calidad.</p>
+      <p>Identifica perfiles que más se parecen a jugadores de mayor valor <strong>dentro de nuestros datos</strong> (top-25% horas + recomienda; threshold 0.60). Es un <strong>indicador aproximado</strong>: no tenemos gasto real y no decimos quién va a gastar. En un proyecto real se sustituye por los datos de compras del cliente.</p>
       <div class="metric-grid">
         <div class="metric-item"><div class="val">0.972</div><div class="lbl">ROC-AUC</div></div>
         <div class="metric-item"><div class="val">0.873</div><div class="lbl">PR-AUC (base 0.20)</div></div>
         <div class="metric-item"><div class="val">0.774</div><div class="lbl">Precision</div></div>
         <div class="metric-item"><div class="val">0.934</div><div class="lbl">Recall</div></div>
       </div>
-      <p class="note">Validez por título ROC 0.979–0.996. Proxy transparente: los F2P no exponen pagos.</p>
+      <p class="note">Validez por título ROC 0.979–0.996. Indicador aproximado y transparente: los F2P no exponen pagos.</p>
     </div>
   </div>
   <div class="card honesty">
-    <h3>🔍 Honestidad técnica</h3>
+    <h3>🔍 Honestidad técnica: qué podemos afirmar y qué no</h3>
     <ul>
-      <li><strong>Sin fuga:</strong> el modelo nunca ve horas totales, últimas 2 semanas, recencia, p75 ni (en conversión) el voto — definen las etiquetas. Verificable en <code>src/train_real.py</code>.</li>
-      <li><strong>Sesgo declarado:</strong> muestra de reseñistas; ventanas de observación desiguales; títulos PC como análogos F2P. Todo en <code>docs/08_datos_reales.md</code>.</li>
-      <li><strong>Artefactos versionados:</strong> <code>models/real_*.pkl</code> (con encoders), <code>models/real_metrics.json</code>, DB de 2 MB. El crudo se re-descarga en ~5 min.</li>
+      <li><strong>Sin ventaja artificial:</strong> el modelo nunca ve horas totales, últimas 2 semanas, recencia, p75 ni (en conversión) el voto — definen las etiquetas. Verificable en <code>src/train_real.py</code>.</li>
+      <li><strong>Sesgo declarado:</strong> muestra de personas que dejaron reseña, no de todos los jugadores; ventanas de observación desiguales; títulos PC como análogos F2P. Todo en <code>docs/08_datos_reales.md</code>.</li>
+      <li><strong>Sin magia:</strong> una buena solución no es solo un número alto, es saber qué podemos afirmar y qué no. Artefactos versionados: <code>models/real_*.pkl</code>, <code>models/real_metrics.json</code>, DB de 2 MB.</li>
     </ul>
   </div>
 </section>
 
 <section id="demo">
-  <h2 class="section-title">Demo interactiva</h2>
-  <p class="subtitle">Ajusta el perfil y mira riesgo, motivo y acción. Demo ilustrativa calibrada con las importancias reales — no es el modelo productivo.</p>
+  <h2 class="section-title">Demo: aquí no explicamos, lo enseñamos</h2>
+  <p class="subtitle">Ajusta el perfil y mira prioridad, motivo y acción. Demo ilustrativa calibrada con las importancias reales — no es exactamente el modelo productivo.</p>
   <div class="simulator">
     <div class="sim-grid">
       <div>
@@ -182,8 +182,8 @@
       </div>
     </div>
     <div class="card budget">
-      <h3>🧮 Calculadora de eficiencia del targeting</h3>
-      <p>De tus installs, ~19,9% serán alto valor. Contactando al top por score (precisión 0,774) rindes <strong>3,9×</strong> por euro de outreach.</p>
+      <h3>🧮 Calculadora de escenario (estimación, no garantía)</h3>
+      <p>Escenario con nuestro indicador aproximado: ~19,9% encajaría en el grupo de alto valor. Es una <strong>estimación basada en nuestro proxy, no una garantía de ingresos</strong>. En un proyecto real lo sustituimos por los datos de PlayNova Games.</p>
       <div class="input-row">
         <label>Budget ($/mes) <input type="number" id="budget" value="10000" min="500" step="500" class="input-field"></label>
         <label>CPI ($) <input type="number" id="cpi" value="5" min="1" max="30" class="input-field"></label>
@@ -196,11 +196,12 @@
 </section>
 
 <section id="piloto">
-  <h2 class="section-title">Piloto de 4 semanas, sin humo</h2>
+  <h2 class="section-title">Piloto de 4 semanas: probarlo con vuestros datos</h2>
+  <p class="subtitle">No os pedimos que creáis en ChurnGuard. Os pedimos cuatro semanas para demostrarlo con vuestros propios datos.</p>
   <div class="problem-grid">
-    <div class="card"><div class="icon">📦</div><h3>Semana 1 · Conexión</h3><p>Export diario de eventos anonimizado (CSV o endpoint): sesiones, progresión, compras, atribución. Firma DPA. Nada invasivo el día 1.</p></div>
-    <div class="card"><div class="icon">🎯</div><h3>Semanas 2–3 · A/B test</h3><p>Tratado (Top-riesgo + acción del playbook) vs control. Métrica primaria: retención. Secundarias: 2ª sesión y conversión.</p></div>
-    <div class="card"><div class="icon">💶</div><h3>Semana 4 · Decisión</h3><p>Informe con lift, IC 95% y €. Sin lift significativo, no se factura la fase 2. Precio piloto: <strong>2.500 €</strong> fijos.</p></div>
+    <div class="card"><div class="icon">📦</div><h3>Semana 1 · Conectar</h3><p>Export diario de eventos con identificadores anonimizados (CSV o endpoint): sesiones, progresión, compras, atribución. Firma DPA. Nada invasivo el día 1.</p></div>
+    <div class="card"><div class="icon">🎯</div><h3>Semanas 2–3 · Probar</h3><p>Grupo de mayor prioridad + acción recomendada vs grupo con tratamiento habitual. Métrica primaria: retención. Secundarias: 2ª sesión y conversión.</p></div>
+    <div class="card"><div class="icon">💶</div><h3>Semana 4 · Decidir</h3><p>Medimos si ha mejorado la retención y la conversión. Si funciona, tenemos argumentos para continuar. Si no funciona, también lo sabremos. Precio piloto: <strong>2.500 €</strong> fijos.</p></div>
   </div>
   <div class="card honesty">
     <h3>🔌 Integración y GDPR</h3>
@@ -215,7 +216,7 @@
 <section id="metodologia">
   <h2 class="section-title">Metodología en 5 días</h2>
   <div class="problem-grid">
-    <div class="card"><h3>Día 10 · Idea</h3><p>Foco: churn + alto valor para F2P. Cliente piloto: PlayNova Games.</p></div>
+    <div class="card"><h3>Día 10 · Idea</h3><p>Foco: señales de posible abandono + perfiles de mayor valor para F2P. Cliente ficticio: PlayNova Games.</p></div>
     <div class="card"><h3>Día 11 · Cliente y datos</h3><p>APIs evaluadas (Steam ✓, OpenDota ✗ por timeouts). Schema real en la DB.</p></div>
     <div class="card"><h3>Día 12 · Dataset real</h3><p><code>fetch_steam_reviews → build_real_dataset</code>: 18.099 reseñas → 16.447 etiquetados.</p></div>
     <div class="card"><h3>Día 13 · Análisis</h3><p><code>02_eda_real.py</code>: engagement temprano, fase por título, voto≠retención.</p></div>
@@ -223,19 +224,19 @@
   </div>
   <h3 class="mini-title">Preguntas que haría tu CTO</h3>
   <div class="faq-item"><h4>¿De dónde salen los datos?</h4><p>De la API pública de reseñas de Steam (sin key): 18.099 reseñas de 6 F2P del 2026-09-14. Crudo re-descargable, DB y resumen versionados, procedencia en <code>docs/08_datos_reales.md</code>.</p></div>
-  <div class="faq-item"><h4>¿El 91% de churn de Fall Guys es la retención del juego?</h4><p>No: es la tasa en nuestra muestra de reseñistas (quien escribe ya está implicado, y en un juego en declive casi todos están lapsed). Lo decimos por escrito. Lo que generaliza son las relaciones, validadas título a título.</p></div>
-  <div class="faq-item"><h4>¿Hay fuga? La antigüedad pesa 0.50…</h4><p>Es señal real (velocidad de reseñas = fase de vida del título) pero con ventana desigual: documentado como limitación. El modelo nunca ve recencia ni horas totales; el piloto con ventanas fijas hará predicción pura.</p></div>
-  <div class="faq-item"><h4>¿High-value no es inventar el pago?</h4><p>Es un proxy transparente (top-25% horas + recomienda), así presentado en todas partes. En el piloto se sustituye por tus eventos de pago reales.</p></div>
-  <div class="faq-item"><h4>¿El simulador es el modelo?</h4><p>No: demo ilustrativa calibrada. El modelo real está en <code>models/real_*.pkl</code>; en el piloto exponemos <code>/score</code> de verdad.</p></div>
+  <div class="faq-item"><h4>¿El 91% de Fall Guys significa que el 91% de sus jugadores han abandonado?</h4><p>No: es el porcentaje dentro de nuestra muestra de personas que dejaron reseña que pertenecen a la categoría de abandono definida. Una persona que escribe una reseña no representa a todos los jugadores. Lo que generaliza son las relaciones, validadas título a título.</p></div>
+  <div class="faq-item"><h4>¿Hay fuga? La antigüedad pesa 0.50…</h4><p>Es señal real (ritmo de reseñas = momento del título) pero con ventana desigual: documentado como limitación. El modelo nunca ve recencia ni horas totales; el piloto trabajará con ventanas fijas y vuestros eventos reales.</p></div>
+  <div class="faq-item"><h4>¿Tenemos datos reales de cuánto gasta cada jugador?</h4><p>No. Utilizamos un indicador aproximado (top-25% horas + recomienda), así presentado en todas partes. En un proyecto real se sustituye por los datos de compras de PlayNova Games.</p></div>
+  <div class="faq-item"><h4>¿La demo que hemos visto es exactamente el modelo productivo?</h4><p>No: es una demo ilustrativa calibrada para convertir señales en decisiones. El modelo real está en <code>models/real_*.pkl</code>; en el piloto exponemos <code>/score</code> con vuestros datos.</p></div>
 </section>
 
 <footer id="contacto">
   <div class="foot-cta">
-    <h3>¿Hablamos del piloto?</h3>
-    <p>Escríbenos con tu CPI, tu retención actual y tu volumen mensual. Estimación en 48 h.</p>
+    <h3>PlayNova, ¿queréis que descubramos juntos cuántos jugadores podemos recuperar?</h3>
+    <p>ChurnGuard no pretende adivinar el futuro. Pretende ayudaros a detectar señales antes y decidir dónde actuar. 4 semanas · 2.500 € · datos reales · experimento controlado.</p>
     <a href="mailto:piloto@churnguard.gg?subject=Piloto%20ChurnGuard%204%20semanas"><button class="btn-primary btn-lg">pedir piloto · 2.500 € →</button></a>
   </div>
-  <div class="foot-base">ChurnGuard — Bootcamp Startup 2026 · Días 10–15<br>Datos públicos de Steam (18.099 reseñas, 2026-09-14) · PlayNova Games (piloto ficticio) · <a href="#inicio">volver arriba ↑</a></div>
+  <div class="foot-base">ChurnGuard — NO PAIN NO GAME · Bootcamp Startup 2026 · Días 10–15<br>Datos públicos de Steam (18.099 reseñas, 2026-09-14) · Cliente ficticio: PlayNova Games · <a href="#inicio">volver arriba ↑</a></div>
 </footer>
 
 <script src="app.js"></script>
