@@ -95,7 +95,7 @@ function calcBudget() {
   const value = hv * ltv;
   document.getElementById('budgetResult').innerHTML =
     '<strong>' + installs.toFixed(0) + ' installs</strong> → ~' + hv.toFixed(0) +
-    ' de alto valor (19,9% medido) ≈ <strong>$' + value.toLocaleString('es-ES', { maximumFractionDigits: 0 }) + '</strong> con LTV $' + ltv + '.' +
-    '<br>Contactando por score (precisión 0,774 vs base 0,199): <strong>3,9×</strong> eficiencia por euro de outreach.';
+    ' en grupo de alto valor aprox. (19,9% en nuestra muestra) ≈ <strong>$' + value.toLocaleString('es-ES', { maximumFractionDigits: 0 }) + '</strong> de valor potencial con LTV $' + ltv + '.' +
+    '<br>Estimación basada en nuestro proxy, no una garantía de ingresos. En proyecto real se sustituye por datos reales de PlayNova Games.';
   document.getElementById('budgetResult').classList.add('show');
 }
