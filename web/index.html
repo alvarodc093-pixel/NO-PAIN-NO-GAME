@@ -220,13 +220,13 @@
 </section>
 
 <section id="metodologia">
-  <h2 class="section-title" data-i18n="met.title">Metodología en 5 días</h2>
+  <h2 class="section-title" data-i18n="met.title">Cómo trabajamos</h2>
   <div class="problem-grid">
-    <div class="card"><h3 data-i18n="met.d10t">Día 10 · Idea</h3><p data-i18n="met.d10p">Foco: señales de posible abandono + perfiles de mayor valor para F2P. Cliente ficticio: PlayNova Games.</p></div>
-    <div class="card"><h3 data-i18n="met.d11t">Día 11 · Cliente y datos</h3><p data-i18n="met.d11p">APIs evaluadas (Steam ✓, OpenDota ✗ por timeouts). Schema real en la DB.</p></div>
-    <div class="card"><h3 data-i18n="met.d12t">Día 12 · Dataset real</h3><p><code>fetch_steam_reviews → build_real_dataset</code><span data-i18n="met.d12p">: 18.099 reseñas → 16.447 etiquetados.</span></p></div>
-    <div class="card"><h3 data-i18n="met.d13t">Día 13 · Análisis</h3><p><code>02_eda_real.py</code><span data-i18n="met.d13p">: engagement temprano, fase por título, voto≠retención.</span></p></div>
-    <div class="card"><h3 data-i18n="met.d14t">Día 14 · Solución</h3><p><code>train_real.py</code><span data-i18n="met.d14p"> anti-fuga + </span><code>eval_per_title.py</code><span data-i18n="met.d14p2">: ROC 0.89–0.92 por juego.</span></p></div>
+    <div class="card"><h3 data-i18n="met.d10t">Paso 1 · Idea</h3><p data-i18n="met.d10p">Foco: señales de posible abandono + perfiles de mayor valor para F2P. Cliente piloto: PlayNova Games.</p></div>
+    <div class="card"><h3 data-i18n="met.d11t">Paso 2 · Cliente y datos</h3><p data-i18n="met.d11p">APIs evaluadas (Steam ✓, OpenDota ✗ por timeouts). Schema real en la DB.</p></div>
+    <div class="card"><h3 data-i18n="met.d12t">Paso 3 · Dataset real</h3><p><code>fetch_steam_reviews → build_real_dataset</code><span data-i18n="met.d12p">: 18.099 reseñas → 16.447 etiquetados.</span></p></div>
+    <div class="card"><h3 data-i18n="met.d13t">Paso 4 · Análisis</h3><p><code>02_eda_real.py</code><span data-i18n="met.d13p">: engagement temprano, fase por título, voto≠retención.</span></p></div>
+    <div class="card"><h3 data-i18n="met.d14t">Paso 5 · Solución</h3><p><code>train_real.py</code><span data-i18n="met.d14p"> anti-fuga + </span><code>eval_per_title.py</code><span data-i18n="met.d14p2">: ROC 0.89–0.92 por juego.</span></p></div>
   </div>
   <h3 class="mini-title" data-i18n="met.faqT">Preguntas que haría tu CTO</h3>
   <div class="faq-item"><h4 data-i18n="met.q1">¿De dónde salen los datos?</h4><p data-i18n-html="met.a1">De la API pública de reseñas de Steam (sin key): 18.099 reseñas de 6 F2P del 2026-09-14. Crudo re-descargable, DB y resumen versionados, procedencia en <code>docs/08_datos_reales.md</code>.</p></div>
@@ -242,7 +242,7 @@
     <p data-i18n="foot.sub">ChurnGuard no pretende adivinar el futuro. Pretende ayudaros a detectar señales antes y decidir dónde actuar. 4 semanas · 2.500 € · datos reales · experimento controlado.</p>
     <a href="mailto:piloto@churnguard.gg?subject=Piloto%20ChurnGuard%204%20semanas"><button class="btn-primary btn-lg" data-i18n="foot.cta">pedir piloto · 2.500 € →</button></a>
   </div>
-  <div class="foot-base"><span data-i18n-html="foot.base">ChurnGuard — NO PAIN NO GAME · Bootcamp Startup 2026 · Días 10–15<br>Datos públicos de Steam (18.099 reseñas, 2026-09-14) · Cliente ficticio: PlayNova Games</span> · <a href="#inicio" data-i18n="foot.top">volver arriba ↑</a></div>
+  <div class="foot-base"><span data-i18n-html="foot.base">ChurnGuard — NO PAIN NO GAME · 2026<br>Datos públicos de Steam (18.099 reseñas, 2026-09-14) · Cliente piloto: PlayNova Games</span> · <a href="#inicio" data-i18n="foot.top">volver arriba ↑</a></div>
 </footer>
 
 <div id="lightbox" class="lightbox" aria-hidden="true">

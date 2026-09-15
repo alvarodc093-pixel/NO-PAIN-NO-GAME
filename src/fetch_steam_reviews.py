@@ -22,7 +22,7 @@ TITLES = [
 
 OUT = "data/real/steam_reviews.jsonl"
 SESSION = requests.Session()
-SESSION.headers.update({"User-Agent": "ChurnGuard-bootcamp/1.0 (research; contact: piloto@churnguard.gg)"})
+SESSION.headers.update({"User-Agent": "ChurnGuard/1.0 (research; contact: piloto@churnguard.gg)"})
 
 def fetch_title(appid, appname, per_title, sleep_s, seen):
     got, cursor = 0, "*"
