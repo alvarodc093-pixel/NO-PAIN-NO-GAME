@@ -17,10 +17,10 @@ Detalle completo de procedencia, labels, anti-fuga y sesgos: `docs/08_datos_real
 
 ## 2. Benchmarks externos (contexto de mercado, no datos)
 
-- Retención móvil D1 22% / D7 4% / D30 0,7% (GameAnalytics 2026) — el problema existe.
+- Retención F2P de referencia D1 22% / D7 4% / D30 0,7% (GameAnalytics 2026) — el problema existe también en PC live-service.
 - Conversión a pago F2P 2–5% (Sensor Tower 2026) — nuestro proxy high_value (19,9%)
   es deliberadamente más amplio: segmento monetizable, no pagadores observados.
-- CPI puzzle $3–8 (AppsFlyer), ARPDAU $0.12 (AppMagic).
+- Adquisición PC F2P $3–8 por jugador (Steam, creadores, paid) como referencia de CAC (AppsFlyer/AppMagic), inputs de la calculadora.
 
 ## 3. La web
 

@@ -9,7 +9,7 @@
 
 - **Steam Store `appreviews` API**: pública, sin key, 100 reseñas/petición con paginación por cursor.
   Fecha de scraping: **2026-09-14**. Filtro `recent`, idioma `all`.
-- **6 títulos F2P** (gratuitos, con economía in-game → análogos honestos del F2P móvil):
+- **6 títulos PC F2P en Steam** (gratuitos, con economía in-game, como los de PlayNova Games):
   Dota 2 (570), Team Fortress 2 (440), Warframe (230410), Path of Exile (238960),
   Apex Legends (1172470), Fall Guys (1097150). ~3.000 reseñas por título.
 - **Descartado**: OpenDota API (evaluada como fuente de telemetría por partida;

@@ -12,14 +12,20 @@
   <div class="nav-inner">
     <div class="logo">🛡️ CHURNGUARD</div>
     <div class="links">
-      <a href="#problema">Problema</a>
-      <a href="#datos">Datos reales</a>
-      <a href="#solucion">Solución</a>
-      <a href="#demo">Demo</a>
-      <a href="#piloto">Piloto</a>
-      <a href="#metodologia">Metodología</a>
+      <a href="#problema" data-i18n="nav.problema">Problema</a>
+      <a href="#datos" data-i18n="nav.datos">Datos reales</a>
+      <a href="#solucion" data-i18n="nav.solucion">Solución</a>
+      <a href="#demo" data-i18n="nav.demo">Demo</a>
+      <a href="#piloto" data-i18n="nav.piloto">Piloto</a>
+      <a href="#metodologia" data-i18n="nav.metodologia">Metodología</a>
     </div>
-    <a href="#piloto" class="btn-nav">Pedir piloto →</a>
+    <select id="langSelect" class="lang-select" aria-label="Idioma / Language / Langue / Sprache" onchange="setLang(this.value)">
+      <option value="es">🇪🇸 ES</option>
+      <option value="en">🇬🇧 EN</option>
+      <option value="fr">🇫🇷 FR</option>
+      <option value="de">🇩🇪 DE</option>
+    </select>
+    <a href="#piloto" class="btn-nav" data-i18n="nav.cta">Pedir piloto →</a>
   </div>
 </nav>
 
@@ -29,51 +35,51 @@
   <div class="orb orb-3"></div>
   <div class="grid-overlay"></div>
   <div class="hero-inner">
-    <div class="badge">● 18.099 reseñas reales · 6 F2P · cero sintéticos</div>
-    <h1>El abandono se ve venir<br><span class="grad">en las señales tempranas</span></h1>
-    <p class="lede">Estudiamos qué señales aparecen con más frecuencia entre quienes terminan abandonando y convertimos esas señales en <strong>prioridad, motivo y acción</strong> para Live-Ops. No adivinamos el futuro: ayudamos a decidir <strong>dónde actuar antes</strong>. Modelos auditables, validez probada <strong>juego por juego</strong>.</p>
+    <div class="badge" data-i18n="hero.badge">● 18.099 reseñas reales · 6 F2P · cero sintéticos</div>
+    <h1><span data-i18n="hero.h1a">El abandono se ve venir</span><br><span class="grad" data-i18n="hero.h1b">en las señales tempranas</span></h1>
+    <p class="lede" data-i18n-html="hero.lede">Estudiamos qué señales aparecen con más frecuencia entre quienes terminan abandonando y convertimos esas señales en <strong>prioridad, motivo y acción</strong> para Live-Ops. No adivinamos el futuro: ayudamos a decidir <strong>dónde actuar antes</strong>. Modelos auditables, validez probada <strong>juego por juego</strong>.</p>
     <div class="cta-row">
-      <a href="#demo"><button class="btn-primary btn-lg">Probar el simulador →</button></a>
-      <a href="#datos"><button class="btn-ghost btn-lg">Ver los datos reales</button></a>
+      <a href="#demo"><button class="btn-primary btn-lg" data-i18n="hero.cta1">Probar el simulador →</button></a>
+      <a href="#datos"><button class="btn-ghost btn-lg" data-i18n="hero.cta2">Ver los datos reales</button></a>
     </div>
     <div class="counters">
-      <div class="counter"><div class="num" data-target="16447" data-format="int">0</div><div class="label">Jugadores reales etiquetados</div></div>
+      <div class="counter"><div class="num" data-target="16447" data-format="int">0</div><div class="label" data-i18n="hero.c1">Jugadores reales etiquetados</div></div>
       <div class="counter"><div class="num" data-target="0.930" data-format="dec3">0</div><div class="label">ROC-AUC · Churn</div></div>
       <div class="counter"><div class="num" data-target="0.817" data-format="dec3">0</div><div class="label">F1 · Churn</div></div>
-      <div class="counter"><div class="num" data-target="0.972" data-format="dec3">0</div><div class="label">ROC-AUC · Alto valor</div></div>
+      <div class="counter"><div class="num" data-target="0.972" data-format="dec3">0</div><div class="label" data-i18n="hero.c4">ROC-AUC · Alto valor</div></div>
     </div>
-    <div class="logos"><span>Steam appreviews API</span><span>·</span><span>6 títulos F2P</span><span>·</span><span>seed 42</span><span>·</span><span>pipeline reproducible</span></div>
+    <div class="logos"><span>Steam appreviews API</span><span>·</span><span data-i18n="hero.logos">6 títulos F2P</span><span>·</span><span>seed 42</span><span>·</span><span data-i18n="hero.logos2">pipeline reproducible</span></div>
   </div>
   <div class="hero-mock">
     <div class="mock-window">
-      <div class="mock-bar"><span></span><span></span><span></span><em>live-ops · ranking semanal de riesgo</em></div>
+      <div class="mock-bar"><span></span><span></span><span></span><em data-i18n="mock.bar">live-ops · ranking semanal de riesgo</em></div>
       <table class="mock-table">
-        <tr><th>Jugador</th><th>Riesgo</th><th>Motivo</th><th>Acción</th></tr>
-        <tr><td>r88210</td><td class="risk-high">83%</td><td>Pocas horas tempranas</td><td>Onboarding + evento diario</td></tr>
-        <tr><td>r10422</td><td class="risk-high">71%</td><td>Señal antigua, título frío</td><td>Win-back + bundle retorno</td></tr>
-        <tr><td>r55201</td><td class="risk-mid">44%</td><td>No recomienda</td><td>Soporte proactivo</td></tr>
+        <tr><th data-i18n="mock.th1">Jugador</th><th data-i18n="mock.th2">Riesgo</th><th data-i18n="mock.th3">Motivo</th><th data-i18n="mock.th4">Acción</th></tr>
+        <tr><td>r88210</td><td class="risk-high">83%</td><td data-i18n="mock.m1">Pocas horas tempranas</td><td data-i18n="mock.a1">Onboarding + evento diario</td></tr>
+        <tr><td>r10422</td><td class="risk-high">71%</td><td data-i18n="mock.m2">Señal antigua, título frío</td><td data-i18n="mock.a2">Win-back + bundle retorno</td></tr>
+        <tr><td>r55201</td><td class="risk-mid">44%</td><td data-i18n="mock.m3">No recomienda</td><td data-i18n="mock.a3">Soporte proactivo</td></tr>
         <tr><td>r77340</td><td class="risk-low">9%</td><td>—</td><td>—</td></tr>
       </table>
-      <div class="mock-foot">Demo ilustrativa · no es el modelo productivo · el piloto usa vuestros eventos reales</div>
+      <div class="mock-foot" data-i18n="mock.foot">Demo ilustrativa · no es el modelo productivo · el piloto usa vuestros eventos reales</div>
     </div>
   </div>
 </header>
 
 <section id="problema">
-  <h2 class="section-title">El problema, medido en datos reales</h2>
-  <p class="subtitle">27,1% de los reseñistas pertenecen a la categoría de abandono que hemos definido. Y el engagement temprano muestra diferencias claras: Q1 (≤18 h) 35,7% frente a Q4 13,2% en nuestra muestra.</p>
+  <h2 class="section-title" data-i18n="prob.title">El problema, medido en datos reales</h2>
+  <p class="subtitle" data-i18n="prob.sub">27,1% de los reseñistas pertenecen a la categoría de abandono que hemos definido. Y el engagement temprano muestra diferencias claras: Q1 (≤18 h) 35,7% frente a Q4 13,2% en nuestra muestra.</p>
   <div class="problem-grid">
-    <div class="card"><div class="icon">📉</div><h3>El abandono empieza pronto</h3><p>Mediana de horas en reseña: 36,8 h en la categoría de abandono vs 120,6 h en activos. Las primeras horas pueden ser una ventana crítica para intentar enganchar al jugador.</p></div>
-    <div class="card"><div class="icon">🙈</div><h3>Que guste no significa que se queden</h3><p>En nuestra muestra, 26,5% de abandono entre quienes recomiendan vs 29,6% si no. La buena valoración por sí sola no debería ser la única señal para decidir a quién recuperar.</p></div>
-    <div class="card"><div class="icon">🎮</div><h3>Cada juego tiene su propia historia</h3><p>Dota 2 genera 3.000 reseñas en 3 días; Fall Guys en 470. El ritmo de la comunidad ayuda a entender en qué momento puede estar un juego — y dónde puede tener sentido concentrar esfuerzos.</p></div>
+    <div class="card"><div class="icon">📉</div><h3 data-i18n="prob.t1">El abandono empieza pronto</h3><p data-i18n="prob.p1">Mediana de horas en reseña: 36,8 h en la categoría de abandono vs 120,6 h en activos. Las primeras horas pueden ser una ventana crítica para intentar enganchar al jugador.</p></div>
+    <div class="card"><div class="icon">🙈</div><h3 data-i18n="prob.t2">Que guste no significa que se queden</h3><p data-i18n="prob.p2">En nuestra muestra, 26,5% de abandono entre quienes recomiendan vs 29,6% si no. La buena valoración por sí sola no debería ser la única señal para decidir a quién recuperar.</p></div>
+    <div class="card"><div class="icon">🎮</div><h3 data-i18n="prob.t3">Cada juego tiene su propia historia</h3><p data-i18n="prob.p3">Dota 2 genera 3.000 reseñas en 3 días; Fall Guys en 470. El ritmo de la comunidad ayuda a entender en qué momento puede estar un juego — y dónde puede tener sentido concentrar esfuerzos.</p></div>
   </div>
 </section>
 
 <section id="datos">
-  <h2 class="section-title">Datos 100% reales, auditables</h2>
-  <p class="subtitle">18.099 reseñas públicas de Steam (API pública, sin key, 2026-09-14) → 16.447 jugadores etiquetados. Cobertura del 100% en campos clave. Procedencia completa en <code>docs/08_datos_reales.md</code>.</p>
+  <h2 class="section-title" data-i18n="data.title">Datos 100% reales, auditables</h2>
+  <p class="subtitle" data-i18n-html="data.sub">18.099 reseñas públicas de Steam (API pública, sin key, 2026-09-14) → 16.447 jugadores etiquetados. Cobertura del 100% en campos clave. Procedencia completa en <code>docs/08_datos_reales.md</code>.</p>
   <table class="data-table">
-    <tr><th>Título</th><th>Reseñas</th><th>Churn*</th><th>Alto valor</th><th>p75 horas</th></tr>
+    <tr><th data-i18n="data.th1">Título</th><th data-i18n="data.th2">Reseñas</th><th>Churn*</th><th data-i18n="data.th4">Alto valor</th><th data-i18n="data.th5">p75 horas</th></tr>
     <tr><td>Dota 2</td><td>2.920</td><td>5,2%</td><td>15,4%</td><td>1.153 h</td></tr>
     <tr><td>Apex Legends</td><td>2.977</td><td>5,1%</td><td>15,3%</td><td>423 h</td></tr>
     <tr><td>Team Fortress 2</td><td>2.827</td><td>8,8%</td><td>23,7%</td><td>162 h</td></tr>
@@ -81,93 +87,93 @@
     <tr><td>Path of Exile</td><td>2.227</td><td>50,7%</td><td>21,1%</td><td>1.257 h</td></tr>
     <tr><td>Fall Guys</td><td>2.797</td><td>91,2%</td><td>20,5%</td><td>85 h</td></tr>
   </table>
-  <p class="note">* Tasas dentro de nuestra muestra de personas que dejaron reseña y pertenecen a la categoría de abandono definida — no son la retención de esos juegos (documentado). Lo que generaliza son las relaciones, validadas juego por juego.</p>
-  <h3 class="mini-title">Lo que enseña cada figura (generadas por <code>notebooks/02_eda_real.py</code>)</h3>
+  <p class="note" data-i18n="data.note">* Tasas dentro de nuestra muestra de personas que dejaron reseña y pertenecen a la categoría de abandono definida — no son la retención de esos juegos (documentado). Lo que generaliza son las relaciones, validadas juego por juego.</p>
+  <h3 class="mini-title" data-i18n-html="data.mini">Lo que enseña cada figura (generadas por <code>notebooks/02_eda_real.py</code>)</h3>
   <div class="fig-grid">
-    <div class="card"><h3>Estado por título</h3><img class="zoomable" src="assets/fig-titulo.png" alt="Churn y alto valor por título" loading="lazy" title="Clic para ampliar"><p class="note">Juegos vivos vs juegos en declive: dónde priorizar Live-Ops. <span class="zoom-hint">🔍 Clic para ampliar</span></p></div>
-    <div class="card"><h3>Engagement temprano</h3><img class="zoomable" src="assets/fig-engagement.png" alt="Churn por cuartil de horas" loading="lazy" title="Clic para ampliar"><p class="note">Q1 35,7% → Q4 13,2%: el hábito de las primeras horas decide. <span class="zoom-hint">🔍 Clic para ampliar</span></p></div>
-    <div class="card"><h3>Satisfacción ≠ retención</h3><img class="zoomable" src="assets/fig-voto.png" alt="Churn según voto" loading="lazy" title="Clic para ampliar"><p class="note">Recomendar apenas mueve la aguja (26,5% vs 29,6%). <span class="zoom-hint">🔍 Clic para ampliar</span></p></div>
+    <div class="card"><h3 data-i18n="data.f1t">Estado por título</h3><img class="zoomable" src="assets/fig-titulo.png" alt="Churn y alto valor por título" loading="lazy" title="Clic para ampliar"><p class="note"><span data-i18n="data.f1n">Juegos vivos vs juegos en declive: dónde priorizar Live-Ops.</span> <span class="zoom-hint" data-i18n="data.zoom">🔍 Clic para ampliar</span></p></div>
+    <div class="card"><h3 data-i18n="data.f2t">Engagement temprano</h3><img class="zoomable" src="assets/fig-engagement.png" alt="Churn por cuartil de horas" loading="lazy" title="Clic para ampliar"><p class="note"><span data-i18n="data.f2n">Q1 35,7% → Q4 13,2%: el hábito de las primeras horas decide.</span> <span class="zoom-hint" data-i18n="data.zoom">🔍 Clic para ampliar</span></p></div>
+    <div class="card"><h3 data-i18n="data.f3t">Satisfacción ≠ retención</h3><img class="zoomable" src="assets/fig-voto.png" alt="Churn según voto" loading="lazy" title="Clic para ampliar"><p class="note"><span data-i18n="data.f3n">Recomendar apenas mueve la aguja (26,5% vs 29,6%).</span> <span class="zoom-hint" data-i18n="data.zoom">🔍 Clic para ampliar</span></p></div>
   </div>
 </section>
 
 <section id="solucion">
-  <h2 class="section-title">Dos puntuaciones, dos decisiones</h2>
+  <h2 class="section-title" data-i18n="sol.title">Dos puntuaciones, dos decisiones</h2>
   <div class="products">
     <div class="product">
-      <div class="tag">Producto principal</div>
+      <div class="tag" data-i18n="sol.tag1">Producto principal</div>
       <h3>🎯 Churn Score</h3>
-      <p>Analiza las señales disponibles y da una <strong>puntuación de riesgo + motivo + acción</strong>. No es “tiene riesgo” a secas, es “tiene prioridad porque presenta poco engagement temprano, vamos a intentar recuperarlo con esta acción”. <strong>Sin mirar la recencia</strong>: solo señales del momento de la reseña.</p>
+      <p data-i18n-html="sol.d1">Analiza las señales disponibles y da una <strong>puntuación de riesgo + motivo + acción</strong>. No es “tiene riesgo” a secas, es “tiene prioridad porque presenta poco engagement temprano, vamos a intentar recuperarlo con esta acción”. <strong>Sin mirar la recencia</strong>: solo señales del momento de la reseña.</p>
       <div class="metric-grid">
         <div class="metric-item"><div class="val">0.930</div><div class="lbl">ROC-AUC</div></div>
         <div class="metric-item"><div class="val">0.872</div><div class="lbl">PR-AUC (base 0.27)</div></div>
         <div class="metric-item"><div class="val">0.836</div><div class="lbl">Precision</div></div>
         <div class="metric-item"><div class="val">0.798</div><div class="lbl">Recall</div></div>
       </div>
-      <p class="note">Validez por título ROC 0.891–0.924 en los 6 juegos. Matriz test: [[2258,140],[180,712]].</p>
+      <p class="note" data-i18n="sol.n1">Validez por título ROC 0.891–0.924 en los 6 juegos. Matriz test: [[2258,140],[180,712]].</p>
     </div>
     <div class="product">
-      <div class="tag alt">Segunda línea · UA</div>
+      <div class="tag alt" data-i18n="sol.tag2">Segunda línea · UA</div>
       <h3>💰 High-Value Score</h3>
-      <p>Identifica perfiles que más se parecen a jugadores de mayor valor <strong>dentro de nuestros datos</strong> (top-25% horas + recomienda; threshold 0.60). Es un <strong>indicador aproximado</strong>: no tenemos gasto real y no decimos quién va a gastar. En un proyecto real se sustituye por los datos de compras del cliente.</p>
+      <p data-i18n-html="sol.d2">Identifica perfiles que más se parecen a jugadores de mayor valor <strong>dentro de nuestros datos</strong> (top-25% horas + recomienda; threshold 0.60). Es un <strong>indicador aproximado</strong>: no tenemos gasto real y no decimos quién va a gastar. En un proyecto real se sustituye por los datos de compras del cliente.</p>
       <div class="metric-grid">
         <div class="metric-item"><div class="val">0.972</div><div class="lbl">ROC-AUC</div></div>
         <div class="metric-item"><div class="val">0.873</div><div class="lbl">PR-AUC (base 0.20)</div></div>
         <div class="metric-item"><div class="val">0.774</div><div class="lbl">Precision</div></div>
         <div class="metric-item"><div class="val">0.934</div><div class="lbl">Recall</div></div>
       </div>
-      <p class="note">Validez por título ROC 0.979–0.996. Indicador aproximado y transparente: los F2P no exponen pagos.</p>
+      <p class="note" data-i18n="sol.n2">Validez por título ROC 0.979–0.996. Indicador aproximado y transparente: los F2P no exponen pagos.</p>
     </div>
   </div>
   <div class="card honesty">
-    <h3>🔍 Honestidad técnica: qué podemos afirmar y qué no</h3>
+    <h3 data-i18n="sol.ht">🔍 Honestidad técnica: qué podemos afirmar y qué no</h3>
     <ul>
-      <li><strong>Sin ventaja artificial:</strong> el modelo nunca ve horas totales, últimas 2 semanas, recencia, p75 ni (en conversión) el voto — definen las etiquetas. Verificable en <code>src/train_real.py</code>.</li>
-      <li><strong>Sesgo declarado:</strong> muestra de personas que dejaron reseña, no de todos los jugadores; ventanas de observación desiguales; títulos PC como análogos F2P. Todo en <code>docs/08_datos_reales.md</code>.</li>
-      <li><strong>Sin magia:</strong> una buena solución no es solo un número alto, es saber qué podemos afirmar y qué no. Artefactos versionados: <code>models/real_*.pkl</code>, <code>models/real_metrics.json</code>, DB de 2 MB.</li>
+      <li data-i18n-html="sol.h1"><strong>Sin ventaja artificial:</strong> el modelo nunca ve horas totales, últimas 2 semanas, recencia, p75 ni (en conversión) el voto — definen las etiquetas. Verificable en <code>src/train_real.py</code>.</li>
+      <li data-i18n-html="sol.h2"><strong>Sesgo declarado:</strong> muestra de personas que dejaron reseña, no de todos los jugadores; ventanas de observación desiguales; juegos PC F2P en Steam como los de PlayNova. Todo en <code>docs/08_datos_reales.md</code>.</li>
+      <li data-i18n-html="sol.h3"><strong>Sin magia:</strong> una buena solución no es solo un número alto, es saber qué podemos afirmar y qué no. Artefactos versionados: <code>models/real_*.pkl</code>, <code>models/real_metrics.json</code>, DB de 2 MB.</li>
     </ul>
   </div>
 </section>
 
 <section id="demo">
-  <h2 class="section-title">Demo: aquí no explicamos, lo enseñamos</h2>
-  <p class="subtitle">Ajusta el perfil y mira prioridad, motivo y acción. Demo ilustrativa calibrada con las importancias reales — no es exactamente el modelo productivo.</p>
+  <h2 class="section-title" data-i18n="demo.title">Demo: aquí no explicamos, lo enseñamos</h2>
+  <p class="subtitle" data-i18n="demo.sub">Ajusta el perfil y mira prioridad, motivo y acción. Demo ilustrativa calibrada con las importancias reales — no es exactamente el modelo productivo.</p>
   <div class="simulator">
     <div class="sim-grid">
       <div>
         <div class="slider-group">
-          <label>Horas jugadas (en reseña): <span id="hoursVal">100</span> h</label>
+          <label><span data-i18n="demo.hours">Horas jugadas (en reseña):</span> <span id="hoursVal">100</span> <span data-i18n="demo.hoursUnit">h</span></label>
           <input type="range" id="hours" min="0" max="2000" value="100" oninput="updateSim()">
         </div>
         <div class="slider-group">
-          <label>Juegos en la cuenta: <span id="gamesVal">30</span></label>
+          <label><span data-i18n="demo.games">Juegos en la cuenta:</span> <span id="gamesVal">30</span></label>
           <input type="range" id="games" min="0" max="500" value="30" oninput="updateSim()">
         </div>
         <div class="slider-group">
-          <label>Antigüedad de la señal: <span id="ageVal">10</span> días</label>
+          <label><span data-i18n="demo.age">Antigüedad de la señal:</span> <span id="ageVal">10</span> <span data-i18n="demo.ageUnit">días</span></label>
           <input type="range" id="age" min="0" max="400" value="10" oninput="updateSim()">
         </div>
         <div class="slider-group">
-          <label>Título</label>
+          <label data-i18n="demo.titleLab">Título</label>
           <select id="title" onchange="updateSim()">
-            <option value="dota">Dota 2 (vivo)</option>
-            <option value="apex" selected>Apex Legends (vivo)</option>
+            <option value="dota" data-i18n="demo.t_dota">Dota 2 (vivo)</option>
+            <option value="apex" selected data-i18n="demo.t_apex">Apex Legends (vivo)</option>
             <option value="tf2">Team Fortress 2</option>
             <option value="warframe">Warframe</option>
-            <option value="poe">Path of Exile (frío)</option>
-            <option value="fallguys">Fall Guys (en declive)</option>
+            <option value="poe" data-i18n="demo.t_poe">Path of Exile (frío)</option>
+            <option value="fallguys" data-i18n="demo.t_fall">Fall Guys (en declive)</option>
           </select>
         </div>
         <div class="slider-group">
-          <label>¿Recomienda el juego?</label>
+          <label data-i18n="demo.votedLab">¿Recomienda el juego?</label>
           <select id="voted" onchange="updateSim()">
-            <option value="1" selected>Sí</option>
-            <option value="0">No</option>
+            <option value="1" selected data-i18n="demo.yes">Sí</option>
+            <option value="0" data-i18n="demo.no">No</option>
           </select>
         </div>
         <div class="presets">
-          <button onclick="setPreset(10,5,300,'fallguys',0)">⚠️ En riesgo</button>
-          <button onclick="setPreset(100,30,10,'apex',1)">😐 Típico</button>
-          <button onclick="setPreset(800,120,5,'dota',1)">✅ Sano</button>
+          <button onclick="setPreset(10,5,300,'fallguys',0)" data-i18n="demo.p1">⚠️ En riesgo</button>
+          <button onclick="setPreset(100,30,10,'apex',1)" data-i18n="demo.p2">😐 Típico</button>
+          <button onclick="setPreset(800,120,5,'dota',1)" data-i18n="demo.p3">✅ Sano</button>
         </div>
       </div>
       <div class="gauge-box">
@@ -182,13 +188,13 @@
       </div>
     </div>
     <div class="card budget">
-      <h3>🧮 Calculadora de escenario (estimación, no garantía)</h3>
-      <p>Escenario con nuestro indicador aproximado: ~19,9% encajaría en el grupo de alto valor. Es una <strong>estimación basada en nuestro proxy, no una garantía de ingresos</strong>. En un proyecto real lo sustituimos por los datos de PlayNova Games.</p>
+      <h3 data-i18n="demo.bTitle">🧮 Calculadora de escenario (estimación, no garantía)</h3>
+      <p data-i18n-html="demo.bDesc">Escenario con nuestro indicador aproximado: ~19,9% encajaría en el grupo de alto valor. Es una <strong>estimación basada en nuestro proxy, no una garantía de ingresos</strong>. En un proyecto real lo sustituimos por los datos de PlayNova Games.</p>
       <div class="input-row">
-        <label>Budget ($/mes) <input type="number" id="budget" value="10000" min="500" step="500" class="input-field"></label>
-        <label>CPI ($) <input type="number" id="cpi" value="5" min="1" max="30" class="input-field"></label>
-        <label>LTV alto valor ($) <input type="number" id="ltv" value="45" min="1" class="input-field"></label>
-        <button onclick="calcBudget()" class="btn-primary">Calcular</button>
+        <label><span data-i18n="demo.budget">Budget ($/mes)</span> <input type="number" id="budget" value="10000" min="500" step="500" class="input-field"></label>
+        <label><span>CPI ($)</span> <input type="number" id="cpi" value="5" min="1" max="30" class="input-field"></label>
+        <label><span data-i18n="demo.ltv">LTV alto valor ($)</span> <input type="number" id="ltv" value="45" min="1" class="input-field"></label>
+        <button onclick="calcBudget()" class="btn-primary" data-i18n="demo.calc">Calcular</button>
       </div>
       <div id="budgetResult" class="budget-result"></div>
     </div>
@@ -196,47 +202,47 @@
 </section>
 
 <section id="piloto">
-  <h2 class="section-title">Piloto de 4 semanas: probarlo con vuestros datos</h2>
-  <p class="subtitle">No os pedimos que creáis en ChurnGuard. Os pedimos cuatro semanas para demostrarlo con vuestros propios datos.</p>
+  <h2 class="section-title" data-i18n="pilot.title">Piloto de 4 semanas: probarlo con vuestros datos</h2>
+  <p class="subtitle" data-i18n="pilot.sub">No os pedimos que creáis en ChurnGuard. Os pedimos cuatro semanas para demostrarlo con vuestros propios datos.</p>
   <div class="problem-grid">
-    <div class="card"><div class="icon">📦</div><h3>Semana 1 · Conectar</h3><p>Export diario de eventos con identificadores anonimizados (CSV o endpoint): sesiones, progresión, compras, atribución. Firma DPA. Nada invasivo el día 1.</p></div>
-    <div class="card"><div class="icon">🎯</div><h3>Semanas 2–3 · Probar</h3><p>Grupo de mayor prioridad + acción recomendada vs grupo con tratamiento habitual. Métrica primaria: retención. Secundarias: 2ª sesión y conversión.</p></div>
-    <div class="card"><div class="icon">💶</div><h3>Semana 4 · Decidir</h3><p>Medimos si ha mejorado la retención y la conversión. Si funciona, tenemos argumentos para continuar. Si no funciona, también lo sabremos. Precio piloto: <strong>2.500 €</strong> fijos.</p></div>
+    <div class="card"><div class="icon">📦</div><h3 data-i18n="pilot.t1">Semana 1 · Conectar</h3><p data-i18n="pilot.p1">Export diario de eventos con identificadores anonimizados (CSV o endpoint): sesiones, progresión, compras, atribución. Firma DPA. Nada invasivo el día 1.</p></div>
+    <div class="card"><div class="icon">🎯</div><h3 data-i18n="pilot.t2">Semanas 2–3 · Probar</h3><p data-i18n="pilot.p2">Grupo de mayor prioridad + acción recomendada vs grupo con tratamiento habitual. Métrica primaria: retención. Secundarias: 2ª sesión y conversión.</p></div>
+    <div class="card"><div class="icon">💶</div><h3 data-i18n="pilot.t3">Semana 4 · Decidir</h3><p data-i18n-html="pilot.p3">Medimos si ha mejorado la retención y la conversión. Si funciona, tenemos argumentos para continuar. Si no funciona, también lo sabremos. Precio piloto: <strong>2.500 €</strong> fijos.</p></div>
   </div>
   <div class="card honesty">
-    <h3>🔌 Integración y GDPR</h3>
+    <h3 data-i18n="pilot.ht">🔌 Integración y GDPR</h3>
     <ul>
-      <li><strong>Input:</strong> CSV diario o POST JSON a <code>/score</code> → <code>{p_churn, motivo, acción}</code>. Latencia &lt; 200 ms p95.</li>
-      <li><strong>Privacidad:</strong> IDs anonimizados, sin PII. Borrado a petición, retención 90 días.</li>
-      <li><strong>Stack:</strong> scikit-learn versionado (seed 42), <code>.pkl</code> con encoders. Re-entreno semanal.</li>
+      <li data-i18n-html="pilot.h1"><strong>Input:</strong> CSV diario o POST JSON a <code>/score</code> → <code>{p_churn, motivo, acción}</code>. Latencia &lt; 200 ms p95.</li>
+      <li data-i18n="pilot.h2"><strong>Privacidad:</strong> IDs anonimizados, sin PII. Borrado a petición, retención 90 días.</li>
+      <li data-i18n-html="pilot.h3"><strong>Stack:</strong> scikit-learn versionado (seed 42), <code>.pkl</code> con encoders. Re-entreno semanal.</li>
     </ul>
   </div>
 </section>
 
 <section id="metodologia">
-  <h2 class="section-title">Metodología en 5 días</h2>
+  <h2 class="section-title" data-i18n="met.title">Metodología en 5 días</h2>
   <div class="problem-grid">
-    <div class="card"><h3>Día 10 · Idea</h3><p>Foco: señales de posible abandono + perfiles de mayor valor para F2P. Cliente ficticio: PlayNova Games.</p></div>
-    <div class="card"><h3>Día 11 · Cliente y datos</h3><p>APIs evaluadas (Steam ✓, OpenDota ✗ por timeouts). Schema real en la DB.</p></div>
-    <div class="card"><h3>Día 12 · Dataset real</h3><p><code>fetch_steam_reviews → build_real_dataset</code>: 18.099 reseñas → 16.447 etiquetados.</p></div>
-    <div class="card"><h3>Día 13 · Análisis</h3><p><code>02_eda_real.py</code>: engagement temprano, fase por título, voto≠retención.</p></div>
-    <div class="card"><h3>Día 14 · Solución</h3><p><code>train_real.py</code> anti-fuga + <code>eval_per_title.py</code>: ROC 0.89–0.92 por juego.</p></div>
+    <div class="card"><h3 data-i18n="met.d10t">Día 10 · Idea</h3><p data-i18n="met.d10p">Foco: señales de posible abandono + perfiles de mayor valor para F2P. Cliente ficticio: PlayNova Games.</p></div>
+    <div class="card"><h3 data-i18n="met.d11t">Día 11 · Cliente y datos</h3><p data-i18n="met.d11p">APIs evaluadas (Steam ✓, OpenDota ✗ por timeouts). Schema real en la DB.</p></div>
+    <div class="card"><h3 data-i18n="met.d12t">Día 12 · Dataset real</h3><p><code>fetch_steam_reviews → build_real_dataset</code><span data-i18n="met.d12p">: 18.099 reseñas → 16.447 etiquetados.</span></p></div>
+    <div class="card"><h3 data-i18n="met.d13t">Día 13 · Análisis</h3><p><code>02_eda_real.py</code><span data-i18n="met.d13p">: engagement temprano, fase por título, voto≠retención.</span></p></div>
+    <div class="card"><h3 data-i18n="met.d14t">Día 14 · Solución</h3><p><code>train_real.py</code><span data-i18n="met.d14p"> anti-fuga + </span><code>eval_per_title.py</code><span data-i18n="met.d14p2">: ROC 0.89–0.92 por juego.</span></p></div>
   </div>
-  <h3 class="mini-title">Preguntas que haría tu CTO</h3>
-  <div class="faq-item"><h4>¿De dónde salen los datos?</h4><p>De la API pública de reseñas de Steam (sin key): 18.099 reseñas de 6 F2P del 2026-09-14. Crudo re-descargable, DB y resumen versionados, procedencia en <code>docs/08_datos_reales.md</code>.</p></div>
-  <div class="faq-item"><h4>¿El 91% de Fall Guys significa que el 91% de sus jugadores han abandonado?</h4><p>No: es el porcentaje dentro de nuestra muestra de personas que dejaron reseña que pertenecen a la categoría de abandono definida. Una persona que escribe una reseña no representa a todos los jugadores. Lo que generaliza son las relaciones, validadas título a título.</p></div>
-  <div class="faq-item"><h4>¿Hay fuga? La antigüedad pesa 0.50…</h4><p>Es señal real (ritmo de reseñas = momento del título) pero con ventana desigual: documentado como limitación. El modelo nunca ve recencia ni horas totales; el piloto trabajará con ventanas fijas y vuestros eventos reales.</p></div>
-  <div class="faq-item"><h4>¿Tenemos datos reales de cuánto gasta cada jugador?</h4><p>No. Utilizamos un indicador aproximado (top-25% horas + recomienda), así presentado en todas partes. En un proyecto real se sustituye por los datos de compras de PlayNova Games.</p></div>
-  <div class="faq-item"><h4>¿La demo que hemos visto es exactamente el modelo productivo?</h4><p>No: es una demo ilustrativa calibrada para convertir señales en decisiones. El modelo real está en <code>models/real_*.pkl</code>; en el piloto exponemos <code>/score</code> con vuestros datos.</p></div>
+  <h3 class="mini-title" data-i18n="met.faqT">Preguntas que haría tu CTO</h3>
+  <div class="faq-item"><h4 data-i18n="met.q1">¿De dónde salen los datos?</h4><p data-i18n-html="met.a1">De la API pública de reseñas de Steam (sin key): 18.099 reseñas de 6 F2P del 2026-09-14. Crudo re-descargable, DB y resumen versionados, procedencia en <code>docs/08_datos_reales.md</code>.</p></div>
+  <div class="faq-item"><h4 data-i18n="met.q2">¿El 91% de Fall Guys significa que el 91% de sus jugadores han abandonado?</h4><p data-i18n="met.a2">No: es el porcentaje dentro de nuestra muestra de personas que dejaron reseña que pertenecen a la categoría de abandono definida. Una persona que escribe una reseña no representa a todos los jugadores. Lo que generaliza son las relaciones, validadas título a título.</p></div>
+  <div class="faq-item"><h4 data-i18n="met.q3">¿Hay fuga? La antigüedad pesa 0.50…</h4><p data-i18n="met.a3">Es señal real (ritmo de reseñas = momento del título) pero con ventana desigual: documentado como limitación. El modelo nunca ve recencia ni horas totales; el piloto trabajará con ventanas fijas y vuestros eventos reales.</p></div>
+  <div class="faq-item"><h4 data-i18n="met.q4">¿Tenemos datos reales de cuánto gasta cada jugador?</h4><p data-i18n="met.a4">No. Utilizamos un indicador aproximado (top-25% horas + recomienda), así presentado en todas partes. En un proyecto real se sustituye por los datos de compras de PlayNova Games.</p></div>
+  <div class="faq-item"><h4 data-i18n="met.q5">¿La demo que hemos visto es exactamente el modelo productivo?</h4><p data-i18n-html="met.a5">No: es una demo ilustrativa calibrada para convertir señales en decisiones. El modelo real está en <code>models/real_*.pkl</code>; en el piloto exponemos <code>/score</code> con vuestros datos.</p></div>
 </section>
 
 <footer id="contacto">
   <div class="foot-cta">
-    <h3>PlayNova, ¿queréis que descubramos juntos cuántos jugadores podemos recuperar?</h3>
-    <p>ChurnGuard no pretende adivinar el futuro. Pretende ayudaros a detectar señales antes y decidir dónde actuar. 4 semanas · 2.500 € · datos reales · experimento controlado.</p>
-    <a href="mailto:piloto@churnguard.gg?subject=Piloto%20ChurnGuard%204%20semanas"><button class="btn-primary btn-lg">pedir piloto · 2.500 € →</button></a>
+    <h3 data-i18n="foot.title">PlayNova, ¿queréis que descubramos juntos cuántos jugadores podemos recuperar?</h3>
+    <p data-i18n="foot.sub">ChurnGuard no pretende adivinar el futuro. Pretende ayudaros a detectar señales antes y decidir dónde actuar. 4 semanas · 2.500 € · datos reales · experimento controlado.</p>
+    <a href="mailto:piloto@churnguard.gg?subject=Piloto%20ChurnGuard%204%20semanas"><button class="btn-primary btn-lg" data-i18n="foot.cta">pedir piloto · 2.500 € →</button></a>
   </div>
-  <div class="foot-base">ChurnGuard — NO PAIN NO GAME · Bootcamp Startup 2026 · Días 10–15<br>Datos públicos de Steam (18.099 reseñas, 2026-09-14) · Cliente ficticio: PlayNova Games · <a href="#inicio">volver arriba ↑</a></div>
+  <div class="foot-base"><span data-i18n-html="foot.base">ChurnGuard — NO PAIN NO GAME · Bootcamp Startup 2026 · Días 10–15<br>Datos públicos de Steam (18.099 reseñas, 2026-09-14) · Cliente ficticio: PlayNova Games</span> · <a href="#inicio" data-i18n="foot.top">volver arriba ↑</a></div>
 </footer>
 
 <div id="lightbox" class="lightbox" aria-hidden="true">
@@ -245,6 +251,7 @@
   <div id="lightboxCap" class="lb-cap"></div>
 </div>
 
+<script src="i18n.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

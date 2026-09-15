@@ -14,6 +14,8 @@ nav .links a { color: #b0b0d0; font-size: .88rem; transition: color .25s; }
 nav .links a:hover { color: #22d3ee; }
 .btn-nav { background: linear-gradient(135deg,#22d3ee,#8b5cf6); color: #fff; padding: .5rem 1.1rem; border-radius: 8px; font-size: .85rem; font-weight: 700; white-space: nowrap; }
 .btn-nav:hover { transform: translateY(-1px); }
+.lang-select { background: #14112b; color: #e8e8f0; border: 1px solid #3b3568; padding: .5rem .6rem; border-radius: 8px; font-size: .85rem; font-weight: 700; cursor: pointer; }
+.lang-select:focus { outline: none; border-color: #22d3ee; }
 
 /* Hero */
 .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; gap: 3rem; position: relative; padding: 7rem 2rem 4rem; overflow: hidden; max-width: 1300px; margin: 0 auto; flex-wrap: wrap; }

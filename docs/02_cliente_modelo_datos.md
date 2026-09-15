@@ -4,18 +4,18 @@
 
 | Campo | Detalle |
 |---|---|
-| **Nombre** | PlayNova Games (ficticio, mid-tier F2P publisher) |
-| **Sector** | Juegos móviles free-to-play (puzzle, idle, match-3) |
-| **Actividad** | 3 títulos activos (puzzle casual, idle RPG, match-3). Operación UA (user acquisition), Live-Ops, monetización in-app, push notifications. |
-| **Tamaño** | ~150 empleados global (Dublín, Lisboa, Varsovia). ~2M MAU · 450k DAU · ARPDAU ~$0.12. Facturación ~$25M/año. |
-| **Productos** | Puzzle Stars (match-3), Idle Legends (idle RPG), Coin Masters (puzzle casual). Tienda in-app, pases de temporada, anuncios rewarded. |
-| **Modelo de negocio** | F2P + microtransacciones (gemas, vidas, boosters) + pases de temporada + anuncios rewarded. ARPDAU ~$0.12, ARPU ~$3.50/mes. |
-| **Procesos principales** | 1) Onboarding/tutorial 2) Sesiones diarias (15-20 min) 3) Live-Ops (eventos diarios/semanales) 4) Monetización (tienda, ads) 5) UA (TikTok, Unity Ads, Meta, Google UAC) 6) Retargeting / re-engagement. |
-| **Situación actual** | Crecimiento plano desde Q2 2025. El equipo cree que "el tutorial no es suficiente" y "TikTok trae gente mala". Tienen análisis descriptivo (crashlytics, firebase) pero NO un sistema predictivo de churn. |
-| **Problemas** | Retención D1 22% mediana (GameAnalytics 2026), churn 7d ~67% en la demo, budget de UA quemado sin LTV, desenganche silencioso, campañas de re-engagement genéricas sin personalizar. |
+| **Nombre** | PlayNova Games (ficticio, mid-tier publisher PC free-to-play en Steam) |
+| **Sector** | Juegos PC free-to-play en Steam (shooter por equipos, survival co-op, action RPG) |
+| **Actividad** | 3 títulos live-service en PC (Steam). Operación UA (Steam, Twitch/YouTube, Discord), Live-Ops por temporadas/eventos, monetización in-game, comunidad y soporte. |
+| **Tamaño** | ~150 empleados global (Dublín, Lisboa, Varsovia). ~2M MAU · 450k DAU. Facturación ~$25M/año. |
+| **Productos** | Nova Strike (shooter por equipos), Hollow Frontier (survival co-op), Emberfall (action RPG). Tienda de cosméticos, pases de temporada/batalla, DLCs y eventos. |
+| **Modelo de negocio** | F2P en PC + microtransacciones cosméticas (skins, emotes) + pases de temporada/batalla + DLCs. Sin anuncios rewarded: el ingreso es jugar + coleccionar + temporada. |
+| **Procesos principales** | 1) Onboarding/tutorial 2) Sesiones en PC (30-60 min) 3) Live-Ops (temporadas, eventos, ranked) 4) Monetización (tienda, pases, DLCs) 5) UA (página Steam, Twitch/YouTube, Discord, Meta/Google) 6) Retargeting / re-engagement. |
+| **Situación actual** | Crecimiento plano desde Q2 2025. El equipo cree que "el tutorial no engancha" y "los eventos no retienen". Tienen análisis descriptivo (Steamworks, GameAnalytics) pero NO un sistema predictivo de churn. |
+| **Problemas** | Retención D1 22% mediana (referencia mercado F2P, GameAnalytics 2026), churn 7d ~67% en la demo, budget de UA quemado sin LTV, desenganche silencioso, campañas de re-engagement genéricas sin personalizar. |
 | **Necesidades** | 1) Ranking semanal de churn 2) Motivo por segmento 3) Qué perfiles llegan a alto valor 4) Demo usable por PMs no-técnicos. |
 
-**Qué pierde si no actúa:** con 2M MAU y ARPDAU $0.12, cada punto de D1 retention = 20.000 jugadores/€30.000/mes en valor de retorno. A escala, un 5% de mejora en D1 = +$1.5M/año en LTV recuperada.
+**Qué pierde si no actúa:** con 2M MAU, cada punto de retención D1 = ~20.000 jugadores que siguen activos y monetizables vía tienda/pases. A escala, un 5% de mejora en D1 = +$1.5M/año en LTV recuperado (estimación interna con CAC $3-8).
 
 ## 2. Datos: de la wishlist al dataset real
 

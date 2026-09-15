@@ -51,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = card ? card.querySelector('h3').textContent : img.alt;
       lbImg.src = img.src;
       lbImg.alt = img.alt;
-      lbCap.textContent = title + ' — ' + img.alt + ' (pulsa Esc o clic fuera para cerrar)';
+      const suf = (typeof __t === 'function') ? __t('sim.lbSuffix') : '(pulsa Esc o clic fuera para cerrar)';
+      lbCap.textContent = title + ' — ' + img.alt + ' ' + suf;
       lb.classList.add('open');
       lb.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -88,14 +89,15 @@ function updateSim() {
   val.style.color = score > 65 ? '#f87171' : score > 35 ? '#fbbf24' : '#22d3ee';
 
   let motive, action;
-  if (h <= 18) { motive = 'Engagement temprano bajo (Q1: 35,7% de churn)'; action = 'Onboarding + evento diario personalizado en 24 h.'; }
-  else if (age > 90) { motive = 'Señal antigua en título frío'; action = 'Campaña win-back + bundle de retorno.'; }
-  else if (!voted) { motive = 'No recomienda (29,6% de churn)'; action = 'Soporte proactivo + oferta de guardado.'; }
-  else if ((TITLE_ADJ[t] || 0) > 0) { motive = 'Título en fase de declive (' + TITLE_NAME[t] + ')'; action = 'Contenido/evento de retorno + recordatorio.'; }
-  else { motive = 'Perfil sano'; action = 'Mantener cadencia; pase de temporada como acelerador.'; }
-  const level = score > 65 ? '🔴 Riesgo alto' : score > 35 ? '🟡 Riesgo medio' : '🟢 Riesgo bajo';
+  const T = (typeof __t === 'function') ? __t : ((k) => k);
+  if (h <= 18) { motive = T('sim.motiveEarly'); action = T('sim.actionEarly'); }
+  else if (age > 90) { motive = T('sim.motiveOld'); action = T('sim.actionOld'); }
+  else if (!voted) { motive = T('sim.motiveNoRec'); action = T('sim.actionNoRec'); }
+  else if ((TITLE_ADJ[t] || 0) > 0) { motive = T('sim.motiveDecline') + ' (' + TITLE_NAME[t] + ')'; action = T('sim.actionDecline'); }
+  else { motive = T('sim.motiveHealthy'); action = T('sim.actionHealthy'); }
+  const level = score > 65 ? T('sim.levelHigh') : score > 35 ? T('sim.levelMid') : T('sim.levelLow');
   document.getElementById('motiveBox').innerHTML =
-    '<strong>' + level + ' · ' + score + '%</strong><br>Motivo probable: <strong>' + motive + '</strong><br>Acción playbook: ' + action;
+    '<strong>' + level + ' · ' + score + '%</strong><br>' + T('sim.motiveLabel') + ' <strong>' + motive + '</strong><br>' + T('sim.actionLabel') + ' ' + action;
 }
 
 function setPreset(h, g, age, t, voted) {
@@ -111,12 +113,22 @@ function calcBudget() {
   const budget = Math.max(100, +document.getElementById('budget').value || 10000);
   const cpi = Math.max(0.5, +document.getElementById('cpi').value || 5);
   const ltv = Math.max(1, +document.getElementById('ltv').value || 45);
+  window.__budget = { budget, cpi, ltv };
+  renderBudget();
+}
+
+function renderBudget() {
+  const box = document.getElementById('budgetResult');
+  if (!window.__budget) return;
+  const { budget, cpi, ltv } = window.__budget;
   const installs = budget / cpi;
   const hv = installs * 0.199;
   const value = hv * ltv;
-  document.getElementById('budgetResult').innerHTML =
+  const T = (typeof __t === 'function') ? __t : ((k) => k);
+  const loc = (window.__lang || 'es') === 'en' ? 'en-US' : (window.__lang || 'es') === 'es' ? 'es-ES' : (window.__lang || 'es') + '-' + (window.__lang || 'es').toUpperCase();
+  box.innerHTML =
     '<strong>' + installs.toFixed(0) + ' installs</strong> → ~' + hv.toFixed(0) +
-    ' en grupo de alto valor aprox. (19,9% en nuestra muestra) ≈ <strong>$' + value.toLocaleString('es-ES', { maximumFractionDigits: 0 }) + '</strong> de valor potencial con LTV $' + ltv + '.' +
-    '<br>Estimación basada en nuestro proxy, no una garantía de ingresos. En proyecto real se sustituye por datos reales de PlayNova Games.';
-  document.getElementById('budgetResult').classList.add('show');
+    ' ' + T('sim.budgetA') + ' ≈ <strong>$' + value.toLocaleString(loc, { maximumFractionDigits: 0 }) + '</strong> ' + T('sim.budgetB') + ltv + '.' +
+    '<br>' + T('sim.budgetC');
+  box.classList.add('show');
 }

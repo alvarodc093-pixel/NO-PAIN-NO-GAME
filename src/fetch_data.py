@@ -63,7 +63,7 @@ def generate_mock_reviews():
 
 def main():
     os.makedirs("data", exist_ok=True)
-    # Datos Steam (juegos móviles F2P relevantes)
+    # Datos Steam (juegos PC F2P relevantes)
     steam_games = fetch_steam_app_details([730, 578080, 1091500])  # CS:GO, PUBG, Dota 2
     with open("data/steam_game_data.json",'w') as f: json.dump(steam_games, f, indent=2)
     print(f"Steam data: {len(steam_games)} games fetched")
