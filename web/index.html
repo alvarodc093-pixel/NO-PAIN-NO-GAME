@@ -88,7 +88,7 @@
     <tr><td>Fall Guys</td><td>2.797</td><td>91,2%</td><td>20,5%</td><td>85 h</td></tr>
   </table>
   <p class="note" data-i18n="data.note">* Tasas dentro de nuestra muestra de personas que dejaron reseña y pertenecen a la categoría de abandono definida — no son la retención de esos juegos (documentado). Lo que generaliza son las relaciones, validadas juego por juego.</p>
-  <h3 class="mini-title" data-i18n-html="data.mini">Lo que enseña cada figura (generadas por <code>notebooks/02_eda_real.py</code>)</h3>
+  <h3 class="mini-title" data-i18n-html="data.mini">Lo que enseña cada figura (generadas por <code>notebooks/EDA.ipynb</code>)</h3>
   <div class="fig-grid">
     <div class="card"><h3 data-i18n="data.f1t">Estado por título</h3><img class="zoomable" src="assets/fig-titulo.png" alt="Churn y alto valor por título" loading="lazy" title="Clic para ampliar"><p class="note"><span data-i18n="data.f1n">Juegos vivos vs juegos en declive: dónde priorizar Live-Ops.</span> <span class="zoom-hint" data-i18n="data.zoom">🔍 Clic para ampliar</span></p></div>
     <div class="card"><h3 data-i18n="data.f2t">Engagement temprano</h3><img class="zoomable" src="assets/fig-engagement.png" alt="Churn por cuartil de horas" loading="lazy" title="Clic para ampliar"><p class="note"><span data-i18n="data.f2n">Q1 35,7% → Q4 13,2%: el hábito de las primeras horas decide.</span> <span class="zoom-hint" data-i18n="data.zoom">🔍 Clic para ampliar</span></p></div>
@@ -225,7 +225,7 @@
     <div class="card"><h3 data-i18n="met.d10t">Paso 1 · Idea</h3><p data-i18n="met.d10p">Foco: señales de posible abandono + perfiles de mayor valor para F2P. Cliente piloto: PlayNova Games.</p></div>
     <div class="card"><h3 data-i18n="met.d11t">Paso 2 · Cliente y datos</h3><p data-i18n="met.d11p">APIs evaluadas (Steam ✓, OpenDota ✗ por timeouts). Schema real en la DB.</p></div>
     <div class="card"><h3 data-i18n="met.d12t">Paso 3 · Dataset real</h3><p><code>fetch_steam_reviews → build_real_dataset</code><span data-i18n="met.d12p">: 18.099 reseñas → 16.447 etiquetados.</span></p></div>
-    <div class="card"><h3 data-i18n="met.d13t">Paso 4 · Análisis</h3><p><code>02_eda_real.py</code><span data-i18n="met.d13p">: engagement temprano, fase por título, voto≠retención.</span></p></div>
+    <div class="card"><h3 data-i18n="met.d13t">Paso 4 · Análisis</h3><p><code>EDA.ipynb</code><span data-i18n="met.d13p">: engagement temprano, fase por título, voto≠retención.</span></p></div>
     <div class="card"><h3 data-i18n="met.d14t">Paso 5 · Solución</h3><p><code>train_real.py</code><span data-i18n="met.d14p"> anti-fuga + </span><code>eval_per_title.py</code><span data-i18n="met.d14p2">: ROC 0.89–0.92 por juego.</span></p></div>
   </div>
   <h3 class="mini-title" data-i18n="met.faqT">Preguntas que haría tu CTO</h3>

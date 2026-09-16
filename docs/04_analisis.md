@@ -1,6 +1,6 @@
 # Análisis sobre datos reales
 
-Script `notebooks/02_eda_real.py` (reproducible). Todo lo de abajo está medido en
+Notebook `notebooks/EDA.ipynb` (reproducible, abrir con Jupyter). Todo lo de abajo está medido en
 `data/playnova_real.db` (16.447 filas). Figuras en `docs/img/` y `web/assets/`.
 
 ## Hallazgos verificados

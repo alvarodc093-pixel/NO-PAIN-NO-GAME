@@ -68,7 +68,7 @@ pip install -r requirements.txt
 python src/fetch_steam_reviews.py    # descarga las 18k opiniones (~5 min)
 python src/build_real_dataset.py    # ordena y etiqueta los datos
 python src/train_real.py            # entrena los dos modelos
-python notebooks/02_eda_real.py     # crea los 3 gráficos
+jupyter notebook notebooks/EDA.ipynb  # EDA (abrir en Jupyter, genera docs/img/eda_*.png)
 python src/eval_per_title.py        # comprueba que funciona juego por juego
 cd web
 python -m http.server 8321          # abre la web en http://localhost:8321
