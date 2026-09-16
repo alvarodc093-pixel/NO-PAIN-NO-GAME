@@ -74,7 +74,7 @@ cd web
 python -m http.server 8321          # abre la web en http://localhost:8321
 ```
 
-- Modelos: Churn (acierta ~8 de cada 10 que marca) y Alto valor (precisión 0,77, detecta el 93% de los valiosos). Detalles en `models/real_metrics.json`.
+- Modelos: Churn (de cada 10 que marca, casi 9 aciertan; umbral 0.65 calibrado en validación interna) y Alto valor (precisión 0,77, detecta el 94% de los valiosos). Detalles en `models/real_metrics.json`.
 - Estructura: `docs/` (explicaciones día a día), `web/` (la página), `src/` (programas), `data/` (base de datos), `models/` (modelos), `notebooks/` (análisis).
 
 </details>

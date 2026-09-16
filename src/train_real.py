@@ -59,11 +59,18 @@ def build(df, target, features, name):
     y = df[target].astype(int)
     X, encoders = encode(df, features)
     Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+    # Umbral calibrado en VALIDACIÓN interna (split del train), nunca en test:
+    # el test se toca una sola vez para el reporte final.
+    Xfit, Xval, yfit, yval = train_test_split(
+        Xtr, ytr, test_size=0.25, random_state=42, stratify=ytr)
+    probe = RandomForestClassifier(n_estimators=300, max_depth=12, min_samples_leaf=5,
+                                   class_weight="balanced_subsample", random_state=42, n_jobs=-1)
+    probe.fit(Xfit, yfit)
+    thr = best_threshold(yval, probe.predict_proba(Xval)[:, 1])
     model = RandomForestClassifier(n_estimators=300, max_depth=12, min_samples_leaf=5,
                                    class_weight="balanced_subsample", random_state=42, n_jobs=-1)
     model.fit(Xtr, ytr)
     prob = model.predict_proba(Xte)[:, 1]
-    thr = best_threshold(yte, prob)
     pred = (prob >= thr).astype(int)
     metrics = {
         "model": name, "threshold": round(float(thr), 2),

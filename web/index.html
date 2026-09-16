@@ -45,7 +45,7 @@
     <div class="counters">
       <div class="counter"><div class="num" data-target="16447" data-format="int">0</div><div class="label" data-i18n="hero.c1">Jugadores reales etiquetados</div></div>
       <div class="counter"><div class="num" data-target="0.930" data-format="dec3">0</div><div class="label">ROC-AUC · Churn</div></div>
-      <div class="counter"><div class="num" data-target="0.817" data-format="dec3">0</div><div class="label">F1 · Churn</div></div>
+      <div class="counter"><div class="num" data-target="0.810" data-format="dec3">0</div><div class="label">F1 · Churn</div></div>
       <div class="counter"><div class="num" data-target="0.972" data-format="dec3">0</div><div class="label" data-i18n="hero.c4">ROC-AUC · Alto valor</div></div>
     </div>
     <div class="logos"><span>Steam appreviews API</span><span>·</span><span data-i18n="hero.logos">6 títulos F2P</span><span>·</span><span>seed 42</span><span>·</span><span data-i18n="hero.logos2">pipeline reproducible</span></div>
@@ -79,7 +79,7 @@
   <h2 class="section-title" data-i18n="data.title">Datos 100% reales, auditables</h2>
   <p class="subtitle" data-i18n-html="data.sub">18.099 reseñas públicas de Steam (API pública, sin key, 2026-09-14) → 16.447 jugadores etiquetados. Cobertura del 100% en campos clave. Procedencia completa en <code>docs/08_datos_reales.md</code>.</p>
   <table class="data-table">
-    <tr><th data-i18n="data.th1">Título</th><th data-i18n="data.th2">Reseñas</th><th>Churn*</th><th data-i18n="data.th4">Alto valor</th><th data-i18n="data.th5">p75 horas</th></tr>
+    <tr><th data-i18n="data.th1">Título</th><th data-i18n="data.th2">Etiquetados</th><th>Churn*</th><th data-i18n="data.th4">Alto valor</th><th data-i18n="data.th5">p75 horas</th></tr>
     <tr><td>Dota 2</td><td>2.920</td><td>5,2%</td><td>15,4%</td><td>1.153 h</td></tr>
     <tr><td>Apex Legends</td><td>2.977</td><td>5,1%</td><td>15,3%</td><td>423 h</td></tr>
     <tr><td>Team Fortress 2</td><td>2.827</td><td>8,8%</td><td>23,7%</td><td>162 h</td></tr>
@@ -106,20 +106,20 @@
       <div class="metric-grid">
         <div class="metric-item"><div class="val">0.930</div><div class="lbl">ROC-AUC</div></div>
         <div class="metric-item"><div class="val">0.872</div><div class="lbl">PR-AUC (base 0.27)</div></div>
-        <div class="metric-item"><div class="val">0.836</div><div class="lbl">Precision</div></div>
-        <div class="metric-item"><div class="val">0.798</div><div class="lbl">Recall</div></div>
+        <div class="metric-item"><div class="val">0.872</div><div class="lbl">Precision</div></div>
+        <div class="metric-item"><div class="val">0.756</div><div class="lbl">Recall</div></div>
       </div>
-      <p class="note" data-i18n="sol.n1">Validez por título ROC 0.891–0.924 en los 6 juegos. Matriz test: [[2258,140],[180,712]].</p>
+      <p class="note" data-i18n="sol.n1">Validez por título ROC 0.891–0.924 en los 6 juegos. Matriz test: [[2299,99],[218,674]]. Umbral 0.65 calibrado en validación interna (test intacto).</p>
     </div>
     <div class="product">
       <div class="tag alt" data-i18n="sol.tag2">Segunda línea · UA</div>
       <h3>💰 High-Value Score</h3>
-      <p data-i18n-html="sol.d2">Identifica perfiles que más se parecen a jugadores de mayor valor <strong>dentro de nuestros datos</strong> (top-25% horas + recomienda; threshold 0.60). Es un <strong>indicador aproximado</strong>: no tenemos gasto real y no decimos quién va a gastar. En un proyecto real se sustituye por los datos de compras del cliente.</p>
+      <p data-i18n-html="sol.d2">Identifica perfiles que más se parecen a jugadores de mayor valor <strong>dentro de nuestros datos</strong> (top-25% horas + recomienda; threshold 0.55). Es un <strong>indicador aproximado</strong>: no tenemos gasto real y no decimos quién va a gastar. En un proyecto real se sustituye por los datos de compras del cliente.</p>
       <div class="metric-grid">
         <div class="metric-item"><div class="val">0.972</div><div class="lbl">ROC-AUC</div></div>
         <div class="metric-item"><div class="val">0.873</div><div class="lbl">PR-AUC (base 0.20)</div></div>
-        <div class="metric-item"><div class="val">0.774</div><div class="lbl">Precision</div></div>
-        <div class="metric-item"><div class="val">0.934</div><div class="lbl">Recall</div></div>
+        <div class="metric-item"><div class="val">0.766</div><div class="lbl">Precision</div></div>
+        <div class="metric-item"><div class="val">0.945</div><div class="lbl">Recall</div></div>
       </div>
       <p class="note" data-i18n="sol.n2">Validez por título ROC 0.979–0.996. Indicador aproximado y transparente: los F2P no exponen pagos.</p>
     </div>
@@ -172,7 +172,7 @@
         </div>
         <div class="presets">
           <button onclick="setPreset(10,5,300,'fallguys',0)" data-i18n="demo.p1">⚠️ En riesgo</button>
-          <button onclick="setPreset(100,30,10,'apex',1)" data-i18n="demo.p2">😐 Típico</button>
+          <button onclick="setPreset(35,12,120,'poe',0)" data-i18n="demo.p2">😐 Típico</button>
           <button onclick="setPreset(800,120,5,'dota',1)" data-i18n="demo.p3">✅ Sano</button>
         </div>
       </div>
@@ -234,6 +234,7 @@
   <div class="faq-item"><h4 data-i18n="met.q3">¿Hay fuga? La antigüedad pesa 0.50…</h4><p data-i18n="met.a3">Es señal real (ritmo de reseñas = momento del título) pero con ventana desigual: documentado como limitación. El modelo nunca ve recencia ni horas totales; el piloto trabajará con ventanas fijas y vuestros eventos reales.</p></div>
   <div class="faq-item"><h4 data-i18n="met.q4">¿Tenemos datos reales de cuánto gasta cada jugador?</h4><p data-i18n="met.a4">No. Utilizamos un indicador aproximado (top-25% horas + recomienda), así presentado en todas partes. En un proyecto real se sustituye por los datos de compras de PlayNova Games.</p></div>
   <div class="faq-item"><h4 data-i18n="met.q5">¿La demo que hemos visto es exactamente el modelo productivo?</h4><p data-i18n-html="met.a5">No: es una demo ilustrativa calibrada para convertir señales en decisiones. El modelo real está en <code>models/real_*.pkl</code>; en el piloto exponemos <code>/score</code> con vuestros datos.</p></div>
+  <div class="faq-item"><h4 data-i18n="met.q6">¿Por qué el F1 varía tanto por título si el ROC es bueno en los 6?</h4><p data-i18n="met.a6">Porque la prevalencia va del 5% (Dota 2, Apex) al 91% (Fall Guys) y usamos un umbral global (0.65) calibrado en validación del conjunto. El ROC mide el ranking dentro de cada juego (0.891–0.924 en los 6: ordena bien en todas partes); el F1 depende del punto de corte. En el piloto calibramos el umbral por título con vuestros eventos.</p></div>
 </section>
 
 <footer id="contacto">

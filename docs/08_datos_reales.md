@@ -65,11 +65,14 @@ p75 del título y —en conversión— el voto. Verificable en `src/train_real.p
    desde señales tempranas**, no como profecía: el piloto con eventos y ventanas
    fijas hará predicción pura.
 4. **high_value es proxy**, no pago observado. Su definición es transparente y su
-   validación por título es excelente (ROC 0.98–1.00).
+   validación por título es excelente (ROC 0.979–0.996).
 
 ## 7. Validez por título (generaliza de verdad)
 
 Churn ROC por título: TF2 0.891 · Dota 2 0.915 · Warframe 0.891 · PoE 0.916 ·
 Fall Guys 0.918 · Apex 0.924. Conversión ROC: 0.979–0.996.
 El modelo discrimina **dentro** de cada juego, no memoriza títulos.
-Reproducible con `python src/eval_per_title.py`.
+Nota: el F1 por título con el umbral global (0.65) varía con la prevalencia
+(Dota 2/Apex/TF2 bajos por tener ~5–9% de positivos; PoE 0.84, Fall Guys 0.96);
+el ROC confirma que el ranking por juego ordena bien, y el umbral se calibraría
+por título en el piloto. Reproducible con `python src/eval_per_title.py`.
