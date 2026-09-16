@@ -1,4 +1,4 @@
-# Día 15 — Fuentes: datos reales + contexto de mercado (15 sept)
+# Fuentes: datos reales + contexto de mercado
 
 ## 1. Fuente primaria de datos (el dataset ES real)
 
@@ -18,15 +18,7 @@
 3. **AppsFlyer / AppMagic** — CAC de referencia $3–8 por jugador F2P (inputs de la calculadora ROI).
 5. **Newzoo** — "Global Games Market Report 2026": tamaño de mercado (contexto del pitch).
 
-## 3. Frases de defensa
-
-- *"Cero sintéticos: 18.099 reseñas reales, cobertura 100% en campos clave, pipeline reproducible con seed 42."*
-- *"Las tasas por título no son retención de esos juegos —son de la muestra de reseñistas— y lo decimos por escrito. Lo que generaliza son las relaciones, validadas por título (ROC 0.89–0.92 en los 6)."*
-- *"La fuga está excluida por diseño: el modelo nunca ve horas totales, recencia ni el voto en conversión. Está en el código."*
-- *"high_value es un proxy transparente (top-25% horas + recomienda), no pago observado. Así se presenta en web, docs y FAQ."*
-- *"El go/no-go no es un ROC de laboratorio: es lift en A/B de 4 semanas con vuestros eventos."*
-
-## 4. Limitaciones honestas
+## 3. Limitaciones honestas
 
 - Muestra de reseñistas (sesgo documentado en `docs/08`): quien escribe ya está implicado.
 - Ventanas de observación desiguales según antigüedad de reseña: el producto es
@@ -34,9 +26,3 @@
 - Nuestros 6 títulos son directamente juegos PC F2P en Steam como los de PlayNova: misma plataforma y economía (gratis + in-game).
   El piloto con vuestros eventos afina por título.
 - 16.447 filas: suficiente para RF, no para deep learning (ni falta que hace).
-
-## Entregable día 15 — checklist
-- [x] Fuente primaria real documentada + scripts de descarga y construcción
-- [x] `docs/08_datos_reales.md` con mapeo, labels, sesgos y validez por título
-- [x] Frases de defensa y limitaciones honestas
-- [x] Modelos sintéticos eliminados del repo

@@ -1,4 +1,4 @@
-# Día 11 — Cliente y modelo de datos (11 sept)
+# Cliente piloto y modelo de datos
 
 ## 1. Ficha del cliente (ficticio pero realista)
 
@@ -37,14 +37,8 @@ SQLite `data/playnova_real.db`, construida por `src/build_real_dataset.py`:
   early_access, received_free, refunded, language, timestamp_created,
   churn NULL|0|1, high_value 0|1)** — 18.099 filas (16.447 etiquetadas).
 
-Claves: reviews.appid → titles.appid. (El schema sintético antiguo `data/schema.sql`
-quedó obsoleto con el cambio a datos reales.)
+Claves: reviews.appid → titles.appid.
 
-## 4. Diagrama Entidad-Relación
+## Diagrama Entidad-Relación
 
 Ver `docs/ER_diagram.mmd` (Mermaid, renderiza en GitHub). Tablas: TITLES 1───∞ REVIEWS.
-
-## Entregable día 11 — checklist
-- [x] Ficha cliente completa
-- [x] Lista de datos disponibles
-- [x] `data/playnova_real.db` + diagrama ER real

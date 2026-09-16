@@ -3,7 +3,6 @@
 > Este proyecto **no usa datos sintéticos**. Todo lo afirmado en web y docs sale de
 > `data/playnova_real.db`, construida con `src/build_real_dataset.py` desde
 > 18.099 reseñas públicas de Steam descargadas con `src/fetch_steam_reviews.py`.
-> Los scripts sintéticos antiguos (`generate_data.py`, `train.py`) están **retirados**.
 
 ## 1. Fuente
 

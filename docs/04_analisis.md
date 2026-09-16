@@ -1,4 +1,4 @@
-# Día 13 — Análisis sobre datos reales (13 sept)
+# Análisis sobre datos reales
 
 Script `notebooks/02_eda_real.py` (reproducible). Todo lo de abajo está medido en
 `data/playnova_real.db` (16.447 filas). Figuras en `docs/img/` y `web/assets/`.
@@ -31,8 +31,3 @@ Script `notebooks/02_eda_real.py` (reproducible). Todo lo de abajo está medido 
 ### H5 — El modelo generaliza dentro de cada juego
 - Churn ROC por título: 0.891–0.924 en los 6. No memoriza títulos: discrimina
   jugadores dentro de cada comunidad (`python src/eval_per_title.py`).
-
-## Entregable día 13 — checklist
-- [x] `notebooks/02_eda_real.py` reproducible (resumen + tabla por título + 3 figuras)
-- [x] 5 hallazgos medidos, con sesgos documentados en `docs/08_datos_reales.md`
-- [x] Figuras regeneradas desde datos reales

@@ -1,4 +1,4 @@
-# Día 14 — Solución y prototipo (14 sept)
+# Solución y prototipo
 
 ## 1. Técnica elegida
 
@@ -50,12 +50,7 @@
 - **Presets:** en riesgo (pocas horas, título en declive → ~80%) · típico (perfil medio → ~50%) · sano (muchas horas, título vivo → ~7%).
 - **Calculadora ROI:** CPI + budget + LTV → installs, retenidos base vs con piloto (+5 pp D7), € incremental y múltiplo sobre los 2.500 € del piloto.
 - **Sección piloto:** alcance 4 semanas, A/B con métrica primaria D7, precio fijo 2.500 €, integración (`POST /score`, p95 <200 ms) y GDPR (IDs anonimizados, borrado a petición).
-- Todo en el navegador, sin backend. El modelo real está en `models/real_*.pkl`.
-
-### Página Metodología
-- Timeline de 5 días (10-14 sept).
-- Explicación del pipeline: datos → EDA → modelo → prototipo → deployment.
-- Anti-leakage documentado.
+ - Todo en el navegador, sin backend. El modelo real está en `models/real_*.pkl`.
 
 ## 5. Playbook semanal (para PMs de PlayNova)
 
@@ -67,19 +62,3 @@ Cada semana, ChurnGuard entrega:
    - No recomienda (churn 29,6%) → ticket de soporte proactivo + oferta de guardado
    - Cuenta nueva/estrecha (pocos juegos) → guía de progresión + recompensa 2ª sesión
 3. **Ranking por título:** esfuerzo de Live-Ops donde el churn medido es mayor.
-
-## 6. Demo script semanal (para reunión con PlayNova)
-
-1. **Problema (2 min):** "27% de reseñistas ya inactivos; el engagement temprano (Q1 35,7% vs Q4 13,2% churn) decide el LTV."
-2. **Datos (2 min):** "18.099 reseñas reales de 6 F2P → 16.447 jugadores etiquetados. Cero sintéticos."
-3. **Hallazgos (3 min):** "El engagement temprano manda; gustar no retiene (26,5% vs 29,6%); cada título vive una fase medible."
-4. **Producto (4 min):** "Simulador con motivo+acción; ranking semanal Top-100; conversión con threshold 0,60 (F1 0,847)."
-5. **Resultado (1 min):** "Validez por título ROC 0.89–0.92; piloto A/B con go/no-go por lift."
-6. **Next steps (2 min):** "Piloto 4 semanas, 2.500 € fijos, con vuestros eventos."
-
-## Entregable día 14 — checklist
-- [x] Modelos reales entrenados (`models/real_churn_model.pkl`, `models/real_conversion_model.pkl`)
-- [x] Métricas (ROC-AUC, PR-AUC, precision, recall, F1) en `models/real_metrics.json` + validez por título
-- [x] Anti-leakage documentado y verificable
-- [x] Web con 5 secciones + simulador ChurnGuard + calculadora budget
-- [x] Playbook semanal y demo script
