@@ -1,84 +1,92 @@
 # ChurnGuard — que ningún jugador se vaya sin avisar
 
-**En una frase:** ayudamos a los equipos de videojuegos gratuitos (F2P) de PC a detectar a tiempo qué jugadores necesitan atención, por qué y qué hacer.
+**En una frase:** ayudamos a los juegos gratuitos (F2P) de PC a detectar qué jugadores necesitan atención, por qué y qué hacer.
 
-Somos **NO PAIN NO GAME**, una startup que usa datos para que los juegos gratuitos de PC retengan a sus jugadores. Nuestro cliente piloto es **PlayNova Games**, una empresa de juegos gratuitos para PC en Steam.
+Somos **NO PAIN NO GAME**. Cliente piloto: **PlayNova Games**.
 
 ---
 
-## El problema, con un ejemplo
+## 1. Ver la web en tu ordenador (30 segundos)
 
-Imagina que alguien descarga un juego, juega unas horas, se atasca en el tutorial… y un día deja de entrar. No se queja, no avisa. Simplemente desaparece.
+La web está en la carpeta `web/`. Es solo HTML/CSS/JS, no hay que instalar nada.
 
-Eso les pasa a miles de jugadores cada semana. Y cada jugador que se va es dinero perdido: conseguirlo costó entre 3 y 8 dólares, y nunca llegó a quedarse.
+**Opción A - la más fácil:**
+1. Abre la carpeta `web`
+2. Doble clic en `index.html`
 
-**La pregunta que nos hicimos:** ¿y si pudiéramos ver las primeras señales y actuar antes de que se vayan?
+**Opción B - como se verá online (recomendada para presentar):**
+```bash
+cd web
+python -m http.server 8321
+```
+Luego abre en el navegador: `http://localhost:8321`
 
-## Qué hace ChurnGuard
+Qué vas a ver: problema → datos reales → solución → demo con sliders → piloto 4 semanas. Arriba a la derecha puedes cambiar idioma 🇪🇸 🇬🇧 🇫🇷 🇩🇪.
 
-Cada lunes, el equipo del juego abriría una lista clara:
+---
 
-| Jugador | Riesgo | Motivo | Qué hacer |
-|---|---|---|---|
-| r88210 | 83% | Jugó muy pocas horas al principio | Ayuda con el tutorial + evento diario |
-| r55201 | 44% | No recomienda el juego | Soporte y oferta para que siga |
-| r77340 | 9% | Todo bien | No hacer nada |
+## 2. Ver la web online (Vercel)
 
-Nada de magia: convertimos **señales → prioridad + motivo + acción**. Y también señalamos qué perfiles se parecen a los jugadores más valiosos, para cuidar mejor el presupuesto.
+Una vez desplegada, la URL es algo como:
 
-## Nuestros datos: reales, no inventados
+`https://tu-proyecto.vercel.app`
 
-- Analizamos **18.099 opiniones públicas de Steam** (con fecha 14-09-2026) de 6 juegos gratuitos conocidos: Dota 2, Team Fortress 2, Warframe, Path of Exile, Apex Legends y Fall Guys.
-- De ahí estudiamos **16.447 jugadores** (el resto no tenía información suficiente y lo dejamos fuera).
-- Todo se puede comprobar: decimos de dónde sale cada dato y qué limitaciones tiene.
+Cada vez que subes un cambio a `main` en GitHub, Vercel la actualiza sola.
 
-## Qué descubrimos (en palabras simples)
+---
 
-1. **Las primeras horas deciden.** Los que juegan poquísimo al principio se van mucho más (35,7%) que los que juegan mucho (13,2%).
-2. **Que te guste el juego no basta.** Los que lo recomiendan se van casi igual (26,5%) que los que no (29,6%). La nota no lo es todo: importa el hábito.
-3. **Cada juego vive su momento.** Dota 2 recibe 3.000 opiniones en 3 días; Fall Guys tarda 470. Cada juego necesita su propia estrategia.
+## 3. Re-desplegar desde cero (2 minutos)
 
-Y algo importante: ese famoso “91% de Fall Guys” **no** significa que el 91% de sus jugadores lo haya dejado. Es solo el porcentaje dentro de las personas que escribieron una opinión en nuestra muestra. Lo explicamos así de claro en la web.
+Solo necesitas la cuenta de GitHub con este repo.
 
-## La web: qué vas a ver
+1. Entra en `vercel.com/new`
+2. `Add GitHub Account` si es la primera vez, y elige este repo: `alvarodc093-pixel/NO-PAIN-NO-GAME`
+3. En la pantalla de configuración pon esto **tal cual**:
+   - `Framework Preset: Other`
+   - `Root Directory: web`
+   - `Build Command:` vacío (nada)
+   - `Output Directory:` vacío (nada)
+4. Pulsa `Deploy`. En ~30s te da la URL.
 
-Abre `web/index.html` (o sírvela con `python -m http.server 8321` dentro de la carpeta `web` y entra en `http://localhost:8321`):
+> ¿Por qué `Root Directory: web`? Porque en la raíz del repo hay Python (`requirements.txt`, `src/`) del análisis de datos. Si dejas Root en `./`, Vercel cree que es un backend Python y falla. Apuntando a `web` solo ve la página estática y funciona siempre.
 
-- **El problema**, contado con 3 tarjetas muy visuales.
-- **Los datos**, con la tabla de los 6 juegos y 3 gráficos que **se amplían al pincharlos** (ideal para presentar).
-- **La solución**: dos puntuaciones explicadas sin tecnicismos.
-- **La demo**: mueve los controles (horas, juegos, antigüedad, título) y mira cómo cambian la prioridad, el motivo y la acción. Incluye una calculadora de ejemplo (es una estimación, no una promesa de ingresos).
-- **El piloto de 4 semanas** (2.500 €): cómo lo probaríamos con datos reales del cliente.
-- **Idiomas**: arriba a la derecha puedes cambiar entre 🇪🇸 español, 🇬🇧 inglés, 🇫🇷 francés y 🇩🇪 alemán. Toda la página se traduce al momento.
+Para actualizar: solo haz `git push origin main`. No hay que tocar nada en Vercel.
 
-## Queremos ser honestos
+---
 
-- **No adivinamos el futuro.** Ayudamos a decidir dónde actuar antes.
-- **La demo es una ilustración**, no el modelo final. El modelo real se probaría con los datos del cliente.
-- **No sabemos quién va a gastar dinero** (Steam no publica eso). Usamos una aproximación transparente y lo decimos en todas partes.
-- **Mostramos lo que no sabemos**: la muestra son personas que escribieron opiniones, no todos los jugadores.
+## 4. Si algo falla al desplegar
 
-## Si tienes curiosidad técnica (opcional)
+| Error | Causa | Solución |
+|---|---|---|
+| `No python entrypoint found` | Root Directory en `./`, detecta Python | Pon `Root Directory: web`, `Framework: Other` |
+| `points to a different repository` | El proyecto Vercel está conectado a otro repo | `Project > Settings > Git > Disconnect` y conecta el repo correcto |
+| `could not find branch or commit` | Vercel pide una rama que no existe | `Settings > Git > Production Branch = main`. No re-despliegues commits viejos, haz un push nuevo |
 
-<details>
-<summary>Cómo se construyó, paso a paso</summary>
+El fichero `vercel.json` de la raíz ya está como respaldo:
+```json
+{ "framework": null, "buildCommand": null, "outputDirectory": "web" }
+```
+Pero lo que manda es el `Root Directory: web` del paso 3.
+
+---
+
+## 5. Nuestros datos (en simple)
+
+- **18.099 opiniones públicas de Steam** (14-09-2026) de 6 juegos: Dota 2, TF2, Warframe, Path of Exile, Apex Legends, Fall Guys.
+- **16.447 jugadores** etiquetados. El resto no tenía datos suficientes.
+- Horas jugadas y nº de juegos salen de la API pública de Steam (`appreviews/{appid}?json=1`, bloque `author`: `playtime_forever`, `playtime_at_review`, `num_games_owned`...). Ver `src/fetch_steam_reviews.py` y `src/build_real_dataset.py`.
+- El 91% de Fall Guys **no** es su abandono real, es solo dentro de nuestra muestra de reseñistas. Lo avisamos en la web.
+
+## 6. Para curiosos (técnico)
 
 ```bash
 pip install -r requirements.txt
-python src/fetch_steam_reviews.py    # descarga las 18k opiniones (~5 min)
-python src/build_real_dataset.py    # ordena y etiqueta los datos
-python src/train_real.py            # entrena los dos modelos
-jupyter notebook notebooks/EDA.ipynb  # EDA (abrir en Jupyter, genera docs/img/eda_*.png)
-python src/eval_per_title.py        # comprueba que funciona juego por juego
-cd web
-python -m http.server 8321          # abre la web en http://localhost:8321
+python src/fetch_steam_reviews.py    # descarga opiniones
+python src/build_real_dataset.py     # crea data/playnova_real.db
+python src/train_real.py             # entrena modelos en models/
 ```
 
-- Modelos: Churn (de cada 10 que marca, casi 9 aciertan; umbral 0.65 calibrado en validación interna) y Alto valor (precisión 0,77, detecta el 94% de los valiosos). Detalles en `models/real_metrics.json`.
-- Estructura: `docs/` (explicaciones día a día), `web/` (la página), `src/` (programas), `data/` (base de datos), `models/` (modelos), `notebooks/` (análisis).
-
-</details>
+Estructura: `web/` página · `src/` programas · `data/` base de datos · `models/` modelos · `notebooks/` análisis · `docs/` explicaciones.
 
 ---
-
-ChurnGuard — NO PAIN NO GAME · 2026 · Cliente piloto: PlayNova Games · Datos públicos de Steam.
+ChurnGuard — NO PAIN NO GAME · 2026 · Datos públicos de Steam.
