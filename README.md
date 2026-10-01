@@ -72,10 +72,10 @@ Pero lo que manda es el `Root Directory: web` del paso 3.
 
 ## 5. Nuestros datos (en simple)
 
-- **18.099 opiniones públicas de Steam** (14-09-2026) de 6 juegos: Dota 2, TF2, Warframe, Path of Exile, Apex Legends, Fall Guys.
-- **16.447 jugadores** etiquetados. El resto no tenía datos suficientes.
+- **36.140 opiniones públicas de Steam** (01-10-2026) de 6 juegos: Dota 2, TF2, Warframe, Path of Exile, Apex Legends, Fall Guys.
+- **34.602 jugadores** etiquetados. El resto no tenía datos suficientes.
 - Horas jugadas y nº de juegos salen de la API pública de Steam (`appreviews/{appid}?json=1`, bloque `author`: `playtime_forever`, `playtime_at_review`, `num_games_owned`...). Ver `src/fetch_steam_reviews.py` y `src/build_real_dataset.py`.
-- El 91% de Fall Guys **no** es su abandono real, es solo dentro de nuestra muestra de reseñistas. Lo avisamos en la web.
+- El 93% de Fall Guys **no** es su abandono real, es solo dentro de nuestra muestra de reseñistas. Lo avisamos en la web.
 
 ## 6. Para curiosos (técnico)
 
