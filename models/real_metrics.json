@@ -1,23 +1,23 @@
 {
   "churn_model": {
     "model": "real_churn_model",
-    "threshold": 0.65,
-    "accuracy": 0.9036,
-    "precision": 0.8719,
-    "recall": 0.7556,
-    "f1": 0.8096,
-    "roc_auc": 0.9295,
-    "pr_auc": 0.8718,
-    "baseline_pr": 0.2711,
-    "n_test": 3290,
+    "threshold": 0.55,
+    "accuracy": 0.8867,
+    "precision": 0.8515,
+    "recall": 0.7999,
+    "f1": 0.8249,
+    "roc_auc": 0.9324,
+    "pr_auc": 0.8936,
+    "baseline_pr": 0.3336,
+    "n_test": 6921,
     "confusion_matrix": [
       [
-        2299,
-        99
+        4290,
+        322
       ],
       [
-        218,
-        674
+        462,
+        1847
       ]
     ],
     "features": [
@@ -34,38 +34,38 @@
       "log_games_owned"
     ],
     "top_features": {
-      "review_age_days": 0.5028549364604993,
-      "appid": 0.24208541459868624,
-      "log_hours_at_review": 0.07809856082686971,
-      "num_reviews": 0.07600695840148669,
-      "log_games_owned": 0.03748355742856813,
-      "log_review_len": 0.036287948207882295,
-      "language": 0.021390261942925697,
-      "voted_up": 0.004753345690804151,
-      "received_free": 0.0010390164422777483,
+      "review_age_days": 0.535720226609709,
+      "appid": 0.2556735491519109,
+      "log_hours_at_review": 0.06142970259130959,
+      "num_reviews": 0.059349064298209166,
+      "log_games_owned": 0.03384736316481796,
+      "log_review_len": 0.02737532240820957,
+      "language": 0.020551034637964528,
+      "voted_up": 0.005036187067373958,
+      "received_free": 0.0010175500704953271,
       "early_access": 0.0,
       "refunded": 0.0
     }
   },
   "conversion_model": {
     "model": "real_conversion_model",
-    "threshold": 0.55,
-    "accuracy": 0.9316,
-    "precision": 0.7658,
-    "recall": 0.945,
-    "f1": 0.846,
-    "roc_auc": 0.9715,
-    "pr_auc": 0.8732,
-    "baseline_pr": 0.1988,
-    "n_test": 3290,
+    "threshold": 0.6,
+    "accuracy": 0.9317,
+    "precision": 0.7676,
+    "recall": 0.9419,
+    "f1": 0.8459,
+    "roc_auc": 0.9731,
+    "pr_auc": 0.8726,
+    "baseline_pr": 0.1991,
+    "n_test": 6921,
     "confusion_matrix": [
       [
-        2447,
-        189
+        5150,
+        393
       ],
       [
-        36,
-        618
+        80,
+        1298
       ]
     ],
     "features": [
@@ -81,14 +81,14 @@
       "log_games_owned"
     ],
     "top_features": {
-      "log_hours_at_review": 0.7485519277085345,
-      "appid": 0.10290396598061449,
-      "review_age_days": 0.07004735743425179,
-      "log_review_len": 0.02329026509872779,
-      "num_reviews": 0.021288485706295594,
-      "log_games_owned": 0.01703272701245658,
-      "language": 0.016526534622919396,
-      "received_free": 0.0003587364361998485,
+      "log_hours_at_review": 0.7476987758694967,
+      "appid": 0.1178378158256981,
+      "review_age_days": 0.0665134963159696,
+      "log_review_len": 0.018363267104671854,
+      "language": 0.017076290746340123,
+      "num_reviews": 0.016715997437453237,
+      "log_games_owned": 0.015436010839862527,
+      "received_free": 0.00035834586050780204,
       "early_access": 0.0,
       "refunded": 0.0
     }
