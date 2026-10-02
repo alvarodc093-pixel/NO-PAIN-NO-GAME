@@ -122,7 +122,7 @@ function renderBudget() {
   if (!window.__budget) return;
   const { budget, cpi, ltv } = window.__budget;
   const installs = budget / cpi;
-  const hv = installs * 0.199;
+  const hv = installs * 0.2;
   const value = hv * ltv;
   const T = (typeof __t === 'function') ? __t : ((k) => k);
   const loc = (window.__lang || 'es') === 'en' ? 'en-US' : (window.__lang || 'es') === 'es' ? 'es-ES' : (window.__lang || 'es') + '-' + (window.__lang || 'es').toUpperCase();
