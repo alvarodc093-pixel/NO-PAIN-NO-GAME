@@ -1,48 +1,48 @@
 {
-  "scrape_date": "2026-10-01",
+  "scrape_date": "2026-10-02",
   "source": "Steam Store appreviews API (pública, sin key)",
-  "n_raw": 36140,
-  "n_labeled_churn": 34602,
-  "n_ambiguous_dropped": 1538,
-  "churn_rate": 0.3336,
-  "high_value_rate": 0.1991,
-  "voted_up_rate": 0.8027,
-  "median_hours_forever": 100.1,
+  "n_raw": 41560,
+  "n_labeled_churn": 39478,
+  "n_ambiguous_dropped": 2082,
+  "churn_rate": 0.3449,
+  "high_value_rate": 0.1995,
+  "voted_up_rate": 0.8005,
+  "median_hours_forever": 104.5,
   "by_title": {
     "Dota 2": {
-      "n": 6000,
-      "churn_rate": 0.0627,
-      "high_value_rate": 0.1581,
-      "p75_hours": 1156.7
+      "n": 6803,
+      "churn_rate": 0.0644,
+      "high_value_rate": 0.1602,
+      "p75_hours": 1163.7
     },
     "Team Fortress 2": {
-      "n": 6018,
-      "churn_rate": 0.113,
-      "high_value_rate": 0.2382,
-      "p75_hours": 177.4
+      "n": 6914,
+      "churn_rate": 0.1336,
+      "high_value_rate": 0.2395,
+      "p75_hours": 186.9
     },
     "Warframe": {
-      "n": 6012,
-      "churn_rate": 0.1553,
-      "high_value_rate": 0.2149,
-      "p75_hours": 743.9
+      "n": 6817,
+      "churn_rate": 0.1752,
+      "high_value_rate": 0.2173,
+      "p75_hours": 743.0
     },
     "Path of Exile": {
-      "n": 6004,
-      "churn_rate": 0.6929,
-      "high_value_rate": 0.2193,
-      "p75_hours": 1237.3
+      "n": 6804,
+      "churn_rate": 0.7107,
+      "high_value_rate": 0.2126,
+      "p75_hours": 1301.1
     },
     "Apex Legends": {
-      "n": 6099,
-      "churn_rate": 0.0671,
-      "high_value_rate": 0.1509,
-      "p75_hours": 431.6
+      "n": 7415,
+      "churn_rate": 0.0835,
+      "high_value_rate": 0.1552,
+      "p75_hours": 442.8
     },
     "Fall Guys": {
-      "n": 6007,
-      "churn_rate": 0.933,
-      "high_value_rate": 0.2165,
+      "n": 6807,
+      "churn_rate": 0.9369,
+      "high_value_rate": 0.2174,
       "p75_hours": 85.6
     }
   }
