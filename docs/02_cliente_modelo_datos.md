@@ -35,7 +35,7 @@ SQLite `data/playnova_real.db`, construida por `src/build_real_dataset.py`:
 - **reviews(review_id PK, appid FK, voted_up, hours_forever/at_review/l2w,
   days_since_last_played, review_age_days, review_len, num_games_owned/reviews,
   early_access, received_free, refunded, language, timestamp_created,
-  churn NULL|0|1, high_value 0|1)** — 36.140 filas (34.602 etiquetadas).
+  churn NULL|0|1, high_value 0|1)** — 41.560 filas (39.478 etiquetadas).
 
 Claves: reviews.appid → titles.appid.
 
